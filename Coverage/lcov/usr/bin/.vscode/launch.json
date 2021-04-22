@@ -1,0 +1,36 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "perl",
+            "request": "launch",
+            "name": "Perl-Debug local",
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/${relativeFile}",
+            "exec": "perl",
+            "execArgs": [],
+            "root": "${workspaceRoot}/",
+            "inc": [],
+            "args": ["--branch-coverage -o result/coverageLineMark_html ${workspaceFolder}/Coverage_LineMark.info --rc lcov_branch_coverage=1 1>/dev/null"],
+            "env": {},
+            "debugRaw": false,
+            "debugLog": true,
+            "stopOnEntry": true,
+            "sessions": "single"
+        },
+        {
+            "type": "perl",
+            "request": "launch",
+            "name": "Perl-Debug remote",
+            "console": "remote",
+            "program": "${workspaceFolder}/${relativeFile}",
+            "root": "${workspaceRoot}/",
+            "stopOnEntry": true,
+            "port": 5000,
+            "sessions": "single"
+        }
+    ]
+}
