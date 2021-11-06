@@ -2238,7 +2238,14 @@ sub set_info_entry($$$$$$$$$$$;$$$$$$$$)
 	if (defined($_[18])) { $data_ref->{"diff_hit"} = $_[18]; }
 }
 
-
+sub set_diffInfo_entry($$$$$)
+{
+	my $data_ref = $_[0];
+	$data_ref->{"testdiff"} = $_[1];
+	$data_ref->{"sumdiff"} = $_[2];
+	if (defined($_[17])) { $data_ref->{"diff_found"} = $_[3]; }
+	if (defined($_[18])) { $data_ref->{"diff_hit"} = $_[4]; }
+}
 #
 # add_counts(data1_ref, data2_ref)
 #
@@ -4882,9 +4889,25 @@ sub write_source_line(*$$$$$$)
 
 	$html = $anchor_start;
 	## QGH: 竖列行数，在这里添加增量代码的标识
+
+=pod 这里不应该使用$count 去判断增量代码
 	$showDiffFlag = $count > 0 ? "D+":"";
 	$showLineNumber = $count > 0 ? sprintf("%6d", $line) : sprintf("%8d", $line);
 	$html .= "<span class=\"lineNum\">".$showDiffFlag.$showLineNumber." </span>";
+=cut
+	
+=pod
+	尝试使用 $diffdata 和 $diff_coverage去做判断 
+	if ($diff_coverage) {
+		$showDiffFlag = $diffdata > 0 ? "D+":"";
+		$showLineNumber = $diffdata > 0 ? sprintf("%6d", $line) : sprintf("%8d", $line);
+		$html .= "<span class=\"lineNum\">".$showDiffFlag.$showLineNumber." </span>";
+	}else {
+		$html .= "<span class=\"lineNum\">".sprintf("%8d", $line)." </span>";
+	}
+=cut
+
+	$html .= "<span class=\"lineNum\">".sprintf("%8d", $line)." </span>";
 	$html .= shift(@br_html).":" if ($br_coverage);
 	$html .= "$source_format$count_format : ";
 	$html .= escape_html($source);

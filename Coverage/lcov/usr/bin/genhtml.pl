@@ -10,7 +10,7 @@
 #   This program is distributed in the hope that it will be useful, but
 #   WITHOUT ANY WARRANTY;  without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-#   General Public License for more details. 
+#   General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
 #   along with this program;  if not, write to the Free Software
@@ -78,11 +78,11 @@ use Cwd qw/abs_path cwd/;
 
 # Global constants
 ## 全局常数
-our $title		= "LCOV - code coverage report";
-our $tool_dir		= abs_path(dirname($0));
-our $lcov_version	= "LCOV version 1.14";
-our $lcov_url		= "http://ltp.sourceforge.net/coverage/lcov.php";
-our $tool_name		= basename($0);
+our $title        = "LCOV - code coverage report";
+our $tool_dir        = abs_path(dirname($0));
+our $lcov_version    = "LCOV version 1.14";
+our $lcov_url        = "http://ltp.sourceforge.net/coverage/lcov.php";
+our $tool_name        = basename($0);
 
 # Specify coverage rate default precision
 ## 指定覆盖率默认精度
@@ -154,31 +154,31 @@ our $br_field_width = 16;
 
 # Header types
 ## 头部类型
-our $HDR_DIR		= 0; # 路径
-our $HDR_FILE		= 1; # 文件
-our $HDR_SOURCE		= 2; # 代码
-our $HDR_TESTDESC	= 3; # 测试描述
-our $HDR_FUNC		= 4; # 方法
+our $HDR_DIR        = 0; # 路径
+our $HDR_FILE        = 1; # 文件
+our $HDR_SOURCE        = 2; # 代码
+our $HDR_TESTDESC    = 3; # 测试描述
+our $HDR_FUNC        = 4; # 方法
 
 # Sort types
 ## 排序类型
-our $SORT_FILE		= 0; # 文件
-our $SORT_LINE		= 1; # 单行
-our $SORT_FUNC		= 2; # 方法
-our $SORT_BRANCH	= 3; # 分支
-our $SORT_DIFFLINE	= 4; # 差异
+our $SORT_FILE        = 0; # 文件
+our $SORT_LINE        = 1; # 单行
+our $SORT_FUNC        = 2; # 方法
+our $SORT_BRANCH    = 3; # 分支
+our $SORT_DIFFLINE    = 4; # 差异
 
 # Fileview heading types
 ## 文件视图标题类型
-our $HEAD_NO_DETAIL	= 1; # 无详情
-our $HEAD_DETAIL_HIDDEN	= 2; # 隐藏详情
-our $HEAD_DETAIL_SHOWN	= 3; # 展示详情
+our $HEAD_NO_DETAIL    = 1; # 无详情
+our $HEAD_DETAIL_HIDDEN    = 2; # 隐藏详情
+our $HEAD_DETAIL_SHOWN    = 3; # 展示详情
 
 # Additional offsets used when converting branch coverage data to HTML
 ## 将分支覆盖率数据转换为HTML时使用的其他偏移量
-our $BR_LEN	= 3;
-our $BR_OPEN	= 4; # 分支打开
-our $BR_CLOSE	= 5; # 分支关闭
+our $BR_LEN    = 3;
+our $BR_OPEN    = 4; # 分支打开
+our $BR_CLOSE    = 5; # 分支关闭
 
 # Branch data combination types
 ## 分支数据组合类型
@@ -187,9 +187,9 @@ our $BR_ADD = 1; # 分支合并
 
 # Error classes which users may specify to ignore during processing
 ## 用户可以指定在处理过程中忽略的错误类
-our $ERROR_SOURCE	= 0;
+our $ERROR_SOURCE    = 0;
 our %ERROR_ID = (
-	"source" => $ERROR_SOURCE,
+    "source" => $ERROR_SOURCE,
 );
 
 # Data related prototypes
@@ -286,56 +286,56 @@ sub gen_png($$$@);
 
 # Global variables & initialization
 ## 全局变量和初始化 【全局变量标准（our）关键字、局部变量标准（my）关键字】
-our %info_data;		# 包含.info文件中所有数据的哈希 # Hash containing all data from .info file 
-our @opt_dir_prefix;	# 要从所有子目录中删除的前缀数组 # Array of prefixes to remove from all sub directories
+our %info_data;        # 包含.info文件中所有数据的哈希 # Hash containing all data from .info file
+our @opt_dir_prefix;    # 要从所有子目录中删除的前缀数组 # Array of prefixes to remove from all sub directories
 our @dir_prefix;
-our %test_description;	#包含测试描述的哈希（如果可用） # Hash containing test descriptions if available
+our %test_description;    #包含测试描述的哈希（如果可用） # Hash containing test descriptions if available
 our $date = get_date_string();
 
-our @info_filenames;	#用作数据源的.info文件的列表 # List of .info files to use as data source
-our $test_title;	#写入每个页眉的输出标题 # Title for output as written to each page header
-our $output_directory;	# 存储输出的目录的名称 # Name of directory in which to store output
-our $base_filename;	# 包含基线数据的文件的可选名称 # Optional name of file containing baseline data
-our $desc_filename;	# 包含测试描述的文件名 # Name of file containing test descriptions
-our $css_filename;	# 要使用的外部样式表文件的可选名称 # Optional name of external stylesheet file to use
-our $quiet;		# 如果已设置，则禁止显示信息消息 # If set, suppress information messages
-our $help;		# 帮助选项标志 # Help option flag
-our $version;		# 版本选项标志 # Version option flag
-our $show_details;	# 如果已设置，则生成详细目录视图 # If set, generate detailed directory view
-our $no_prefix;		# 如果已设置，请不要删除文件名前缀 # If set, do not remove filename prefix
+our @info_filenames;    #用作数据源的.info文件的列表 # List of .info files to use as data source
+our $test_title;    #写入每个页眉的输出标题 # Title for output as written to each page header
+our $output_directory;    # 存储输出的目录的名称 # Name of directory in which to store output
+our $base_filename;    # 包含基线数据的文件的可选名称 # Optional name of file containing baseline data
+our $desc_filename;    # 包含测试描述的文件名 # Name of file containing test descriptions
+our $css_filename;    # 要使用的外部样式表文件的可选名称 # Optional name of external stylesheet file to use
+our $quiet;        # 如果已设置，则禁止显示信息消息 # If set, suppress information messages
+our $help;        # 帮助选项标志 # Help option flag
+our $version;        # 版本选项标志 # Version option flag
+our $show_details;    # 如果已设置，则生成详细目录视图 # If set, generate detailed directory view
+our $no_prefix;        # 如果已设置，请不要删除文件名前缀 # If set, do not remove filename prefix
 
-our $func_coverage;	# 如果设置，则生成函数覆盖率统计信息 # If set, generate function coverage statistics
-our $no_func_coverage;	# 禁用功能覆盖 # Disable func_coverage
+our $func_coverage;    # 如果设置，则生成函数覆盖率统计信息 # If set, generate function coverage statistics
+our $no_func_coverage;    # 禁用功能覆盖 # Disable func_coverage
 
 our $diff_coverage; # 如果设置，则生成差异覆盖率统计信息
 our $no_diff_coverage; # 禁用差异覆盖
 
-our $br_coverage;	# 如果设置，则生成分支覆盖率统计信息 # If set, generate branch coverage statistics
-our $no_br_coverage;	# 禁用br_coverage # Disable br_coverage
+our $br_coverage;    # 如果设置，则生成分支覆盖率统计信息 # If set, generate branch coverage statistics
+our $no_br_coverage;    # 禁用br_coverage # Disable br_coverage
 
-our $sort = 1;		# 如果已设置，请提供带有排序条目的目录列表 # If set, provide directory listings with sorted entries
-our $no_sort;		# 禁用sort # Disable sort
+our $sort = 1;        # 如果已设置，请提供带有排序条目的目录列表 # If set, provide directory listings with sorted entries
+our $no_sort;        # 禁用sort # Disable sort
 
-our $frames;		# 如果设置了，则使用框架作为源代码视图 # If set, use frames for source code view
-our $keep_descriptions;	# 如果设置了，不要删除未使用的测试用例描述 # If set, do not remove unused test case descriptions
-our $no_sourceview;	# 如果已设置，请不要为每个文件创建源代码视图 # If set, do not create a source code view for each file
-our $highlight;		 # 如果已设置，则仅高亮显示转换数据覆盖的行 # If set, highlight lines covered by converted data only
-our $legend;		# 如果已设置，则在输出中包括图例 # If set, include legend in output
-our $tab_size = 8;	# 要用来代替制表符的空格数 # Number of spaces to use in place of tab
-our $config;		# 配置文件内容 # Configuration file contents
-our $html_prolog_file;	# 自定义HTML 序言文件（最多包括<body>） # Custom HTML prolog file (up to and including <body>)
-our $html_epilog_file;	# 自定义HTML 结束语文件（从</body>起） # Custom HTML epilog file (from </body> onwards)
-our $html_prolog;	# 实际HTML序言 # Actual HTML prolog
-our $html_epilog;	# 实际HTML结束语 # Actual HTML epilog
-our $html_ext = "html";	# 生成的HTML文件的扩展名 # Extension for generated HTML files
-our $html_gzip = 0;	# 使用gzip压缩 # Compress with gzip
-our $demangle_cpp = 0;	# 删除C++函数名 # Demangle C++ function names
-our @opt_ignore_errors;	 # 在处理过程中忽略某些错误类 # Ignore certain error classes during processing
+our $frames;        # 如果设置了，则使用框架作为源代码视图 # If set, use frames for source code view
+our $keep_descriptions;    # 如果设置了，不要删除未使用的测试用例描述 # If set, do not remove unused test case descriptions
+our $no_sourceview;    # 如果已设置，请不要为每个文件创建源代码视图 # If set, do not create a source code view for each file
+our $highlight;         # 如果已设置，则仅高亮显示转换数据覆盖的行 # If set, highlight lines covered by converted data only
+our $legend;        # 如果已设置，则在输出中包括图例 # If set, include legend in output
+our $tab_size = 8;    # 要用来代替制表符的空格数 # Number of spaces to use in place of tab
+our $config;        # 配置文件内容 # Configuration file contents
+our $html_prolog_file;    # 自定义HTML 序言文件（最多包括<body>） # Custom HTML prolog file (up to and including <body>)
+our $html_epilog_file;    # 自定义HTML 结束语文件（从</body>起） # Custom HTML epilog file (from </body> onwards)
+our $html_prolog;    # 实际HTML序言 # Actual HTML prolog
+our $html_epilog;    # 实际HTML结束语 # Actual HTML epilog
+our $html_ext = "html";    # 生成的HTML文件的扩展名 # Extension for generated HTML files
+our $html_gzip = 0;    # 使用gzip压缩 # Compress with gzip
+our $demangle_cpp = 0;    # 删除C++函数名 # Demangle C++ function names
+our @opt_ignore_errors;     # 在处理过程中忽略某些错误类 # Ignore certain error classes during processing
 our @ignore;
-our $opt_config_file;	# 用户指定的配置文件位置 # User-specified configuration file location
-our %opt_rc;	# 令行中的配置数组，哈希形式存储（key:value）
-our $opt_missed;	 # 按遗漏计数列出/排序行 # List/sort lines by missed counts
-our $charset = "UTF-8";	# HTML页面的默认字符集 # Default charset for HTML pages
+our $opt_config_file;    # 用户指定的配置文件位置 # User-specified configuration file location
+our %opt_rc;    # 令行中的配置数组，哈希形式存储（key:value）
+our $opt_missed;     # 按遗漏计数列出/排序行 # List/sort lines by missed counts
+our $charset = "UTF-8";    # HTML页面的默认字符集 # Default charset for HTML pages
 our @fileview_sortlist;
 our @fileview_sortname = ("", "-sort-l", "-sort-f", "-sort-b", "-sort-d");
 our @funcview_sortlist;
@@ -347,9 +347,9 @@ our $lcov_func_coverage = 1;
 our $lcov_branch_coverage = 0;
 our $lcov_diff_coverage = 1;
 
-our $rc_desc_html = 0;	# lcovrc: genhtml_desc_html
+our $rc_desc_html = 0;    # lcovrc: genhtml_desc_html
 
-our $cwd = cwd();# 当前工作目录 	# Current working directory
+our $cwd = cwd();# 当前工作目录     # Current working directory
 
 
 #
@@ -363,170 +363,170 @@ $SIG{__DIE__} = \&die_handler;
 # 检查命令行中的配置文件名
 Getopt::Long::Configure("pass_through", "no_auto_abbrev");
 GetOptions("config-file=s" => \$opt_config_file,
-	   "rc=s%" => \%opt_rc);
+       "rc=s%" => \%opt_rc);
 Getopt::Long::Configure("default");
 
 {
-	# Remove spaces around rc options
-	## 删除rc选项周围的空格 例如： --rc lcov_branch_coverage=1
-	my %new_opt_rc;
-	print(STDERR "%opt_rc");
-	## 获取命令行配置中的选项，key:value形式的哈希集合 
-	while (my ($key, $value) = each(%opt_rc)) {
-		$key =~ s/^\s+|\s+$//g;
-		$value =~ s/^\s+|\s+$//g;
+    # Remove spaces around rc options
+    ## 删除rc选项周围的空格 例如： --rc lcov_branch_coverage=1
+    my %new_opt_rc;
+    print(STDERR "%opt_rc");
+    ## 获取命令行配置中的选项，key:value形式的哈希集合
+    while (my ($key, $value) = each(%opt_rc)) {
+        $key =~ s/^\s+|\s+$//g;
+        $value =~ s/^\s+|\s+$//g;
 
-		$new_opt_rc{$key} = $value;
-	}
-	## 赋值给opt_rc，后期可以从这里添加增量代码的覆盖率计算
-	%opt_rc = %new_opt_rc; 
+        $new_opt_rc{$key} = $value;
+    }
+    ## 赋值给opt_rc，后期可以从这里添加增量代码的覆盖率计算
+    %opt_rc = %new_opt_rc;
 }
 
 # Read configuration file if available
 ## 读取配置文件（如果有）
 if (defined($opt_config_file)) {
-	$config = read_config($opt_config_file);
+    $config = read_config($opt_config_file);
 } elsif (defined($ENV{"HOME"}) && (-r $ENV{"HOME"}."/.lcovrc"))
 {
-	$config = read_config($ENV{"HOME"}."/.lcovrc");
+    $config = read_config($ENV{"HOME"}."/.lcovrc");
 }
 elsif (-r "/etc/lcovrc")
 {
-	$config = read_config("/etc/lcovrc");
+    $config = read_config("/etc/lcovrc");
 } elsif (-r "/usr/local/etc/lcovrc")
 {
-	$config = read_config("/usr/local/etc/lcovrc");
+    $config = read_config("/usr/local/etc/lcovrc");
 }
 
 if ($config || %opt_rc)
 {
-	# Copy configuration file and --rc values to variables
-	## 将配置文件和--rc值复制到变量
-	apply_config({
-		"genhtml_css_file"		=> \$css_filename,
-		## 行覆盖率相关
-		"genhtml_hi_limit"		=> \$hi_limit,
-		"genhtml_med_limit"		=> \$med_limit,
-		"genhtml_line_field_width"	=> \$line_field_width,
+    # Copy configuration file and --rc values to variables
+    ## 将配置文件和--rc值复制到变量
+    apply_config({
+        "genhtml_css_file"        => \$css_filename,
+        ## 行覆盖率相关
+        "genhtml_hi_limit"        => \$hi_limit,
+        "genhtml_med_limit"        => \$med_limit,
+        "genhtml_line_field_width"    => \$line_field_width,
 
-		"genhtml_overview_width"	=> \$overview_width,
-		"genhtml_nav_resolution"	=> \$nav_resolution,
-		"genhtml_nav_offset"		=> \$nav_offset,
-		"genhtml_keep_descriptions"	=> \$keep_descriptions,
-		"genhtml_no_prefix"		=> \$no_prefix,
-		"genhtml_no_source"		=> \$no_sourceview,
-		"genhtml_num_spaces"		=> \$tab_size,
-		"genhtml_highlight"		=> \$highlight,
-		"genhtml_legend"		=> \$legend,
-		"genhtml_html_prolog"		=> \$html_prolog_file,
-		"genhtml_html_epilog"		=> \$html_epilog_file,
-		"genhtml_html_extension"	=> \$html_ext,
-		"genhtml_html_gzip"		=> \$html_gzip,
-		"genhtml_precision"		=> \$default_precision,
-		 ## 方法覆盖率相关
-		"genhtml_function_hi_limit"	=> \$fn_hi_limit,
-		"genhtml_function_med_limit"	=> \$fn_med_limit,
-		"genhtml_function_coverage"	=> \$func_coverage,
-		 ## 分支覆盖率相关
-		"genhtml_branch_hi_limit"	=> \$br_hi_limit,
-		"genhtml_branch_med_limit"	=> \$br_med_limit,
-		"genhtml_branch_coverage"	=> \$br_coverage,
-		"genhtml_branch_field_width"	=> \$br_field_width,
+        "genhtml_overview_width"    => \$overview_width,
+        "genhtml_nav_resolution"    => \$nav_resolution,
+        "genhtml_nav_offset"        => \$nav_offset,
+        "genhtml_keep_descriptions"    => \$keep_descriptions,
+        "genhtml_no_prefix"        => \$no_prefix,
+        "genhtml_no_source"        => \$no_sourceview,
+        "genhtml_num_spaces"        => \$tab_size,
+        "genhtml_highlight"        => \$highlight,
+        "genhtml_legend"        => \$legend,
+        "genhtml_html_prolog"        => \$html_prolog_file,
+        "genhtml_html_epilog"        => \$html_epilog_file,
+        "genhtml_html_extension"    => \$html_ext,
+        "genhtml_html_gzip"        => \$html_gzip,
+        "genhtml_precision"        => \$default_precision,
+         ## 方法覆盖率相关
+        "genhtml_function_hi_limit"    => \$fn_hi_limit,
+        "genhtml_function_med_limit"    => \$fn_med_limit,
+        "genhtml_function_coverage"    => \$func_coverage,
+         ## 分支覆盖率相关
+        "genhtml_branch_hi_limit"    => \$br_hi_limit,
+        "genhtml_branch_med_limit"    => \$br_med_limit,
+        "genhtml_branch_coverage"    => \$br_coverage,
+        "genhtml_branch_field_width"    => \$br_field_width,
 
-		## FIX:QGH 新增差异代码覆盖率相关
-		"genhtml_diff_hi_limit"	=> \$diff_hi_limit,
-		"genhtml_diff_med_limit"	=> \$diff_med_limit,
-		"genhtml_diff_coverage"	=> \$diff_coverage,
-		"genhtml_diff_field_width"	=> \$diff_field_width,
+        ## FIX:QGH 新增差异代码覆盖率相关
+        "genhtml_diff_hi_limit"    => \$diff_hi_limit,
+        "genhtml_diff_med_limit"    => \$diff_med_limit,
+        "genhtml_diff_coverage"    => \$diff_coverage,
+        "genhtml_diff_field_width"    => \$diff_field_width,
 
-		"genhtml_sort"			=> \$sort,
-		"genhtml_charset"		=> \$charset,
-		"genhtml_desc_html"		=> \$rc_desc_html,
-		"genhtml_demangle_cpp"		=> \$demangle_cpp,
-		"genhtml_missed"		=> \$opt_missed,
-		"lcov_function_coverage"	=> \$lcov_func_coverage,
-		"lcov_branch_coverage"		=> \$lcov_branch_coverage,
-		## FIX:QGH 新增差异代码覆盖率
-		"locv_diff_coverage"		=> \$lcov_diff_coverage,
-		});
+        "genhtml_sort"            => \$sort,
+        "genhtml_charset"        => \$charset,
+        "genhtml_desc_html"        => \$rc_desc_html,
+        "genhtml_demangle_cpp"        => \$demangle_cpp,
+        "genhtml_missed"        => \$opt_missed,
+        "lcov_function_coverage"    => \$lcov_func_coverage,
+        "lcov_branch_coverage"        => \$lcov_branch_coverage,
+        ## FIX:QGH 新增差异代码覆盖率
+        "locv_diff_coverage"        => \$lcov_diff_coverage,
+        });
 }
 
 # Copy related values if not specified
 ## 如果未指定，则复制相关值
-$fn_hi_limit	= $hi_limit if (!defined($fn_hi_limit));
-$fn_med_limit	= $med_limit if (!defined($fn_med_limit));
-$br_hi_limit	= $hi_limit if (!defined($br_hi_limit));
-$br_med_limit	= $med_limit if (!defined($br_med_limit));
-$func_coverage	= $lcov_func_coverage if (!defined($func_coverage));
-$br_coverage	= $lcov_branch_coverage if (!defined($br_coverage));
+$fn_hi_limit    = $hi_limit if (!defined($fn_hi_limit));
+$fn_med_limit    = $med_limit if (!defined($fn_med_limit));
+$br_hi_limit    = $hi_limit if (!defined($br_hi_limit));
+$br_med_limit    = $med_limit if (!defined($br_med_limit));
+$func_coverage    = $lcov_func_coverage if (!defined($func_coverage));
+$br_coverage    = $lcov_branch_coverage if (!defined($br_coverage));
 ## 新增差异代码覆盖率相关
-$diff_hi_limit	= $hi_limit if (!defined($diff_hi_limit));
-$diff_med_limit	= $med_limit if (!defined($diff_med_limit));
-$diff_coverage	= $lcov_diff_coverage if (!defined($diff_coverage));
+$diff_hi_limit    = $hi_limit if (!defined($diff_hi_limit));
+$diff_med_limit    = $med_limit if (!defined($diff_med_limit));
+$diff_coverage    = $lcov_diff_coverage if (!defined($diff_coverage));
 
 
 # Parse command line options
 ## 解析命令行选项
-if (!GetOptions("output-directory|o=s"	=> \$output_directory,
-		"title|t=s"		=> \$test_title,
-		"description-file|d=s"	=> \$desc_filename,
-		"keep-descriptions|k"	=> \$keep_descriptions,
-		"css-file|c=s"		=> \$css_filename,
-		"baseline-file|b=s"	=> \$base_filename,
-		"prefix|p=s"		=> \@opt_dir_prefix,
-		"num-spaces=i"		=> \$tab_size,
-		"no-prefix"		=> \$no_prefix,
-		"no-sourceview"		=> \$no_sourceview,
-		"show-details|s"	=> \$show_details,
-		"frames|f"		=> \$frames,
-		"highlight"		=> \$highlight,
-		"legend"		=> \$legend,
-		"quiet|q"		=> \$quiet,
-		"help|h|?"		=> \$help,
-		"version|v"		=> \$version,
-		"html-prolog=s"		=> \$html_prolog_file,
-		"html-epilog=s"		=> \$html_epilog_file,
-		"html-extension=s"	=> \$html_ext,
-		"html-gzip"		=> \$html_gzip,
-		## 开启方法覆盖率的命令
-		"function-coverage"	=> \$func_coverage,
-		"no-function-coverage"	=> \$no_func_coverage,
-		## 开启分支覆盖率的命令
-		"branch-coverage"	=> \$br_coverage,
-		"no-branch-coverage"	=> \$no_br_coverage,
-		## FIX：QGH新添加命令行中关于差异代码的命令
-		"diff-coverage"	=> \$diff_coverage,
-		"no-diff-coverage"	=> \$no_diff_coverage,
+if (!GetOptions("output-directory|o=s"    => \$output_directory,
+        "title|t=s"        => \$test_title,
+        "description-file|d=s"    => \$desc_filename,
+        "keep-descriptions|k"    => \$keep_descriptions,
+        "css-file|c=s"        => \$css_filename,
+        "baseline-file|b=s"    => \$base_filename,
+        "prefix|p=s"        => \@opt_dir_prefix,
+        "num-spaces=i"        => \$tab_size,
+        "no-prefix"        => \$no_prefix,
+        "no-sourceview"        => \$no_sourceview,
+        "show-details|s"    => \$show_details,
+        "frames|f"        => \$frames,
+        "highlight"        => \$highlight,
+        "legend"        => \$legend,
+        "quiet|q"        => \$quiet,
+        "help|h|?"        => \$help,
+        "version|v"        => \$version,
+        "html-prolog=s"        => \$html_prolog_file,
+        "html-epilog=s"        => \$html_epilog_file,
+        "html-extension=s"    => \$html_ext,
+        "html-gzip"        => \$html_gzip,
+        ## 开启方法覆盖率的命令
+        "function-coverage"    => \$func_coverage,
+        "no-function-coverage"    => \$no_func_coverage,
+        ## 开启分支覆盖率的命令
+        "branch-coverage"    => \$br_coverage,
+        "no-branch-coverage"    => \$no_br_coverage,
+        ## FIX：QGH新添加命令行中关于差异代码的命令
+        "diff-coverage"    => \$diff_coverage,
+        "no-diff-coverage"    => \$no_diff_coverage,
 
-		"sort"			=> \$sort,
-		"no-sort"		=> \$no_sort,
-		"demangle-cpp"		=> \$demangle_cpp,
-		"ignore-errors=s"	=> \@opt_ignore_errors,
-		"config-file=s"		=> \$opt_config_file,
-		"rc=s%"			=> \%opt_rc,
-		"precision=i"		=> \$default_precision,
-		"missed"		=> \$opt_missed,
-		))
+        "sort"            => \$sort,
+        "no-sort"        => \$no_sort,
+        "demangle-cpp"        => \$demangle_cpp,
+        "ignore-errors=s"    => \@opt_ignore_errors,
+        "config-file=s"        => \$opt_config_file,
+        "rc=s%"            => \%opt_rc,
+        "precision=i"        => \$default_precision,
+        "missed"        => \$opt_missed,
+        ))
 {
-	print(STDERR "Use $tool_name --help to get usage information\n");
-	exit(1);
+    print(STDERR "Use $tool_name --help to get usage information\n");
+    exit(1);
 } else {
-	# Merge options
-	## 合并选项
-	if ($no_func_coverage) {
-		$func_coverage = 0;
-	}
-	if ($no_br_coverage) {
-		$br_coverage = 0;
-	}
-	if ($no_diff_coverage) {
-		$diff_coverage = 0;
-	}
-	# Merge sort options
-	## 合并排序选项
-	if ($no_sort) {
-		$sort = 0;
-	}
+    # Merge options
+    ## 合并选项
+    if ($no_func_coverage) {
+        $func_coverage = 0;
+    }
+    if ($no_br_coverage) {
+        $br_coverage = 0;
+    }
+    if ($no_diff_coverage) {
+        $diff_coverage = 0;
+    }
+    # Merge sort options
+    ## 合并排序选项
+    if ($no_sort) {
+        $sort = 0;
+    }
 }
 
 @info_filenames = @ARGV;
@@ -535,16 +535,16 @@ if (!GetOptions("output-directory|o=s"	=> \$output_directory,
 ## 检查帮助选项
 if ($help)
 {
-	print_usage(*STDOUT);
-	exit(0);
+    print_usage(*STDOUT);
+    exit(0);
 }
 
 # Check for version option
 # 版本检查选项
 if ($version)
 {
-	print("$tool_name: $lcov_version\n");
-	exit(0);
+    print("$tool_name: $lcov_version\n");
+    exit(0);
 }
 
 # Determine which errors the user wants us to ignore
@@ -559,27 +559,27 @@ parse_dir_prefix(@opt_dir_prefix);
 ## 检查信息文件名
 if (!@info_filenames)
 {
-	## "未指定文件名\n". "使用 $tool_name --help 获取使用信息\n"
-	die("No filename specified\n".
-	    "Use $tool_name --help to get usage information\n");
+    ## "未指定文件名\n". "使用 $tool_name --help 获取使用信息\n"
+    die("No filename specified\n".
+        "Use $tool_name --help to get usage information\n");
 }
 
 # Generate a title if none is specified
 ## 如果未指定标题，则生成标题
 if (!$test_title)
 {
-	if (scalar(@info_filenames) == 1)
-	{
-		# Only one filename specified, use it as title
-		## 只指定一个文件名，用它作为标题
-		$test_title = basename($info_filenames[0]);
-	}
-	else
-	{
-		# More than one filename specified, used default title
-		## 指定了多个文件名，使用默认标题
-		$test_title = "unnamed";
-	}
+    if (scalar(@info_filenames) == 1)
+    {
+        # Only one filename specified, use it as title
+        ## 只指定一个文件名，用它作为标题
+        $test_title = basename($info_filenames[0]);
+    }
+    else
+    {
+        # More than one filename specified, used default title
+        ## 指定了多个文件名，使用默认标题
+        $test_title = "unnamed";
+    }
 }
 
 # Make sure css_filename is an absolute path (in case we're changing
@@ -587,20 +587,20 @@ if (!$test_title)
 ## 确保css_filename是绝对路径（以防我们更改目录）
 if ($css_filename)
 {
-	if (!($css_filename =~ /^\/(.*)$/))
-	{
-		$css_filename = $cwd."/".$css_filename;
-	}
+    if (!($css_filename =~ /^\/(.*)$/))
+    {
+        $css_filename = $cwd."/".$css_filename;
+    }
 }
 
 # Make sure tab_size is within valid range
 ## 确保制表符大小在有效范围内
 if ($tab_size < 1)
 {
-	## 错误：指定的空格数无效。"."$tab_size!
-	print(STDERR "ERROR: invalid number of spaces specified: ".
-		     "$tab_size!\n");
-	exit(1);
+    ## 错误：指定的空格数无效。"."$tab_size!
+    print(STDERR "ERROR: invalid number of spaces specified: ".
+             "$tab_size!\n");
+    exit(1);
 }
 
 # Get HTML prolog and epilog
@@ -612,58 +612,58 @@ $html_epilog = get_html_epilog($html_epilog_file);
 ## 如果--no sourceview与--frames一起启用，则发出警告
 if ($no_sourceview && defined($frames))
 {
-	## 警告： --frames 选项不可用，因为 --no-sourceview 已指定!
-	warn("WARNING: option --frames disabled because --no-sourceview ".
-	     "was specified!\n");
-	$frames = undef;
+    ## 警告： --frames 选项不可用，因为 --no-sourceview 已指定!
+    warn("WARNING: option --frames disabled because --no-sourceview ".
+         "was specified!\n");
+    $frames = undef;
 }
 
 # Issue a warning if --no-prefix is enabled together with --prefix
 # 如果--no prefix与--prefix一起启用，则发出警告
 if ($no_prefix && @dir_prefix)
 {
-	## 警告： --prefix 选项不可用，因为 --no-prefix 已指定!
-	warn("WARNING: option --prefix disabled because --no-prefix was ".
-	     "specified!\n");
-	@dir_prefix = undef;
+    ## 警告： --prefix 选项不可用，因为 --no-prefix 已指定!
+    warn("WARNING: option --prefix disabled because --no-prefix was ".
+         "specified!\n");
+    @dir_prefix = undef;
 }
 
 @fileview_sortlist = ($SORT_FILE);
 @funcview_sortlist = ($SORT_FILE);
 
 if ($sort) {
-	push(@fileview_sortlist, $SORT_LINE);
-	push(@fileview_sortlist, $SORT_FUNC) if ($func_coverage);
-	push(@fileview_sortlist, $SORT_BRANCH) if ($br_coverage);
-	## FIX:QGH 新增差异代码覆盖率相关
-	push(@fileview_sortlist, $SORT_DIFFLINE) if ($diff_coverage);
-	push(@funcview_sortlist, $SORT_LINE);
+    push(@fileview_sortlist, $SORT_LINE);
+    push(@fileview_sortlist, $SORT_FUNC) if ($func_coverage);
+    push(@fileview_sortlist, $SORT_BRANCH) if ($br_coverage);
+    ## FIX:QGH 新增差异代码覆盖率相关
+    push(@fileview_sortlist, $SORT_DIFFLINE) if ($diff_coverage);
+    push(@funcview_sortlist, $SORT_LINE);
 }
 
 if ($frames)
 {
-	# Include genpng code needed for overview image generation
-	## 包括生成概述图像所需的genpng代码
-	do("$tool_dir/genpng");
+    # Include genpng code needed for overview image generation
+    ## 包括生成概述图像所需的genpng代码
+    do("$tool_dir/genpng");
 }
 
 # Ensure that the c++filt tool is available when using --demangle-cpp
 ## 确保在使用--demangle cpp时c++filt工具可用
 if ($demangle_cpp)
 {
-	if (system_no_output(3, "c++filt", "--version")) {
-		## 错误： 找不到--demangle cpp所需的c++筛选器工具
-		die("ERROR: could not find c++filt tool needed for ".
-		    "--demangle-cpp\n");
-	}
+    if (system_no_output(3, "c++filt", "--version")) {
+        ## 错误： 找不到--demangle cpp所需的c++筛选器工具
+        die("ERROR: could not find c++filt tool needed for ".
+            "--demangle-cpp\n");
+    }
 }
 
 # Make sure precision is within valid range
 ## 确保精度在有效范围内
 if ($default_precision < 1 || $default_precision > 4)
 {
-	## 错误：指定精度超出范围（1到4）
-	die("ERROR: specified precision is out of range (1 to 4)\n");
+    ## 错误：指定精度超出范围（1到4）
+    die("ERROR: specified precision is out of range (1 to 4)\n");
 }
 
 
@@ -671,12 +671,12 @@ if ($default_precision < 1 || $default_precision > 4)
 ## 确保output_目录存在，必要时创建它
 if ($output_directory)
 {
-	stat($output_directory);
+    stat($output_directory);
 
-	if (! -e _)
-	{
-		create_sub_dir($output_directory);
-	}
+    if (! -e _)
+    {
+        create_sub_dir($output_directory);
+    }
 }
 
 # Do something
@@ -695,9 +695,9 @@ exit(0);
 ## 打印使用信息。
 sub print_usage(*)
 {
-	local *HANDLE = $_[0];
+    local *HANDLE = $_[0];
 
-	print(HANDLE <<END_OF_USAGE);
+    print(HANDLE <<END_OF_USAGE);
 Usage: $tool_name [OPTIONS] INFOFILE(S)
 
 Create HTML output for coverage data found in INFOFILE. Note that INFOFILE
@@ -741,7 +741,7 @@ HTML output:
 
 For more information see: $lcov_url
 END_OF_USAGE
-	;
+    ;
 =pot 注释
 Usage: $tool_name [OPTIONS] INFOFILE(S)
 
@@ -800,12 +800,12 @@ HTML output:
 
 sub get_rate($$)
 {
-	my ($found, $hit) = @_;
+    my ($found, $hit) = @_;
 
-	if ($found == 0) {
-		return 10000;
-	}
-	return int($hit * 1000 / $found) * 10 + 2 - (1 / $found);
+    if ($found == 0) {
+        return 10000;
+    }
+    return int($hit * 1000 / $found) * 10 + 2 - (1 / $found);
 }
 
 
@@ -818,12 +818,12 @@ sub get_rate($$)
 
 sub get_overall_line($$$$)
 {
-	my ($found, $hit, $name_sn, $name_pl) = @_;
-	my $name;
+    my ($found, $hit, $name_sn, $name_pl) = @_;
+    my $name;
 
-	return "no data found" if (!defined($found) || $found == 0);
-	$name = ($found == 1) ? $name_sn : $name_pl;
-	return rate($hit, $found, "% ($hit of $found $name)");
+    return "no data found" if (!defined($found) || $found == 0);
+    $name = ($found == 1) ? $name_sn : $name_pl;
+    return rate($hit, $found, "% ($hit of $found $name)");
 }
 
 
@@ -836,51 +836,51 @@ sub get_overall_line($$$$)
 
 sub print_overall_rate($$$$$$$$$$$$)
 {
-	my ($ln_do, $ln_found, $ln_hit, $fn_do, $fn_found, $fn_hit,
-	    $br_do, $br_found, $br_hit, $diff_do, $diff_found, $diff_hit) = @_;
+    my ($ln_do, $ln_found, $ln_hit, $fn_do, $fn_found, $fn_hit,
+        $br_do, $br_found, $br_hit, $diff_do, $diff_found, $diff_hit) = @_;
 
-	info("Overall coverage rate:\n"); ## 总覆盖率
-	info("  lines......: %s\n",
-	     get_overall_line($ln_found, $ln_hit, "line", "lines"))
-		if ($ln_do);
-	info("  functions..: %s\n",
-	     get_overall_line($fn_found, $fn_hit, "function", "functions"))
-		if ($fn_do);
-	info("  branches...: %s\n",
-	     get_overall_line($br_found, $br_hit, "branch", "branches"))
-		if ($br_do);
-	info("  difflines...: %s\n",
-		get_overall_line($diff_found, $diff_hit, "diffline", "difflines"))
-		if ($diff_do);
+    info("Overall coverage rate:\n"); ## 总覆盖率
+    info("  lines......: %s\n",
+         get_overall_line($ln_found, $ln_hit, "line", "lines"))
+        if ($ln_do);
+    info("  functions..: %s\n",
+         get_overall_line($fn_found, $fn_hit, "function", "functions"))
+        if ($fn_do);
+    info("  branches...: %s\n",
+         get_overall_line($br_found, $br_hit, "branch", "branches"))
+        if ($br_do);
+    info("  difflines...: %s\n",
+        get_overall_line($diff_found, $diff_hit, "diffline", "difflines"))
+        if ($diff_do);
 }
 
 sub get_fn_list($)
 {
-	my ($info) = @_;
-	my %fns;
-	my @result;
+    my ($info) = @_;
+    my %fns;
+    my @result;
 
-	foreach my $filename (keys(%{$info})) {
-		my $data = $info->{$filename};
-		my $funcdata = $data->{"func"};
-		my $sumfnccount = $data->{"sumfnc"};
+    foreach my $filename (keys(%{$info})) {
+        my $data = $info->{$filename};
+        my $funcdata = $data->{"func"};
+        my $sumfnccount = $data->{"sumfnc"};
 
-		if (defined($funcdata)) {
-			foreach my $func_name (keys(%{$funcdata})) {
-				$fns{$func_name} = 1;
-			}
-		}
+        if (defined($funcdata)) {
+            foreach my $func_name (keys(%{$funcdata})) {
+                $fns{$func_name} = 1;
+            }
+        }
 
-		if (defined($sumfnccount)) {
-			foreach my $func_name (keys(%{$sumfnccount})) {
-				$fns{$func_name} = 1;
-			}
-		}
-	}
+        if (defined($sumfnccount)) {
+            foreach my $func_name (keys(%{$sumfnccount})) {
+                $fns{$func_name} = 1;
+            }
+        }
+    }
 
-	@result = keys(%fns);
+    @result = keys(%fns);
 
-	return \@result;
+    return \@result;
 }
 
 #
@@ -895,85 +895,85 @@ sub get_fn_list($)
 
 sub rename_functions($$)
 {
-	my ($info, $conv) = @_;
+    my ($info, $conv) = @_;
 
-	foreach my $filename (keys(%{$info})) {
-		my $data = $info->{$filename};
-		my $funcdata;
-		my $testfncdata;
-		my $sumfnccount;
-		my %newfuncdata;
-		my %newsumfnccount;
-		my $f_found;
-		my $f_hit;
+    foreach my $filename (keys(%{$info})) {
+        my $data = $info->{$filename};
+        my $funcdata;
+        my $testfncdata;
+        my $sumfnccount;
+        my %newfuncdata;
+        my %newsumfnccount;
+        my $f_found;
+        my $f_hit;
 
-		# funcdata: function name -> line number
-		## functdata：函数名->行号
-		$funcdata = $data->{"func"};
-		foreach my $fn (keys(%{$funcdata})) {
-			my $cn = $conv->{$fn};
+        # funcdata: function name -> line number
+        ## functdata：函数名->行号
+        $funcdata = $data->{"func"};
+        foreach my $fn (keys(%{$funcdata})) {
+            my $cn = $conv->{$fn};
 
-			# Abort if two functions on different lines map to the
-			# same demangled name.
-			## 如果不同行上的两个函数映射到同一demangled名称，则中止。
-			if (defined($newfuncdata{$cn}) &&
-			    $newfuncdata{$cn} != $funcdata->{$fn}) {
-				## 错误： 需求函数名 $cn ". "映射到不同的行
-				die("ERROR: Demangled function name $cn ".
-				    "maps to different lines (".
-				    $newfuncdata{$cn}." vs ".
-				    $funcdata->{$fn}.") in $filename\n");
-			}
-			$newfuncdata{$cn} = $funcdata->{$fn};
-		}
-		$data->{"func"} = \%newfuncdata;
+            # Abort if two functions on different lines map to the
+            # same demangled name.
+            ## 如果不同行上的两个函数映射到同一demangled名称，则中止。
+            if (defined($newfuncdata{$cn}) &&
+                $newfuncdata{$cn} != $funcdata->{$fn}) {
+                ## 错误： 需求函数名 $cn ". "映射到不同的行
+                die("ERROR: Demangled function name $cn ".
+                    "maps to different lines (".
+                    $newfuncdata{$cn}." vs ".
+                    $funcdata->{$fn}.") in $filename\n");
+            }
+            $newfuncdata{$cn} = $funcdata->{$fn};
+        }
+        $data->{"func"} = \%newfuncdata;
 
-		# testfncdata: test name -> testfnccount
-		# testfnccount: function name -> execution count
-		## testfncata:测试名称->testfncount
+        # testfncdata: test name -> testfnccount
+        # testfnccount: function name -> execution count
+        ## testfncata:测试名称->testfncount
         ## testfnccount: 方法名 -> 执行次数
-		$testfncdata = $data->{"testfnc"};
-		foreach my $tn (keys(%{$testfncdata})) {
-			my $testfnccount = $testfncdata->{$tn};
-			my %newtestfnccount;
+        $testfncdata = $data->{"testfnc"};
+        foreach my $tn (keys(%{$testfncdata})) {
+            my $testfnccount = $testfncdata->{$tn};
+            my %newtestfnccount;
 
-			foreach my $fn (keys(%{$testfnccount})) {
-				my $cn = $conv->{$fn};
+            foreach my $fn (keys(%{$testfnccount})) {
+                my $cn = $conv->{$fn};
 
-				# Add counts for different functions that map
-				# to the same name.
-				## 为映射到相同名称的不同函数添加计数。
-				$newtestfnccount{$cn} +=
-					$testfnccount->{$fn};
-			}
-			$testfncdata->{$tn} = \%newtestfnccount;
-		}
+                # Add counts for different functions that map
+                # to the same name.
+                ## 为映射到相同名称的不同函数添加计数。
+                $newtestfnccount{$cn} +=
+                    $testfnccount->{$fn};
+            }
+            $testfncdata->{$tn} = \%newtestfnccount;
+        }
 
-		# sumfnccount: function name -> execution count
-		## sumfncount：函数名->执行次数
-		$sumfnccount = $data->{"sumfnc"};
-		foreach my $fn (keys(%{$sumfnccount})) {
-			my $cn = $conv->{$fn};
+        # sumfnccount: function name -> execution count
+        ## sumfncount：函数名->执行次数
+        $sumfnccount = $data->{"sumfnc"};
+        foreach my $fn (keys(%{$sumfnccount})) {
+            my $cn = $conv->{$fn};
 
-			# Add counts for different functions that map
-			# to the same name.
-			## 为映射到相同名称的不同函数添加计数。
-			$newsumfnccount{$cn} += $sumfnccount->{$fn};
-		}
-		$data->{"sumfnc"} = \%newsumfnccount;
+            # Add counts for different functions that map
+            # to the same name.
+            ## 为映射到相同名称的不同函数添加计数。
+            $newsumfnccount{$cn} += $sumfnccount->{$fn};
+        }
+        $data->{"sumfnc"} = \%newsumfnccount;
 
-		# Update function found and hit counts since they may have
-		# changed
-		##  已找到更新函数和命中计数，因为它们可能已更改
-		$f_found = 0;
-		$f_hit = 0;
-		foreach my $fn (keys(%newsumfnccount)) {
-			$f_found++;
-			$f_hit++ if ($newsumfnccount{$fn} > 0);
-		}
-		$data->{"f_found"} = $f_found;
-		$data->{"f_hit"} = $f_hit;
-	}
+        # Update function found and hit counts since they may have
+        # changed
+        ##  已找到更新函数和命中计数，因为它们可能已更改
+        $f_found = 0;
+        $f_hit = 0;
+        foreach my $fn (keys(%newsumfnccount)) {
+            $f_found++;
+            $f_hit++ if ($newsumfnccount{$fn} > 0);
+        }
+        $data->{"f_found"} = $f_found;
+        $data->{"f_hit"} = $f_hit;
+    }
 }
 
 #
@@ -993,230 +993,230 @@ sub rename_functions($$)
 
 sub gen_html()
 {
-	local *HTML_HANDLE;
-	my %overview;
-	my %base_data;
-	my $lines_found;
-	my $lines_hit;
-	my $fn_found;
-	my $fn_hit;
-	my $br_found;
-	my $br_hit;
-	my $overall_found = 0;
-	my $overall_hit = 0;
-	my $total_fn_found = 0;
-	my $total_fn_hit = 0;
-	my $total_br_found = 0;
-	my $total_br_hit = 0;
+    local *HTML_HANDLE;
+    my %overview;
+    my %base_data;
+    my $lines_found;
+    my $lines_hit;
+    my $fn_found;
+    my $fn_hit;
+    my $br_found;
+    my $br_hit;
+    my $overall_found = 0;
+    my $overall_hit = 0;
+    my $total_fn_found = 0;
+    my $total_fn_hit = 0;
+    my $total_br_found = 0;
+    my $total_br_hit = 0;
 
-	## 新增差异代码覆盖率相关
-	my $diff_found;
-	my $diff_hit;
-	my $total_diff_found = 0;
-	my $total_diff_hit = 0;
+    ## 新增差异代码覆盖率相关
+    my $diff_found;
+    my $diff_hit;
+    my $total_diff_found = 0;
+    my $total_diff_hit = 0;
 
-	my $dir_name;
-	my $link_name;
-	my @dir_list;
-	my %new_info;
+    my $dir_name;
+    my $link_name;
+    my @dir_list;
+    my %new_info;
 
-	# Read in all specified .info files
-	## 读取所有指定的.info文件
-	foreach (@info_filenames)
-	{
-		%new_info = %{read_info_file($_)};
+    # Read in all specified .info files
+    ## 读取所有指定的.info文件
+    foreach (@info_filenames)
+    {
+        %new_info = %{read_info_file($_)};
 
-		# Combine %new_info with %info_data
-		## 将%new_info与%info_data合并。
-		%info_data = %{combine_info_files(\%info_data, \%new_info)};
-	}
+        # Combine %new_info with %info_data
+        ## 将%new_info与%info_data合并。
+        %info_data = %{combine_info_files(\%info_data, \%new_info)};
+    }
 
-	info("Found %d entries.\n", scalar(keys(%info_data)));
+    info("Found %d entries.\n", scalar(keys(%info_data)));
 
-	# Read and apply baseline data if specified
-	## 读 和 应用baseline数据（如果指定）
-	if ($base_filename)
-	{
-		# Read baseline file
-		## 读 baseline 文件
-		info("Reading baseline file $base_filename\n");
-		%base_data = %{read_info_file($base_filename)};
-		info("Found %d entries.\n", scalar(keys(%base_data)));
+    # Read and apply baseline data if specified
+    ## 读 和 应用baseline数据（如果指定）
+    if ($base_filename)
+    {
+        # Read baseline file
+        ## 读 baseline 文件
+        info("Reading baseline file $base_filename\n");
+        %base_data = %{read_info_file($base_filename)};
+        info("Found %d entries.\n", scalar(keys(%base_data)));
 
-		# Apply baseline
-		## 应用baseline
-		info("Subtracting baseline data.\n");
-		%info_data = %{apply_baseline(\%info_data, \%base_data)};
-	}
+        # Apply baseline
+        ## 应用baseline
+        info("Subtracting baseline data.\n");
+        %info_data = %{apply_baseline(\%info_data, \%base_data)};
+    }
 
-	@dir_list = get_dir_list(keys(%info_data));
-	print "@dir_list";
+    @dir_list = get_dir_list(keys(%info_data));
+    print "@dir_list";
 
-	if ($no_prefix)
-	{
-		# User requested that we leave filenames alone
-		## 用户要求我们不使用文件名
-		info("User asked not to remove filename prefix\n");
-	}
-	elsif (! @dir_prefix)
-	{
-		# Get prefix common to most directories in list
-		## 获取列表中大多数目录的共同前缀
-		my $prefix = get_prefix(1, keys(%info_data));
+    if ($no_prefix)
+    {
+        # User requested that we leave filenames alone
+        ## 用户要求我们不使用文件名
+        info("User asked not to remove filename prefix\n");
+    }
+    elsif (! @dir_prefix)
+    {
+        # Get prefix common to most directories in list
+        ## 获取列表中大多数目录的共同前缀
+        my $prefix = get_prefix(1, keys(%info_data));
 
-		if ($prefix)
-		{
-			## 找到常见的文件名前缀
-			info("Found common filename prefix \"$prefix\"\n");
-			$dir_prefix[0] = $prefix;
+        if ($prefix)
+        {
+            ## 找到常见的文件名前缀
+            info("Found common filename prefix \"$prefix\"\n");
+            $dir_prefix[0] = $prefix;
 
-		}
-		else
-		{
-			## 没有找到共同的文件名前缀!
-			info("No common filename prefix found!\n");
-			$no_prefix=1;
-		}
-	}
-	else
-	{
-		## 使用用户指定的文件名前缀
-		my $msg = "Using user-specified filename prefix ";
-		for my $i (0 .. $#dir_prefix)
-		{
-				$dir_prefix[$i] =~ s/\/+$//;
-				$msg .= ", " unless 0 == $i;
-				$msg .= "\"" . $dir_prefix[$i] . "\"";
-		}
-		info($msg . "\n");
-	}
+        }
+        else
+        {
+            ## 没有找到共同的文件名前缀!
+            info("No common filename prefix found!\n");
+            $no_prefix=1;
+        }
+    }
+    else
+    {
+        ## 使用用户指定的文件名前缀
+        my $msg = "Using user-specified filename prefix ";
+        for my $i (0 .. $#dir_prefix)
+        {
+                $dir_prefix[$i] =~ s/\/+$//;
+                $msg .= ", " unless 0 == $i;
+                $msg .= "\"" . $dir_prefix[$i] . "\"";
+        }
+        info($msg . "\n");
+    }
 
 
-	# Read in test description file if specified
-	## 读取测试描述文件（如果指定）。
-	if ($desc_filename)
-	{
-		info("Reading test description file $desc_filename\n");
-		%test_description = %{read_testfile($desc_filename)};
+    # Read in test description file if specified
+    ## 读取测试描述文件（如果指定）。
+    if ($desc_filename)
+    {
+        info("Reading test description file $desc_filename\n");
+        %test_description = %{read_testfile($desc_filename)};
 
-		# Remove test descriptions which are not referenced
-		# from %info_data if user didn't tell us otherwise
-		## 如果用户没有另行通知，请删除未从 %info_data 中引用的测试说明
-		if (!$keep_descriptions)
-		{
-			remove_unused_descriptions();
-		}
-	}
+        # Remove test descriptions which are not referenced
+        # from %info_data if user didn't tell us otherwise
+        ## 如果用户没有另行通知，请删除未从 %info_data 中引用的测试说明
+        if (!$keep_descriptions)
+        {
+            remove_unused_descriptions();
+        }
+    }
 
-	# Change to output directory if specified
-	## 如果指定，则更改为输出目录
-	if ($output_directory)
-	{
-		chdir($output_directory)
-			or die("ERROR: cannot change to directory ".
-			"$output_directory!\n");
-	}
-	## 正在编写.css和.png文件
-	info("Writing .css and .png files.\n");
-	write_css_file();
-	write_png_files();
+    # Change to output directory if specified
+    ## 如果指定，则更改为输出目录
+    if ($output_directory)
+    {
+        chdir($output_directory)
+            or die("ERROR: cannot change to directory ".
+            "$output_directory!\n");
+    }
+    ## 正在编写.css和.png文件
+    info("Writing .css and .png files.\n");
+    write_css_file();
+    write_png_files();
 
-	if ($html_gzip)
-	{
-		## 正在写入.htaccess文件
-		info("Writing .htaccess file.\n");
-		write_htaccess_file();
-	}
-	## 产生输出
-	info("Generating output.\n");
+    if ($html_gzip)
+    {
+        ## 正在写入.htaccess文件
+        info("Writing .htaccess file.\n");
+        write_htaccess_file();
+    }
+    ## 产生输出
+    info("Generating output.\n");
 
-	# Process each subdirectory and collect overview information
-	## 处理每个子目录并收集概述信息
-	my $index = 0;
-	foreach $dir_name (@dir_list)
-	{
-		$index += 1;
-		($lines_found, $lines_hit, $fn_found, $fn_hit,
-		 $br_found, $br_hit,$diff_found, $diff_hit)
-			= process_dir($dir_name);
+    # Process each subdirectory and collect overview information
+    ## 处理每个子目录并收集概述信息
+    my $index = 0;
+    foreach $dir_name (@dir_list)
+    {
+        $index += 1;
+        ($lines_found, $lines_hit, $fn_found, $fn_hit,
+         $br_found, $br_hit,$diff_found, $diff_hit)
+            = process_dir($dir_name);
 
-		# Handle files in root directory gracefully
-		## 优雅地处理根目录中的文件
-		$dir_name = "root" if ($dir_name eq "");
+        # Handle files in root directory gracefully
+        ## 优雅地处理根目录中的文件
+        $dir_name = "root" if ($dir_name eq "");
 
-		# Remove prefix if applicable
-		## 删除前缀（如果适用）
-		if (!$no_prefix && @dir_prefix)
-		{
-			# Match directory names beginning with one of @dir_prefix
-			## 匹配以@dir_前缀之一开头的目录名
-			$dir_name = apply_prefix($dir_name,@dir_prefix);
-		}
+        # Remove prefix if applicable
+        ## 删除前缀（如果适用）
+        if (!$no_prefix && @dir_prefix)
+        {
+            # Match directory names beginning with one of @dir_prefix
+            ## 匹配以@dir_前缀之一开头的目录名
+            $dir_name = apply_prefix($dir_name,@dir_prefix);
+        }
 
-		# Generate name for directory overview HTML page
-		## 生成目录概述HTML页的名称
-		if ($dir_name =~ /^\/(.*)$/)
-		{
-			$link_name = substr($dir_name, 1)."/index.$html_ext";
-		}
-		else
-		{
-			$link_name = $dir_name."/index.$html_ext";
-		}
+        # Generate name for directory overview HTML page
+        ## 生成目录概述HTML页的名称
+        if ($dir_name =~ /^\/(.*)$/)
+        {
+            $link_name = substr($dir_name, 1)."/index.$html_ext";
+        }
+        else
+        {
+            $link_name = $dir_name."/index.$html_ext";
+        }
 
-		##FIX:QGH 差异覆盖率相关
-		$overview{$dir_name} = [$lines_found, $lines_hit, $fn_found,
-					$fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, $link_name,
-					get_rate($lines_found, $lines_hit),
-					get_rate($fn_found, $fn_hit),
-					get_rate($br_found, $br_hit),
-					get_rate($diff_found, $diff_hit)];
-		$overall_found	+= $lines_found;
-		$overall_hit	+= $lines_hit;
-		$total_fn_found	+= $fn_found;
-		$total_fn_hit	+= $fn_hit;
-		$total_br_found	+= $br_found;
-		$total_br_hit	+= $br_hit;
+        ##FIX:QGH 差异覆盖率相关
+        $overview{$dir_name} = [$lines_found, $lines_hit, $fn_found,
+                    $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, $link_name,
+                    get_rate($lines_found, $lines_hit),
+                    get_rate($fn_found, $fn_hit),
+                    get_rate($br_found, $br_hit),
+                    get_rate($diff_found, $diff_hit)];
+        $overall_found    += $lines_found;
+        $overall_hit    += $lines_hit;
+        $total_fn_found    += $fn_found;
+        $total_fn_hit    += $fn_hit;
+        $total_br_found    += $br_found;
+        $total_br_hit    += $br_hit;
 
-		##FIX:QGH 差异覆盖率相关
-		$total_diff_found+= $diff_found;
-		$total_diff_hit	+= $diff_hit;
-	}
+        ##FIX:QGH 差异覆盖率相关
+        $total_diff_found+= $diff_found;
+        $total_diff_hit    += $diff_hit;
+    }
 
-	# Generate overview page
-	## 生成概览页
-	info("Writing directory view page.\n"); ## 正在写入目录视图页
+    # Generate overview page
+    ## 生成概览页
+    info("Writing directory view page.\n"); ## 正在写入目录视图页
 
-	# Create sorted pages
-	## 创建排序页面
-	foreach (@fileview_sortlist) {
-		write_dir_page($fileview_sortname[$_], ".", "", $test_title,
-			       undef, $overall_found, $overall_hit,
-			       $total_fn_found, $total_fn_hit,
-			       $total_br_found,$total_br_hit, 
-			       $total_diff_found,$total_diff_hit,
-			       \%overview, {}, {}, {}, {}, {}, $_);
-	}
+    # Create sorted pages
+    ## 创建排序页面
+    foreach (@fileview_sortlist) {
+        write_dir_page($fileview_sortname[$_], ".", "", $test_title,
+                   undef, $overall_found, $overall_hit,
+                   $total_fn_found, $total_fn_hit,
+                   $total_br_found,$total_br_hit,
+                   $total_diff_found,$total_diff_hit,
+                   \%overview, {}, {}, {}, {}, {}, $_);
+    }
 
-	# Check if there are any test case descriptions to write out
-	## 检查是否有任何要写出的测试用例描述
-	if (%test_description)
-	{
-		## 正在编写测试用例描述文件
-		info("Writing test case description file.\n");
-		write_description_file( \%test_description,
-					$overall_found, $overall_hit,
-					$total_fn_found, $total_fn_hit,
-					$total_br_found, $total_br_hit,
-					$total_diff_found, $total_diff_hit);
-	}
+    # Check if there are any test case descriptions to write out
+    ## 检查是否有任何要写出的测试用例描述
+    if (%test_description)
+    {
+        ## 正在编写测试用例描述文件
+        info("Writing test case description file.\n");
+        write_description_file( \%test_description,
+                    $overall_found, $overall_hit,
+                    $total_fn_found, $total_fn_hit,
+                    $total_br_found, $total_br_hit,
+                    $total_diff_found, $total_diff_hit);
+    }
 
-	print_overall_rate(1, $overall_found, $overall_hit,
-			   $func_coverage, $total_fn_found, $total_fn_hit,
-			   $br_coverage, $total_br_found, $total_br_hit,
-			   $diff_coverage,$total_diff_found,$total_diff_hit);
+    print_overall_rate(1, $overall_found, $overall_hit,
+               $func_coverage, $total_fn_found, $total_fn_hit,
+               $br_coverage, $total_br_found, $total_br_hit,
+               $diff_coverage,$total_diff_found,$total_diff_hit);
 
-	chdir($cwd);
+    chdir($cwd);
 }
 
 #
@@ -1226,46 +1226,46 @@ sub gen_html()
 
 sub html_create($$)
 {
-	my $handle = $_[0];
-	my $filename = $_[1];
+    my $handle = $_[0];
+    my $filename = $_[1];
 
-	if ($html_gzip)
-	{
-		open($handle, "|-", "gzip -c >'$filename'")
-			or die("ERROR: cannot open $filename for writing ".
-			       "(gzip)!\n"); ## 错误：无法打开 $filename 进行写入
-	}
-	else
-	{
-		open($handle, ">", $filename)
-			or die("ERROR: cannot open $filename for writing!\n"); ## 错误：无法打开 $filename 进行写入
-	}
+    if ($html_gzip)
+    {
+        open($handle, "|-", "gzip -c >'$filename'")
+            or die("ERROR: cannot open $filename for writing ".
+                   "(gzip)!\n"); ## 错误：无法打开 $filename 进行写入
+    }
+    else
+    {
+        open($handle, ">", $filename)
+            or die("ERROR: cannot open $filename for writing!\n"); ## 错误：无法打开 $filename 进行写入
+    }
 }
 
 sub write_dir_page($$$$$$$$$$$$$$$$$$$$)
 {
-	my ($name, $rel_dir, $base_dir, $title, $trunc_dir, $overall_found,
-	    $overall_hit, $total_fn_found, $total_fn_hit, $total_br_found,
-	    $total_br_hit,$total_diff_found,$total_diff_hit, 
-	    $overview, $testhash, $testfnchash, $testbrhash,$testdiffhash,
-	    $view_type, $sort_type) = @_;
+    my ($name, $rel_dir, $base_dir, $title, $trunc_dir, $overall_found,
+        $overall_hit, $total_fn_found, $total_fn_hit, $total_br_found,
+        $total_br_hit,$total_diff_found,$total_diff_hit,
+        $overview, $testhash, $testfnchash, $testbrhash,$testdiffhash,
+        $view_type, $sort_type) = @_;
 
-	# Generate directory overview page including details
-	## 生成目录概览页，包括详细信息
-	html_create(*HTML_HANDLE, "$rel_dir/index$name.$html_ext");
-	if (!defined($trunc_dir)) {
-		$trunc_dir = "";
-	}
-	$title .= " - " if ($trunc_dir ne "");
-	write_html_prolog(*HTML_HANDLE, $base_dir, "LCOV - $title$trunc_dir");
-	write_header(*HTML_HANDLE, $view_type, $trunc_dir, $rel_dir,
-		     $overall_found, $overall_hit, $total_fn_found,
-		     $total_fn_hit, $total_br_found, $total_br_hit, 
-		     $total_diff_found, $total_diff_hit, $sort_type);
-	write_file_table(*HTML_HANDLE, $base_dir, $overview, $testhash,
-			 $testfnchash, $testbrhash, $testdiffhash, $view_type, $sort_type);
-	write_html_epilog(*HTML_HANDLE, $base_dir);
-	close(*HTML_HANDLE);
+    # Generate directory overview page including details
+    ## 生成目录概览页，包括详细信息
+    html_create(*HTML_HANDLE, "$rel_dir/index$name.$html_ext");
+    if (!defined($trunc_dir)) {
+        $trunc_dir = "";
+    }
+    $title .= " - " if ($trunc_dir ne "");
+    write_html_prolog(*HTML_HANDLE, $base_dir, "LCOV - $title$trunc_dir");
+    write_header(*HTML_HANDLE, $view_type, $trunc_dir, $rel_dir,
+             $overall_found, $overall_hit, $total_fn_found,
+             $total_fn_hit, $total_br_found, $total_br_hit,
+             $total_diff_found, $total_diff_hit, $sort_type);
+    write_file_table(*HTML_HANDLE, $base_dir, $overview, $testhash,
+             $testfnchash, $testbrhash, $testdiffhash, $view_type, $sort_type);
+    write_html_epilog(*HTML_HANDLE, $base_dir);
+    close(*HTML_HANDLE);
 }
 
 
@@ -1276,153 +1276,153 @@ sub write_dir_page($$$$$$$$$$$$$$$$$$$$)
 
 sub process_dir($)
 {
-	my $abs_dir = $_[0];
-	my $trunc_dir;
-	my $rel_dir = $abs_dir;
-	my $base_dir;
-	my $filename;
-	my %overview;
-	my $lines_found;
-	my $lines_hit;
-	my $fn_found;
-	my $fn_hit;
-	my $br_found;
-	my $br_hit;
-	my $overall_found=0;
-	my $overall_hit=0;
-	my $total_fn_found=0;
-	my $total_fn_hit=0;
-	my $total_br_found = 0;
-	my $total_br_hit = 0;
-	my $base_name;
-	my $extension;
-	my $testdata;
-	my %testhash;
-	my $testfncdata;
-	my %testfnchash;
-	my $testbrdata;
-	my %testbrhash;
-	## FIX：QGH 差异覆盖率相关
-	my $diff_found;
-	my $diff_hit;
-	my $total_diff_found = 0;
-	my $total_diff_hit = 0;
-	my $testdiffdata;
-	my %testdiffhash;
+    my $abs_dir = $_[0];
+    my $trunc_dir;
+    my $rel_dir = $abs_dir;
+    my $base_dir;
+    my $filename;
+    my %overview;
+    my $lines_found;
+    my $lines_hit;
+    my $fn_found;
+    my $fn_hit;
+    my $br_found;
+    my $br_hit;
+    my $overall_found=0;
+    my $overall_hit=0;
+    my $total_fn_found=0;
+    my $total_fn_hit=0;
+    my $total_br_found = 0;
+    my $total_br_hit = 0;
+    my $base_name;
+    my $extension;
+    my $testdata;
+    my %testhash;
+    my $testfncdata;
+    my %testfnchash;
+    my $testbrdata;
+    my %testbrhash;
+    ## FIX：QGH 差异覆盖率相关
+    my $diff_found;
+    my $diff_hit;
+    my $total_diff_found = 0;
+    my $total_diff_hit = 0;
+    my $testdiffdata;
+    my %testdiffhash;
 
-	my @sort_list;
-	local *HTML_HANDLE;
+    my @sort_list;
+    local *HTML_HANDLE;
 
-	# Remove prefix if applicable
-	## 删除前缀（如果适用）
-	if (!$no_prefix)
-	{
-		# Match directory name beginning with one of @dir_prefix
-		## 匹配以@dir_前缀之一开头的目录名
-		$rel_dir = apply_prefix($rel_dir,@dir_prefix);
-	}
+    # Remove prefix if applicable
+    ## 删除前缀（如果适用）
+    if (!$no_prefix)
+    {
+        # Match directory name beginning with one of @dir_prefix
+        ## 匹配以@dir_前缀之一开头的目录名
+        $rel_dir = apply_prefix($rel_dir,@dir_prefix);
+    }
 
-	$trunc_dir = $rel_dir;
+    $trunc_dir = $rel_dir;
 
-	# Remove leading /
-	## 删除前缀 /
-	if ($rel_dir =~ /^\/(.*)$/)
-	{
-		$rel_dir = substr($rel_dir, 1);
-	}
+    # Remove leading /
+    ## 删除前缀 /
+    if ($rel_dir =~ /^\/(.*)$/)
+    {
+        $rel_dir = substr($rel_dir, 1);
+    }
 
-	# Handle files in root directory gracefully
-	## 优雅地处理根目录中的文件
-	$rel_dir = "root" if ($rel_dir eq "");
-	$trunc_dir = "root" if ($trunc_dir eq "");
+    # Handle files in root directory gracefully
+    ## 优雅地处理根目录中的文件
+    $rel_dir = "root" if ($rel_dir eq "");
+    $trunc_dir = "root" if ($trunc_dir eq "");
 
-	$base_dir = get_relative_base_path($rel_dir);
+    $base_dir = get_relative_base_path($rel_dir);
 
-	create_sub_dir($rel_dir);
+    create_sub_dir($rel_dir);
 
-	# Match filenames which specify files in this directory, not including
-	# sub-directories
-	## 匹配指定此目录中文件的文件名，不包括子目录
-	foreach $filename (grep(/^\Q$abs_dir\E\/[^\/]*$/,keys(%info_data)))
-	{
-		my $page_link;
-		my $func_link;
+    # Match filenames which specify files in this directory, not including
+    # sub-directories
+    ## 匹配指定此目录中文件的文件名，不包括子目录
+    foreach $filename (grep(/^\Q$abs_dir\E\/[^\/]*$/,keys(%info_data)))
+    {
+        my $page_link;
+        my $func_link;
 
-		($lines_found, $lines_hit, $fn_found, $fn_hit, $br_found,
-		 $br_hit, $diff_found, $diff_hit, $testdata, $testfncdata, $testbrdata, $testdiffdata) =
-			process_file($trunc_dir, $rel_dir, $filename);
+        ($lines_found, $lines_hit, $fn_found, $fn_hit, $br_found,
+         $br_hit, $diff_found, $diff_hit, $testdata, $testfncdata, $testbrdata, $testdiffdata) =
+            process_file($trunc_dir, $rel_dir, $filename);
 
-		$base_name = basename($filename);
+        $base_name = basename($filename);
 
-		if ($no_sourceview) {
-			$page_link = "";
-		} elsif ($frames) {
-			# Link to frameset page
-			## 链接到框架集页面
-			$page_link = "$base_name.gcov.frameset.$html_ext";
-		} else {
-			# Link directory to source code view 
-			## 将目录链接到源代码视图页
-			$page_link = "$base_name.gcov.$html_ext";
-		}
-		## FIX:QGH 差异覆盖率相关
-		$overview{$base_name} = [$lines_found, $lines_hit, $fn_found,
-					 $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit,
-					 $page_link,
-					 get_rate($lines_found, $lines_hit),
-					 get_rate($fn_found, $fn_hit),
-					 get_rate($br_found, $br_hit),
-					 get_rate($diff_found, $diff_hit)];
+        if ($no_sourceview) {
+            $page_link = "";
+        } elsif ($frames) {
+            # Link to frameset page
+            ## 链接到框架集页面
+            $page_link = "$base_name.gcov.frameset.$html_ext";
+        } else {
+            # Link directory to source code view
+            ## 将目录链接到源代码视图页
+            $page_link = "$base_name.gcov.$html_ext";
+        }
+        ## FIX:QGH 差异覆盖率相关
+        $overview{$base_name} = [$lines_found, $lines_hit, $fn_found,
+                     $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit,
+                     $page_link,
+                     get_rate($lines_found, $lines_hit),
+                     get_rate($fn_found, $fn_hit),
+                     get_rate($br_found, $br_hit),
+                     get_rate($diff_found, $diff_hit)];
 
-		$testhash{$base_name} = $testdata;
-		$testfnchash{$base_name} = $testfncdata;
-		$testbrhash{$base_name} = $testbrdata;
-		## FIX:QGH 差异覆盖率相关
-		$testdiffhash{$base_name} = $testdiffdata;
+        $testhash{$base_name} = $testdata;
+        $testfnchash{$base_name} = $testfncdata;
+        $testbrhash{$base_name} = $testbrdata;
+        ## FIX:QGH 差异覆盖率相关
+        $testdiffhash{$base_name} = $testdiffdata;
 
-		$overall_found	+= $lines_found;
-		$overall_hit	+= $lines_hit;
+        $overall_found    += $lines_found;
+        $overall_hit    += $lines_hit;
 
-		$total_fn_found += $fn_found;
-		$total_fn_hit   += $fn_hit;
+        $total_fn_found += $fn_found;
+        $total_fn_hit   += $fn_hit;
 
-		$total_br_found += $br_found;
-		$total_br_hit   += $br_hit;
+        $total_br_found += $br_found;
+        $total_br_hit   += $br_hit;
 
-		## FIX:QGH 差异覆盖率相关
-		$total_diff_found += $diff_found;
-		$total_diff_hit   += $diff_hit;
-	}
+        ## FIX:QGH 差异覆盖率相关
+        $total_diff_found += $diff_found;
+        $total_diff_hit   += $diff_hit;
+    }
 
-	# Create sorted pages
-	## 创建排序页面
-	foreach (@fileview_sortlist) {
-		# Generate directory overview page (without details)
-		## 生成目录概述页（无详细信息）	
-		write_dir_page($fileview_sortname[$_], $rel_dir, $base_dir,
-			       $test_title, $trunc_dir, $overall_found,
-			       $overall_hit, $total_fn_found, $total_fn_hit,
-			       $total_br_found, $total_br_hit,
-			       $total_diff_found,$total_diff_hit,\%overview, {},
-			       {}, {},{}, 1, $_);
-		if (!$show_details) {
-			next;
-		}
-		# Generate directory overview page including details
-		## 生成目录概览页，包括详细信息
-		write_dir_page("-detail".$fileview_sortname[$_], $rel_dir,
-			       $base_dir, $test_title, $trunc_dir,
-			       $overall_found, $overall_hit, $total_fn_found,
-			       $total_fn_hit, $total_br_found, $total_br_hit,
-			       $total_diff_found,$total_diff_hit,
-			       \%overview, \%testhash, \%testfnchash,
-			       \%testbrhash, \%testdiffhash, 1, $_);
-	}
+    # Create sorted pages
+    ## 创建排序页面
+    foreach (@fileview_sortlist) {
+        # Generate directory overview page (without details)
+        ## 生成目录概述页（无详细信息）
+        write_dir_page($fileview_sortname[$_], $rel_dir, $base_dir,
+                   $test_title, $trunc_dir, $overall_found,
+                   $overall_hit, $total_fn_found, $total_fn_hit,
+                   $total_br_found, $total_br_hit,
+                   $total_diff_found,$total_diff_hit,\%overview, {},
+                   {}, {},{}, 1, $_);
+        if (!$show_details) {
+            next;
+        }
+        # Generate directory overview page including details
+        ## 生成目录概览页，包括详细信息
+        write_dir_page("-detail".$fileview_sortname[$_], $rel_dir,
+                   $base_dir, $test_title, $trunc_dir,
+                   $overall_found, $overall_hit, $total_fn_found,
+                   $total_fn_hit, $total_br_found, $total_br_hit,
+                   $total_diff_found,$total_diff_hit,
+                   \%overview, \%testhash, \%testfnchash,
+                   \%testbrhash, \%testdiffhash, 1, $_);
+    }
 
-	# Calculate resulting line counts
-	# 计算结果行计数
-	return ($overall_found, $overall_hit, $total_fn_found, $total_fn_hit,
-		$total_br_found, $total_br_hit, $total_diff_found, $total_diff_hit);
+    # Calculate resulting line counts
+    # 计算结果行计数
+    return ($overall_found, $overall_hit, $total_fn_found, $total_fn_hit,
+        $total_br_found, $total_br_hit, $total_diff_found, $total_diff_hit);
 }
 
 
@@ -1436,90 +1436,90 @@ sub process_dir($)
 
 sub get_converted_lines($)
 {
-	my $testdata = $_[0];
-	my $testcount;
-	my %converted;
-	my %nonconverted;
-	my $hash;
-	my $testcase;
-	my $line;
-	my %result;
+    my $testdata = $_[0];
+    my $testcount;
+    my %converted;
+    my %nonconverted;
+    my $hash;
+    my $testcase;
+    my $line;
+    my %result;
 
 
-	# Get a hash containing line numbers with positive counts both for
-	# converted and original data sets
-	## 获取一个包含转换后的数据集和原始数据集的正数行数的哈希值。
-	foreach $testcase (keys(%{$testdata}))
-	{
-		# Check to see if this is a converted data set
-		## 检查这是否是已转换的数据集
-		if ($testcase =~ /,diff$/)
-		{
-			$hash = \%converted;
-		}
-		else
-		{
-			$hash = \%nonconverted;
-		}
+    # Get a hash containing line numbers with positive counts both for
+    # converted and original data sets
+    ## 获取一个包含转换后的数据集和原始数据集的正数行数的哈希值。
+    foreach $testcase (keys(%{$testdata}))
+    {
+        # Check to see if this is a converted data set
+        ## 检查这是否是已转换的数据集
+        if ($testcase =~ /,diff$/)
+        {
+            $hash = \%converted;
+        }
+        else
+        {
+            $hash = \%nonconverted;
+        }
 
-		$testcount = $testdata->{$testcase};
-		# Add lines with a positive count to hash
-		## 将计数为正的行添加到哈希
-		foreach $line (keys%{$testcount})
-		{
-			if ($testcount->{$line} > 0)
-			{
-				$hash->{$line} = 1;
-			}
-		}
-	}
+        $testcount = $testdata->{$testcase};
+        # Add lines with a positive count to hash
+        ## 将计数为正的行添加到哈希
+        foreach $line (keys%{$testcount})
+        {
+            if ($testcount->{$line} > 0)
+            {
+                $hash->{$line} = 1;
+            }
+        }
+    }
 
-	# Combine both hashes to resulting list
-	## 将两个哈希值合并到结果列表
-	foreach $line (keys(%converted))
-	{
-		if (!defined($nonconverted{$line}))
-		{
-			$result{$line} = 1;
-		}
-	}
+    # Combine both hashes to resulting list
+    ## 将两个哈希值合并到结果列表
+    foreach $line (keys(%converted))
+    {
+        if (!defined($nonconverted{$line}))
+        {
+            $result{$line} = 1;
+        }
+    }
 
-	return \%result;
+    return \%result;
 }
 
 ## 写方法的界面
 sub write_function_page($$$$$$$$$$$$$$$$$$$$$$)
 {
-	my ($base_dir, $rel_dir, $trunc_dir, $base_name, $title,
-	    $lines_found, $lines_hit, $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit,
-	    $sumcount, $funcdata, $sumfnccount, $testfncdata, $sumbrcount,
-	    $testbrdata, $sumdiffcount,$testdiffdata, $sort_type) = @_;
-	my $pagetitle;
-	my $filename;
+    my ($base_dir, $rel_dir, $trunc_dir, $base_name, $title,
+        $lines_found, $lines_hit, $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit,
+        $sumcount, $funcdata, $sumfnccount, $testfncdata, $sumbrcount,
+        $testbrdata, $sumdiffcount,$testdiffdata, $sort_type) = @_;
+    my $pagetitle;
+    my $filename;
 
-	# Generate function table for this file
-	## 为此文件生成函数表
-	if ($sort_type == 0) {
-		$filename = "$rel_dir/$base_name.func.$html_ext";
-	} else {
-		$filename = "$rel_dir/$base_name.func-sort-c.$html_ext";
-	}
-	html_create(*HTML_HANDLE, $filename);
-	$pagetitle = "LCOV - $title - $trunc_dir/$base_name - functions";
-	write_html_prolog(*HTML_HANDLE, $base_dir, $pagetitle);
-	## FIX:QGH 差异覆盖率相关
-	write_header(*HTML_HANDLE, 4, "$trunc_dir/$base_name",
-		     "$rel_dir/$base_name", $lines_found, $lines_hit,
-		     $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, $sort_type);
-	write_function_table(*HTML_HANDLE, "$base_name.gcov.$html_ext",
-			     $sumcount, $funcdata,
-			     $sumfnccount, $testfncdata,
-			     $sumbrcount,$testbrdata, 
-			     $sumdiffcount,$testdiffdata, 
-			     $base_name,
-			     $base_dir, $sort_type);
-	write_html_epilog(*HTML_HANDLE, $base_dir, 1);
-	close(*HTML_HANDLE);
+    # Generate function table for this file
+    ## 为此文件生成函数表
+    if ($sort_type == 0) {
+        $filename = "$rel_dir/$base_name.func.$html_ext";
+    } else {
+        $filename = "$rel_dir/$base_name.func-sort-c.$html_ext";
+    }
+    html_create(*HTML_HANDLE, $filename);
+    $pagetitle = "LCOV - $title - $trunc_dir/$base_name - functions";
+    write_html_prolog(*HTML_HANDLE, $base_dir, $pagetitle);
+    ## FIX:QGH 差异覆盖率相关
+    write_header(*HTML_HANDLE, 4, "$trunc_dir/$base_name",
+             "$rel_dir/$base_name", $lines_found, $lines_hit,
+             $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, $sort_type);
+    write_function_table(*HTML_HANDLE, "$base_name.gcov.$html_ext",
+                 $sumcount, $funcdata,
+                 $sumfnccount, $testfncdata,
+                 $sumbrcount,$testbrdata,
+                 $sumdiffcount,$testdiffdata,
+                 $base_name,
+                 $base_dir, $sort_type);
+    write_html_epilog(*HTML_HANDLE, $base_dir, 1);
+    close(*HTML_HANDLE);
 }
 
 
@@ -1529,135 +1529,135 @@ sub write_function_page($$$$$$$$$$$$$$$$$$$$$$)
 
 sub process_file($$$)
 {
-	info("Processing file ".apply_prefix($_[2], @dir_prefix)."\n");
+    info("Processing file ".apply_prefix($_[2], @dir_prefix)."\n");
 
-	my $trunc_dir = $_[0];
-	my $rel_dir = $_[1];
-	my $filename = $_[2];
-	my $base_name = basename($filename);
-	my $base_dir = get_relative_base_path($rel_dir);
+    my $trunc_dir = $_[0];
+    my $rel_dir = $_[1];
+    my $filename = $_[2];
+    my $base_name = basename($filename);
+    my $base_dir = get_relative_base_path($rel_dir);
 
-	my $testdata;
-	my $testcount;
-	my $sumcount;
+    my $testdata;
+    my $testcount;
+    my $sumcount;
 
-	my $funcdata;
-	my $checkdata;
+    my $funcdata;
+    my $checkdata;
 
-	my $testfncdata;
-	my $sumfnccount;
+    my $testfncdata;
+    my $sumfnccount;
 
-	my $testbrdata;
-	my $sumbrcount;
+    my $testbrdata;
+    my $sumbrcount;
 
-	my $lines_found;
-	my $lines_hit;
-	my $fn_found;
-	my $fn_hit;
-	my $br_found;
-	my $br_hit;
-	my $converted;
-	my @source;
-	my $pagetitle;
-	##FIX:QGH 差异覆盖率相关
-	my $testdiffdata;
-	my $sumdiffcount;
-	my $testdiffcount;
-	my $diff_found;
-	my $diff_hit;
+    my $lines_found;
+    my $lines_hit;
+    my $fn_found;
+    my $fn_hit;
+    my $br_found;
+    my $br_hit;
+    my $converted;
+    my @source;
+    my $pagetitle;
+    ##FIX:QGH 差异覆盖率相关
+    my $testdiffdata;
+    my $sumdiffcount;
+    my $testdiffcount;
+    my $diff_found;
+    my $diff_hit;
 
-	local *HTML_HANDLE;
-	##FIX:QGH 差异覆盖率相关
-	($testdata, $sumcount, $funcdata, $checkdata, $testfncdata,
-	 $sumfnccount, $testbrdata, $sumbrcount, $testdiffdata, $sumdiffcount, $lines_found, $lines_hit,
-	 $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit)
-		= get_info_entry($info_data{$filename});
+    local *HTML_HANDLE;
+    ##FIX:QGH 差异覆盖率相关
+    ($testdata, $sumcount, $funcdata, $checkdata, $testfncdata,
+     $sumfnccount, $testbrdata, $sumbrcount, $testdiffdata, $sumdiffcount, $lines_found, $lines_hit,
+     $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit)
+        = get_info_entry($info_data{$filename});
 
-	# Return after this point in case user asked us not to generate
-	# source code view
-	## 在这之后返回，以防用户要求我们不要生成源代码视图。
-	if ($no_sourceview)
-	{
-		##FIX:QGH 差异覆盖率相关
-		return ($lines_found, $lines_hit, $fn_found, $fn_hit,
-			$br_found, $br_hit, $diff_found, $diff_hit, $testdata, $testfncdata,
-			$testbrdata, $testdiffdata);
-	}
+    # Return after this point in case user asked us not to generate
+    # source code view
+    ## 在这之后返回，以防用户要求我们不要生成源代码视图。
+    if ($no_sourceview)
+    {
+        ##FIX:QGH 差异覆盖率相关
+        return ($lines_found, $lines_hit, $fn_found, $fn_hit,
+            $br_found, $br_hit, $diff_found, $diff_hit, $testdata, $testfncdata,
+            $testbrdata, $testdiffdata);
+    }
 
-	$converted = get_converted_lines($testdata);
+    $converted = get_converted_lines($testdata);
 
-	# Generate source code view for this file
-	# 为此文件生成源代码视图
-	html_create(*HTML_HANDLE, "$rel_dir/$base_name.gcov.$html_ext");
-	$pagetitle = "LCOV - $test_title - $trunc_dir/$base_name";
-	write_html_prolog(*HTML_HANDLE, $base_dir, $pagetitle);
-	write_header(*HTML_HANDLE, 2, "$trunc_dir/$base_name",
-		     "$rel_dir/$base_name", $lines_found, $lines_hit,
-		     $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, 0);
-	@source = write_source(*HTML_HANDLE, $filename, $sumcount, $checkdata,
-			       $converted, $funcdata, $sumbrcount, $sumdiffcount);
+    # Generate source code view for this file
+    # 为此文件生成源代码视图
+    html_create(*HTML_HANDLE, "$rel_dir/$base_name.gcov.$html_ext");
+    $pagetitle = "LCOV - $test_title - $trunc_dir/$base_name";
+    write_html_prolog(*HTML_HANDLE, $base_dir, $pagetitle);
+    write_header(*HTML_HANDLE, 2, "$trunc_dir/$base_name",
+             "$rel_dir/$base_name", $lines_found, $lines_hit,
+             $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, 0);
+    @source = write_source(*HTML_HANDLE, $filename, $sumcount, $checkdata,
+                   $converted, $funcdata, $sumbrcount, $sumdiffcount);
 
-	write_html_epilog(*HTML_HANDLE, $base_dir, 1);
-	close(*HTML_HANDLE);
+    write_html_epilog(*HTML_HANDLE, $base_dir, 1);
+    close(*HTML_HANDLE);
 
-	if ($func_coverage) {
-		# Create function tables
-		## 创建函数表
-		foreach (@funcview_sortlist) {
-			write_function_page($base_dir, $rel_dir, $trunc_dir,
-					    $base_name, $test_title,
-					    $lines_found, $lines_hit,
-					    $fn_found, $fn_hit, 
-					    $br_found,$br_hit, 
-					    $diff_found,$diff_hit, 
-					    $sumcount, $funcdata, 
-					    $sumfnccount, $testfncdata, 
-					    $sumbrcount, $testbrdata,
-					    $sumdiffcount, $testdiffdata, $_);
-		}
-	}
+    if ($func_coverage) {
+        # Create function tables
+        ## 创建函数表
+        foreach (@funcview_sortlist) {
+            write_function_page($base_dir, $rel_dir, $trunc_dir,
+                        $base_name, $test_title,
+                        $lines_found, $lines_hit,
+                        $fn_found, $fn_hit,
+                        $br_found,$br_hit,
+                        $diff_found,$diff_hit,
+                        $sumcount, $funcdata,
+                        $sumfnccount, $testfncdata,
+                        $sumbrcount, $testbrdata,
+                        $sumdiffcount, $testdiffdata, $_);
+        }
+    }
 
-	# Additional files are needed in case of frame output
-	## 如果是帧输出，则需要附加文件
-	if (!$frames)
-	{
-		return ($lines_found, $lines_hit, $fn_found, $fn_hit,
-			$br_found, $br_hit, $diff_found,$diff_hit, $testdata, $testfncdata,
-			$testbrdata, $testdiffdata);
-	}
+    # Additional files are needed in case of frame output
+    ## 如果是帧输出，则需要附加文件
+    if (!$frames)
+    {
+        return ($lines_found, $lines_hit, $fn_found, $fn_hit,
+            $br_found, $br_hit, $diff_found,$diff_hit, $testdata, $testfncdata,
+            $testbrdata, $testdiffdata);
+    }
 
-	# Create overview png file
-	## 创建概述png文件
-	gen_png("$rel_dir/$base_name.gcov.png", $overview_width, $tab_size,
-		@source);
+    # Create overview png file
+    ## 创建概述png文件
+    gen_png("$rel_dir/$base_name.gcov.png", $overview_width, $tab_size,
+        @source);
 
-	# Create frameset page
-	## 创建frameset页
-	html_create(*HTML_HANDLE,
-		    "$rel_dir/$base_name.gcov.frameset.$html_ext");
-	write_frameset(*HTML_HANDLE, $base_dir, $base_name, $pagetitle);
-	close(*HTML_HANDLE);
+    # Create frameset page
+    ## 创建frameset页
+    html_create(*HTML_HANDLE,
+            "$rel_dir/$base_name.gcov.frameset.$html_ext");
+    write_frameset(*HTML_HANDLE, $base_dir, $base_name, $pagetitle);
+    close(*HTML_HANDLE);
 
-	# Write overview frame
-	## 编写概述框架
-	html_create(*HTML_HANDLE,
-		    "$rel_dir/$base_name.gcov.overview.$html_ext");
-	write_overview(*HTML_HANDLE, $base_dir, $base_name, $pagetitle,
-		       scalar(@source));
-	close(*HTML_HANDLE);
-	##FIX:QGH 差异覆盖率相关
-	return ($lines_found, $lines_hit, $fn_found, $fn_hit, $br_found,
-		$br_hit, $diff_found, $diff_hit, $testdata, $testfncdata, $testbrdata, $testdiffdata);
+    # Write overview frame
+    ## 编写概述框架
+    html_create(*HTML_HANDLE,
+            "$rel_dir/$base_name.gcov.overview.$html_ext");
+    write_overview(*HTML_HANDLE, $base_dir, $base_name, $pagetitle,
+               scalar(@source));
+    close(*HTML_HANDLE);
+    ##FIX:QGH 差异覆盖率相关
+    return ($lines_found, $lines_hit, $fn_found, $fn_hit, $br_found,
+        $br_hit, $diff_found, $diff_hit, $testdata, $testfncdata, $testbrdata, $testdiffdata);
 }
 
 
 sub compress_brcount($)
 {
-	my ($brcount) = @_;
-	my $db;
+    my ($brcount) = @_;
+    my $db;
 
-	$db = brcount_to_db($brcount);
-	return db_to_brcount($db, $brcount);
+    $db = brcount_to_db($brcount);
+    return db_to_brcount($db, $brcount);
 }
 
 
@@ -1676,15 +1676,15 @@ sub compress_brcount($)
 #        "sum"   -> \%sumcount
 #        "func"  -> \%funcdata
 #        "found" -> $lines_found (number of instrumented lines found in file) # 在文件中找到的检测行数
-#	 	 "hit"   -> $lines_hit (number of executed lines in file) # 文件中执行的行数
+#          "hit"   -> $lines_hit (number of executed lines in file) # 文件中执行的行数
 #        "f_found" -> $fn_found (number of instrumented functions found in file) # 在文件中找到的插入指令的函数数
-#	 	 "f_hit"   -> $fn_hit (number of executed functions in file) # 文件中执行的函数数
+#          "f_hit"   -> $fn_hit (number of executed functions in file) # 文件中执行的函数数
 #        "b_found" -> $br_found (number of instrumented branches found in file) # 在文件中找到检测的分支数
-#	 	 "b_hit"   -> $br_hit (number of executed branches in file) # 文件中已执行的分支数
+#          "b_hit"   -> $br_hit (number of executed branches in file) # 文件中已执行的分支数
 
 ##FIX：QGH新添加命令行中关于差异代码的命令
-#		 "diff_found" -> $diff_found
-#		 "diff_hit"   -> $diff_hit
+#         "diff_found" -> $diff_found
+#         "diff_hit"   -> $diff_hit
 #        "testdiff"  -> \%testdiffdata
 #        "sumdiff"   -> \%sumdiffcount
 
@@ -1720,7 +1720,7 @@ sub compress_brcount($)
 # %testdiffcount : line number   -> 行号->单个测试的差异覆盖数据
 # %sumdiffcount  : line number   -> 行号->所有测试的差异覆盖数据
 
-# 
+#
 # Note that .info file sections referring to the same file and test name
 # will automatically be combined by adding all execution counts.
 #
@@ -1738,424 +1738,424 @@ sub compress_brcount($)
 
 sub read_info_file($)
 {
-	my $tracefile = $_[0];		# Name of tracefile # 跟踪文件的名称
-	my %result;			# Resulting hash: file -> data # 哈希结果: file -> data
-	my $data;			# Data handle for current entry # 当前条目的数据处理
-	my $testdata;			#       "             "
-	my $testcount;			#       "             "
-	my $sumcount;			#       "             "
-	my $funcdata;			#       "             "
-	my $checkdata;			#       "             "
-	my $testfncdata;
-	my $testfnccount;
-	my $sumfnccount;
-	my $testbrdata;
-	my $testbrcount;
-	my $sumbrcount;
-	my $line;			# Current line read from .info file # 当前从.info文件中读取的行数
-	my $testname;			# Current test name  # 当前测试名称
-	my $filename;			# Current filename # 当前文件名称
-	my $hitcount;			# Count for lines hit # 总行的 hit 数量
-	my $count;			# Execution count of current line # 当前行的执行次数
+    my $tracefile = $_[0];        # Name of tracefile # 跟踪文件的名称
+    my %result;            # Resulting hash: file -> data # 哈希结果: file -> data
+    my $data;            # Data handle for current entry # 当前条目的数据处理
+    my $testdata;            #       "             "
+    my $testcount;            #       "             "
+    my $sumcount;            #       "             "
+    my $funcdata;            #       "             "
+    my $checkdata;            #       "             "
+    my $testfncdata;
+    my $testfnccount;
+    my $sumfnccount;
+    my $testbrdata;
+    my $testbrcount;
+    my $sumbrcount;
+    my $line;            # Current line read from .info file # 当前从.info文件中读取的行数
+    my $testname;            # Current test name  # 当前测试名称
+    my $filename;            # Current filename # 当前文件名称
+    my $hitcount;            # Count for lines hit # 总行的 hit 数量
+    my $count;            # Execution count of current line # 当前行的执行次数
 
-	##FIX:QGH 新添加命令行中关于差异代码的命令
-	my $testdiffdata;
-	my $testdiffcount;
-	my $sumdiffcount;
-	my $diffcount;		#差异代码行当前执行的次数
+    ##FIX:QGH 新添加命令行中关于差异代码的命令
+    my $testdiffdata;
+    my $testdiffcount;
+    my $sumdiffcount;
+    my $diffcount;        #差异代码行当前执行的次数
 
 
-	my $negative;			# If set, warn about negative counts # 如果设置，警告负数
-	my $changed_testname;		# If set, warn about changed testname # 如果设置，则对更改的testname发出警告。
-	my $line_checksum;		# Checksum of current line # 当前行的校验和
-	my $notified_about_relative_paths;
-	local *INFO_HANDLE;		# Filehandle for .info file .info文件的文件柄
+    my $negative;            # If set, warn about negative counts # 如果设置，警告负数
+    my $changed_testname;        # If set, warn about changed testname # 如果设置，则对更改的testname发出警告。
+    my $line_checksum;        # Checksum of current line # 当前行的校验和
+    my $notified_about_relative_paths;
+    local *INFO_HANDLE;        # Filehandle for .info file .info文件的文件柄
 
-	info("Reading data file $tracefile\n");
+    info("Reading data file $tracefile\n");
 
-	# Check if file exists and is readable
-	## 检查文件是否存在且可读
-	stat($_[0]);
-	if (!(-r _))
-	{
-		die("ERROR: cannot read file $_[0]!\n");
-	}
+    # Check if file exists and is readable
+    ## 检查文件是否存在且可读
+    stat($_[0]);
+    if (!(-r _))
+    {
+        die("ERROR: cannot read file $_[0]!\n");
+    }
 
-	# Check if this is really a plain file
-	## 检查这是否真的是一个普通文件
-	if (!(-f _))
-	{
-		die("ERROR: not a plain file: $_[0]!\n");
-	}
+    # Check if this is really a plain file
+    ## 检查这是否真的是一个普通文件
+    if (!(-f _))
+    {
+        die("ERROR: not a plain file: $_[0]!\n");
+    }
 
-	# Check for .gz extension
-	## 检查是否有.gz扩展名
-	if ($_[0] =~ /\.gz$/)
-	{
-		# Check for availability of GZIP tool
-		## 检查GZIP工具的可用性
-		system_no_output(1, "gunzip" ,"-h")
-			and die("ERROR: gunzip command not available!\n");
+    # Check for .gz extension
+    ## 检查是否有.gz扩展名
+    if ($_[0] =~ /\.gz$/)
+    {
+        # Check for availability of GZIP tool
+        ## 检查GZIP工具的可用性
+        system_no_output(1, "gunzip" ,"-h")
+            and die("ERROR: gunzip command not available!\n");
 
-		# Check integrity of compressed file
-		## 检查压缩文件的完整性
-		system_no_output(1, "gunzip", "-t", $_[0])
-			and die("ERROR: integrity check failed for ".
-				"compressed file $_[0]!\n");
+        # Check integrity of compressed file
+        ## 检查压缩文件的完整性
+        system_no_output(1, "gunzip", "-t", $_[0])
+            and die("ERROR: integrity check failed for ".
+                "compressed file $_[0]!\n");
 
-		# Open compressed file
-		## 打开压缩文件
-		open(INFO_HANDLE, "-|", "gunzip -c '$_[0]'")
-			or die("ERROR: cannot start gunzip to decompress ".
-			       "file $_[0]!\n");
-	}
-	else
-	{
-		# Open decompressed file
-		## 打开解压文件
-		open(INFO_HANDLE, "<", $_[0])
-			or die("ERROR: cannot read file $_[0]!\n");
-	}
+        # Open compressed file
+        ## 打开压缩文件
+        open(INFO_HANDLE, "-|", "gunzip -c '$_[0]'")
+            or die("ERROR: cannot start gunzip to decompress ".
+                   "file $_[0]!\n");
+    }
+    else
+    {
+        # Open decompressed file
+        ## 打开解压文件
+        open(INFO_HANDLE, "<", $_[0])
+            or die("ERROR: cannot read file $_[0]!\n");
+    }
 
-	$testname = "";
-	while (<INFO_HANDLE>)
-	{
-		chomp($_);
-		$line = $_;
+    $testname = "";
+    while (<INFO_HANDLE>)
+    {
+        chomp($_);
+        $line = $_;
 
-		# Switch statement
-		## 转换声明
-		foreach ($line)
-		{
-			/^TN:([^,]*)(,diff)?/ && do
-			{
-				# Test name information found
-				## 找到测试名称信息
-				$testname = defined($1) ? $1 : "";
-				if ($testname =~ s/\W/_/g)
-				{
-					$changed_testname = 1;
-				}
-				$testname .= $2 if (defined($2));
-				last;
-			};
+        # Switch statement
+        ## 转换声明
+        foreach ($line)
+        {
+            /^TN:([^,]*)(,diff)?/ && do
+            {
+                # Test name information found
+                ## 找到测试名称信息
+                $testname = defined($1) ? $1 : "";
+                if ($testname =~ s/\W/_/g)
+                {
+                    $changed_testname = 1;
+                }
+                $testname .= $2 if (defined($2));
+                last;
+            };
 
-			/^[SK]F:(.*)/ && do
-			{
-				# Filename information found
-				# Retrieve data for new entry
-				## 找到的文件名信息，检索新条目的数据
-				$filename = File::Spec->rel2abs($1, $cwd);
+            /^[SK]F:(.*)/ && do
+            {
+                # Filename information found
+                # Retrieve data for new entry
+                ## 找到的文件名信息，检索新条目的数据
+                $filename = File::Spec->rel2abs($1, $cwd);
 
-				if (!File::Spec->file_name_is_absolute($1) &&
-				    !$notified_about_relative_paths)
-				{
-					info("Resolved relative source file ".
-					     "path \"$1\" with CWD to ".
-					     "\"$filename\".\n"); ## 解决了相对源文件
-					$notified_about_relative_paths = 1;
-				}
+                if (!File::Spec->file_name_is_absolute($1) &&
+                    !$notified_about_relative_paths)
+                {
+                    info("Resolved relative source file ".
+                         "path \"$1\" with CWD to ".
+                         "\"$filename\".\n"); ## 解决了相对源文件
+                    $notified_about_relative_paths = 1;
+                }
 
-				$data = $result{$filename};
-				($testdata, $sumcount, $funcdata, $checkdata,
-				 $testfncdata, $sumfnccount, $testbrdata,
-				 $sumbrcount, $testdiffdata,$sumdiffcount) =
-					get_info_entry($data);
+                $data = $result{$filename};
+                ($testdata, $sumcount, $funcdata, $checkdata,
+                 $testfncdata, $sumfnccount, $testbrdata,
+                 $sumbrcount, $testdiffdata,$sumdiffcount) =
+                    get_info_entry($data);
 
-				if (defined($testname))
-				{
-					$testcount = $testdata->{$testname};
-					$testfnccount = $testfncdata->{$testname};
-					$testbrcount = $testbrdata->{$testname};
-					$testdiffcount = $testdiffdata->{$testname};
-				}
-				else
-				{
-					$testcount = {};
-					$testfnccount = {};
-					$testbrcount = {};
-					$testdiffcount = {};
-				}
-				last;
-			};
+                if (defined($testname))
+                {
+                    $testcount = $testdata->{$testname};
+                    $testfnccount = $testfncdata->{$testname};
+                    $testbrcount = $testbrdata->{$testname};
+                    $testdiffcount = $testdiffdata->{$testname};
+                }
+                else
+                {
+                    $testcount = {};
+                    $testfnccount = {};
+                    $testbrcount = {};
+                    $testdiffcount = {};
+                }
+                last;
+            };
 
-			/^DA:(\d+),(-?\d+)(,[^,\s]+)?/ && do
-			{
-				# Fix negative counts
-				# 修正负计数
-				$count = $2 < 0 ? 0 : $2;
-				if ($2 < 0)
-				{
-					$negative = 1;
-				}
-				# Execution count found, add to structure
-				# Add summary counts
-				# 找到执行计数，添加到结构，添加摘要计数
-				$sumcount->{$1} += $count;
+            /^DA:(\d+),(-?\d+)(,[^,\s]+)?/ && do
+            {
+                # Fix negative counts
+                # 修正负计数
+                $count = $2 < 0 ? 0 : $2;
+                if ($2 < 0)
+                {
+                    $negative = 1;
+                }
+                # Execution count found, add to structure
+                # Add summary counts
+                # 找到执行计数，添加到结构，添加摘要计数
+                $sumcount->{$1} += $count;
 
-				# Add test-specific counts
-				## 添加测试特定计数
-				if (defined($testname))
-				{
-					$testcount->{$1} += $count;
-				}
+                # Add test-specific counts
+                ## 添加测试特定计数
+                if (defined($testname))
+                {
+                    $testcount->{$1} += $count;
+                }
 
-				# Store line checksum if available
-				## 存储行校验和（如果可用）
-				if (defined($3))
-				{
-					$line_checksum = substr($3, 1);
+                # Store line checksum if available
+                ## 存储行校验和（如果可用）
+                if (defined($3))
+                {
+                    $line_checksum = substr($3, 1);
 
-					# Does it match a previous definition
-					## 它是否符合先前的定义
-					if (defined($checkdata->{$1}) &&
-					    ($checkdata->{$1} ne
-					     $line_checksum))
-					{
-						die("ERROR: checksum mismatch ".
-						    "at $filename:$1\n");
-					}
+                    # Does it match a previous definition
+                    ## 它是否符合先前的定义
+                    if (defined($checkdata->{$1}) &&
+                        ($checkdata->{$1} ne
+                         $line_checksum))
+                    {
+                        die("ERROR: checksum mismatch ".
+                            "at $filename:$1\n");
+                    }
 
-					$checkdata->{$1} = $line_checksum;
-				}
-				last;
-			};
+                    $checkdata->{$1} = $line_checksum;
+                }
+                last;
+            };
 
-			## 读取CA 行
-			/^CA:(\d+),(-?\d+)(,[^,\s]+)?/ && do
-			{
-				last if (!$diff_coverage);
+            ## 读取CA 行
+            /^CA:(\d+),(-?\d+)(,[^,\s]+)?/ && do
+            {
+                last if (!$diff_coverage);
 
-				# Fix negative counts
-				## 修正负计数
-				$diffcount = $2 < 0 ? 0 : $2;
-				if ($2 < 0)
-				{
-					$negative = 1;
-				}
-				# Execution count found, add to structure
-				# Add summary counts
-				## 找到执行计数，添加到结构，添加摘要计数
-				$sumdiffcount->{$1} += $diffcount;
+                # Fix negative counts
+                ## 修正负计数
+                $diffcount = $2 < 0 ? 0 : $2;
+                if ($2 < 0)
+                {
+                    $negative = 1;
+                }
+                # Execution count found, add to structure
+                # Add summary counts
+                ## 找到执行计数，添加到结构，添加摘要计数
+                $sumdiffcount->{$1} += $diffcount;
 
-				# Add test-specific counts
-				## 添加测试特定计数
-				if (defined($testname))
-				{
-					$testdiffcount->{$1} += $diffcount;
-				}
+                # Add test-specific counts
+                ## 添加测试特定计数
+                if (defined($testname))
+                {
+                    $testdiffcount->{$1} += $diffcount;
+                }
 =pot 差异代码的注释掉这块
-				# Store line checksum if available
-				## 存储行校验和（如果可用）
-				if (defined($3))
-				{
-					$line_checksum = substr($3, 1);
+                # Store line checksum if available
+                ## 存储行校验和（如果可用）
+                if (defined($3))
+                {
+                    $line_checksum = substr($3, 1);
 
-					# Does it match a previous definition
-					## 它是否符合先前的定义
-					if (defined($checkdata->{$1}) &&
-					    ($checkdata->{$1} ne
-					     $line_checksum))
-					{
-						die("ERROR: checksum mismatch ".
-						    "at $filename:$1\n");
-					}
+                    # Does it match a previous definition
+                    ## 它是否符合先前的定义
+                    if (defined($checkdata->{$1}) &&
+                        ($checkdata->{$1} ne
+                         $line_checksum))
+                    {
+                        die("ERROR: checksum mismatch ".
+                            "at $filename:$1\n");
+                    }
 
-					$checkdata->{$1} = $line_checksum;
-				}
+                    $checkdata->{$1} = $line_checksum;
+                }
 =cut
-				last;
-			};
+                last;
+            };
 
-			/^FN:(\d+),([^,]+)/ && do
-			{
-				last if (!$func_coverage);
+            /^FN:(\d+),([^,]+)/ && do
+            {
+                last if (!$func_coverage);
 
-				# Function data found, add to structure
-				## 找到函数数据，添加到结构
-				$funcdata->{$2} = $1;
+                # Function data found, add to structure
+                ## 找到函数数据，添加到结构
+                $funcdata->{$2} = $1;
 
-				# Also initialize function call data
-				## 同时初始化函数调用数据
-				if (!defined($sumfnccount->{$2})) {
-					$sumfnccount->{$2} = 0;
-				}
-				if (defined($testname))
-				{
-					if (!defined($testfnccount->{$2})) {
-						$testfnccount->{$2} = 0;
-					}
-				}
-				last;
-			};
+                # Also initialize function call data
+                ## 同时初始化函数调用数据
+                if (!defined($sumfnccount->{$2})) {
+                    $sumfnccount->{$2} = 0;
+                }
+                if (defined($testname))
+                {
+                    if (!defined($testfnccount->{$2})) {
+                        $testfnccount->{$2} = 0;
+                    }
+                }
+                last;
+            };
 
-			/^FNDA:(\d+),([^,]+)/ && do
-			{
-				last if (!$func_coverage);
-				# Function call count found, add to structure
-				# Add summary counts
-				## 找到函数调用计数，添加到结构添加摘要计数
-				$sumfnccount->{$2} += $1;
+            /^FNDA:(\d+),([^,]+)/ && do
+            {
+                last if (!$func_coverage);
+                # Function call count found, add to structure
+                # Add summary counts
+                ## 找到函数调用计数，添加到结构添加摘要计数
+                $sumfnccount->{$2} += $1;
 
-				# Add test-specific counts
-				## 添加测试特定计数
-				if (defined($testname))
-				{
-					$testfnccount->{$2} += $1;
-				}
-				last;
-			};
+                # Add test-specific counts
+                ## 添加测试特定计数
+                if (defined($testname))
+                {
+                    $testfnccount->{$2} += $1;
+                }
+                last;
+            };
 
-			/^BRDA:(\d+),(\d+),(\d+),(\d+|-)/ && do {
-				# Branch coverage data found
-				## 找到分支覆盖率数据
-				my ($line, $block, $branch, $taken) =
-				   ($1, $2, $3, $4);
+            /^BRDA:(\d+),(\d+),(\d+),(\d+|-)/ && do {
+                # Branch coverage data found
+                ## 找到分支覆盖率数据
+                my ($line, $block, $branch, $taken) =
+                   ($1, $2, $3, $4);
 
-				last if (!$br_coverage);
-				$sumbrcount->{$line} .=
-					"$block,$branch,$taken:";
+                last if (!$br_coverage);
+                $sumbrcount->{$line} .=
+                    "$block,$branch,$taken:";
 
-				# Add test-specific counts
-				## 添加测试特定计数
-				if (defined($testname)) {
-					$testbrcount->{$line} .=
-						"$block,$branch,$taken:";
-				}
-				last;
-			};
+                # Add test-specific counts
+                ## 添加测试特定计数
+                if (defined($testname)) {
+                    $testbrcount->{$line} .=
+                        "$block,$branch,$taken:";
+                }
+                last;
+            };
 
-			/^end_of_record/ && do
-			{
-				# Found end of section marker
-				## 找到节结束标记
-				if ($filename)
-				{
-					# Store current section data
-					## 存储当前节数据
-					if (defined($testname))
-					{
-						$testdata->{$testname} =
-							$testcount;
-						$testfncdata->{$testname} =
-							$testfnccount;
-						$testbrdata->{$testname} =
-							$testbrcount;
-						$testdiffdata->{$testname} =
-							$testdiffcount;
-					}	
+            /^end_of_record/ && do
+            {
+                # Found end of section marker
+                ## 找到节结束标记
+                if ($filename)
+                {
+                    # Store current section data
+                    ## 存储当前节数据
+                    if (defined($testname))
+                    {
+                        $testdata->{$testname} =
+                            $testcount;
+                        $testfncdata->{$testname} =
+                            $testfnccount;
+                        $testbrdata->{$testname} =
+                            $testbrcount;
+                        $testdiffdata->{$testname} =
+                            $testdiffcount;
+                    }
 
-					set_info_entry($data, $testdata,
-						       $sumcount, $funcdata,
-						       $checkdata, $testfncdata,
-						       $sumfnccount,
-						       $testbrdata,
-						       $sumbrcount,
-						       $testdiffdata,
-						       $sumdiffcount);
-					$result{$filename} = $data;
-					last;
-				}
-			};
+                    set_info_entry($data, $testdata,
+                               $sumcount, $funcdata,
+                               $checkdata, $testfncdata,
+                               $sumfnccount,
+                               $testbrdata,
+                               $sumbrcount,
+                               $testdiffdata,
+                               $sumdiffcount);
+                    $result{$filename} = $data;
+                    last;
+                }
+            };
 
-			# default
-			last;
-		}
-	}
-	close(INFO_HANDLE);
+            # default
+            last;
+        }
+    }
+    close(INFO_HANDLE);
 
-	# Calculate lines_found and lines_hit for each file
-	## 计算每个文件找到的行数和命中的行数
-	foreach $filename (keys(%result))
-	{
-		$data = $result{$filename};
+    # Calculate lines_found and lines_hit for each file
+    ## 计算每个文件找到的行数和命中的行数
+    foreach $filename (keys(%result))
+    {
+        $data = $result{$filename};
 
-		($testdata, $sumcount, undef, undef, $testfncdata,
-		 $sumfnccount, $testbrdata, $sumbrcount, $testdiffdata, $sumdiffcount) =
-			get_info_entry($data);
+        ($testdata, $sumcount, undef, undef, $testfncdata,
+         $sumfnccount, $testbrdata, $sumbrcount, $testdiffdata, $sumdiffcount) =
+            get_info_entry($data);
 
-		# Filter out empty files
-		# 过滤空文件
-		# Filter out empty files
-		# 过滤空文件
-		if (scalar(keys(%{$sumcount})) == 0)
-		{
-			delete($result{$filename});
-			next;
-		}
-		# Filter out empty test cases
-		# 过滤空测试用例
-		foreach $testname (keys(%{$testdata}))
-		{
-			if (!defined($testdata->{$testname}) ||
-			    scalar(keys(%{$testdata->{$testname}})) == 0)
-			{
-				delete($testdata->{$testname});
-				delete($testfncdata->{$testname});
-				##FIX：QGH新添加命令行中关于差异代码的命令
-				delete($testdiffcount->{$testname});
-			}
-		}
+        # Filter out empty files
+        # 过滤空文件
+        # Filter out empty files
+        # 过滤空文件
+        if (scalar(keys(%{$sumcount})) == 0)
+        {
+            delete($result{$filename});
+            next;
+        }
+        # Filter out empty test cases
+        # 过滤空测试用例
+        foreach $testname (keys(%{$testdata}))
+        {
+            if (!defined($testdata->{$testname}) ||
+                scalar(keys(%{$testdata->{$testname}})) == 0)
+            {
+                delete($testdata->{$testname});
+                delete($testfncdata->{$testname});
+                ##FIX：QGH新添加命令行中关于差异代码的命令
+                delete($testdiffcount->{$testname});
+            }
+        }
 
-		$data->{"found"} = scalar(keys(%{$sumcount}));
-		$hitcount = 0;
+        $data->{"found"} = scalar(keys(%{$sumcount}));
+        $hitcount = 0;
 
-		foreach (keys(%{$sumcount}))
-		{
-			if ($sumcount->{$_} > 0) { $hitcount++; }
-		}
-		$data->{"hit"} = $hitcount;
+        foreach (keys(%{$sumcount}))
+        {
+            if ($sumcount->{$_} > 0) { $hitcount++; }
+        }
+        $data->{"hit"} = $hitcount;
 
-		### FIX:QGH 计算差异代码的 fond 和 hit 的值
-		$data->{"diff_found"} = scalar(keys(%{$sumdiffcount}));
-		$hitcount = 0;
+        ### FIX:QGH 计算差异代码的 fond 和 hit 的值
+        $data->{"diff_found"} = scalar(keys(%{$sumdiffcount}));
+        $hitcount = 0;
 
-		foreach (keys(%{$sumdiffcount}))
-		{
-			if ($sumdiffcount->{$_} > 0) { $hitcount++; }
-		}
-		$data->{"diff_hit"} = $hitcount;
+        foreach (keys(%{$sumdiffcount}))
+        {
+            if ($sumdiffcount->{$_} > 0) { $hitcount++; }
+        }
+        $data->{"diff_hit"} = $hitcount;
 
-		# Get found/hit values for function call data
-		## 获取函数调用数据的 found 和 hit 值
-		$data->{"f_found"} = scalar(keys(%{$sumfnccount}));
-		$hitcount = 0;
+        # Get found/hit values for function call data
+        ## 获取函数调用数据的 found 和 hit 值
+        $data->{"f_found"} = scalar(keys(%{$sumfnccount}));
+        $hitcount = 0;
 
-		foreach (keys(%{$sumfnccount})) {
-			if ($sumfnccount->{$_} > 0) {
-				$hitcount++;
-			}
-		}
-		$data->{"f_hit"} = $hitcount;
+        foreach (keys(%{$sumfnccount})) {
+            if ($sumfnccount->{$_} > 0) {
+                $hitcount++;
+            }
+        }
+        $data->{"f_hit"} = $hitcount;
 
-		# Combine branch data for the same branches
-		## 合并相同分支的分支数据
-		(undef, $data->{"b_found"}, $data->{"b_hit"}) =
-			compress_brcount($sumbrcount);
-		foreach $testname (keys(%{$testbrdata})) {
-			compress_brcount($testbrdata->{$testname});
-		}
-	}
+        # Combine branch data for the same branches
+        ## 合并相同分支的分支数据
+        (undef, $data->{"b_found"}, $data->{"b_hit"}) =
+            compress_brcount($sumbrcount);
+        foreach $testname (keys(%{$testbrdata})) {
+            compress_brcount($testbrdata->{$testname});
+        }
+    }
 
-	if (scalar(keys(%result)) == 0)
-	{
-		## 错误： 在跟踪文件中找不到有效记录
-		die("ERROR: no valid records found in tracefile $tracefile\n");
-	}
-	if ($negative)
-	{
-		## 警告：在tracefile中发现负数。
-		warn("WARNING: negative counts found in tracefile ".
-		     "$tracefile\n");
-	}
-	if ($changed_testname)
-	{
-		## 警告：从testname中删除无效字符 
-		warn("WARNING: invalid characters removed from testname in ".
-		     "tracefile $tracefile\n");
-	}
+    if (scalar(keys(%result)) == 0)
+    {
+        ## 错误： 在跟踪文件中找不到有效记录
+        die("ERROR: no valid records found in tracefile $tracefile\n");
+    }
+    if ($negative)
+    {
+        ## 警告：在tracefile中发现负数。
+        warn("WARNING: negative counts found in tracefile ".
+             "$tracefile\n");
+    }
+    if ($changed_testname)
+    {
+        ## 警告：从testname中删除无效字符
+        warn("WARNING: invalid characters removed from testname in ".
+             "tracefile $tracefile\n");
+    }
 
-	return(\%result);
+    return(\%result);
 }
 
 
@@ -2173,33 +2173,33 @@ sub read_info_file($)
 
 sub get_info_entry($)
 {
-	
-	my $testdata_ref = $_[0]->{"test"};
-	my $sumcount_ref = $_[0]->{"sum"};
-	my $funcdata_ref = $_[0]->{"func"};
-	my $checkdata_ref = $_[0]->{"check"};
-	my $testfncdata = $_[0]->{"testfnc"};
-	my $sumfnccount = $_[0]->{"sumfnc"};
-	my $testbrdata = $_[0]->{"testbr"};
-	my $sumbrcount = $_[0]->{"sumbr"};
-	##FIX:QGH 差异覆盖率相关
-	my $testdiffdata = $_[0]->{"testdiff"};
-	my $sumdiffcount = $_[0]->{"sumdiff"};
+    
+    my $testdata_ref = $_[0]->{"test"};
+    my $sumcount_ref = $_[0]->{"sum"};
+    my $funcdata_ref = $_[0]->{"func"};
+    my $checkdata_ref = $_[0]->{"check"};
+    my $testfncdata = $_[0]->{"testfnc"};
+    my $sumfnccount = $_[0]->{"sumfnc"};
+    my $testbrdata = $_[0]->{"testbr"};
+    my $sumbrcount = $_[0]->{"sumbr"};
+    ##FIX:QGH 差异覆盖率相关
+    my $testdiffdata = $_[0]->{"testdiff"};
+    my $sumdiffcount = $_[0]->{"sumdiff"};
 
-	my $lines_found = $_[0]->{"found"};
-	my $lines_hit = $_[0]->{"hit"};
-	my $fn_found = $_[0]->{"f_found"};
-	my $fn_hit = $_[0]->{"f_hit"};
-	my $br_found = $_[0]->{"b_found"};
-	my $br_hit = $_[0]->{"b_hit"};
-	##FIX:QGH 差异覆盖率相关
-	my $diff_found = $_[0]->{"diff_found"};
-	my $diff_hit = $_[0]->{"diff_hit"};
+    my $lines_found = $_[0]->{"found"};
+    my $lines_hit = $_[0]->{"hit"};
+    my $fn_found = $_[0]->{"f_found"};
+    my $fn_hit = $_[0]->{"f_hit"};
+    my $br_found = $_[0]->{"b_found"};
+    my $br_hit = $_[0]->{"b_hit"};
+    ##FIX:QGH 差异覆盖率相关
+    my $diff_found = $_[0]->{"diff_found"};
+    my $diff_hit = $_[0]->{"diff_hit"};
 
-	return ($testdata_ref, $sumcount_ref, $funcdata_ref, $checkdata_ref,
-		$testfncdata, $sumfnccount, $testbrdata, $sumbrcount, $testdiffdata, $sumdiffcount,
-		$lines_found, $lines_hit, $fn_found, $fn_hit,
-		$br_found, $br_hit,$diff_found, $diff_hit);
+    return ($testdata_ref, $sumcount_ref, $funcdata_ref, $checkdata_ref,
+        $testfncdata, $sumfnccount, $testbrdata, $sumbrcount, $testdiffdata, $sumdiffcount,
+        $lines_found, $lines_hit, $fn_found, $fn_hit,
+        $br_found, $br_hit,$diff_found, $diff_hit);
 }
 
 
@@ -2214,31 +2214,38 @@ sub get_info_entry($)
 
 sub set_info_entry($$$$$$$$$$$;$$$$$$$$)
 {
-	my $data_ref = $_[0];
+    my $data_ref = $_[0];
 
-	$data_ref->{"test"} = $_[1];
-	$data_ref->{"sum"} = $_[2];
-	$data_ref->{"func"} = $_[3];
-	$data_ref->{"check"} = $_[4];
-	$data_ref->{"testfnc"} = $_[5];
-	$data_ref->{"sumfnc"} = $_[6];
-	$data_ref->{"testbr"} = $_[7];
-	$data_ref->{"sumbr"} = $_[8];
-	$data_ref->{"testdiff"} = $_[9];
-	$data_ref->{"sumdiff"} = $_[10];
+    $data_ref->{"test"} = $_[1];
+    $data_ref->{"sum"} = $_[2];
+    $data_ref->{"func"} = $_[3];
+    $data_ref->{"check"} = $_[4];
+    $data_ref->{"testfnc"} = $_[5];
+    $data_ref->{"sumfnc"} = $_[6];
+    $data_ref->{"testbr"} = $_[7];
+    $data_ref->{"sumbr"} = $_[8];
+    $data_ref->{"testdiff"} = $_[9];
+    $data_ref->{"sumdiff"} = $_[10];
 
-	if (defined($_[11])) { $data_ref->{"found"} = $_[11]; }
-	if (defined($_[12])) { $data_ref->{"hit"} = $_[12]; }
-	if (defined($_[13])) { $data_ref->{"f_found"} = $_[13]; }
-	if (defined($_[14])) { $data_ref->{"f_hit"} = $_[14]; }
-	if (defined($_[15])) { $data_ref->{"b_found"} = $_[15]; }
-	if (defined($_[16])) { $data_ref->{"b_hit"} = $_[16]; }
+    if (defined($_[11])) { $data_ref->{"found"} = $_[11]; }
+    if (defined($_[12])) { $data_ref->{"hit"} = $_[12]; }
+    if (defined($_[13])) { $data_ref->{"f_found"} = $_[13]; }
+    if (defined($_[14])) { $data_ref->{"f_hit"} = $_[14]; }
+    if (defined($_[15])) { $data_ref->{"b_found"} = $_[15]; }
+    if (defined($_[16])) { $data_ref->{"b_hit"} = $_[16]; }
 
-	if (defined($_[17])) { $data_ref->{"diff_found"} = $_[17]; }
-	if (defined($_[18])) { $data_ref->{"diff_hit"} = $_[18]; }
+    if (defined($_[17])) { $data_ref->{"diff_found"} = $_[17]; }
+    if (defined($_[18])) { $data_ref->{"diff_hit"} = $_[18]; }
 }
 
-
+sub set_diffInfo_entry($$$$$)
+{
+    my $data_ref = $_[0];
+    $data_ref->{"testdiff"} = $_[1];
+    $data_ref->{"sumdiff"} = $_[2];
+    if (defined($_[17])) { $data_ref->{"diff_found"} = $_[3]; }
+    if (defined($_[18])) { $data_ref->{"diff_hit"} = $_[4]; }
+}
 #
 # add_counts(data1_ref, data2_ref)
 #
@@ -2254,97 +2261,97 @@ sub set_info_entry($$$$$$$$$$$;$$$$$$$$)
 
 sub add_counts($$)
 {
-	my $data1_ref = $_[0];	# Hash 1  # Hash 1
-	my $data2_ref = $_[1];	# Hash 2  # Hash 2
-	my %result;		# Resulting hash  # hash 结果
-	my $line;		# Current line iteration scalar  # 当前行迭代标量
-	my $data1_count;	# Count of line in hash1   # hash1中的行计数
-	my $data2_count;	# Count of line in hash2   # hash2中的行计数
-	my $found = 0;		# Total number of lines found  # 找到的行总数
-	my $hit = 0;		# Number of lines with a count > 0  # 计数大于0的行数
+    my $data1_ref = $_[0];    # Hash 1  # Hash 1
+    my $data2_ref = $_[1];    # Hash 2  # Hash 2
+    my %result;        # Resulting hash  # hash 结果
+    my $line;        # Current line iteration scalar  # 当前行迭代标量
+    my $data1_count;    # Count of line in hash1   # hash1中的行计数
+    my $data2_count;    # Count of line in hash2   # hash2中的行计数
+    my $found = 0;        # Total number of lines found  # 找到的行总数
+    my $hit = 0;        # Number of lines with a count > 0  # 计数大于0的行数
 
-	foreach $line (keys(%$data1_ref))
-	{
-		$data1_count = $data1_ref->{$line};
-		$data2_count = $data2_ref->{$line};
+    foreach $line (keys(%$data1_ref))
+    {
+        $data1_count = $data1_ref->{$line};
+        $data2_count = $data2_ref->{$line};
 
-		# Add counts if present in both hashes
-		## 如果两个哈希中都存在，则添加计数
-		if (defined($data2_count)) { $data1_count += $data2_count; }
+        # Add counts if present in both hashes
+        ## 如果两个哈希中都存在，则添加计数
+        if (defined($data2_count)) { $data1_count += $data2_count; }
 
-		# Store sum in %result
-		## 将总和存储在%result中
-		$result{$line} = $data1_count;
+        # Store sum in %result
+        ## 将总和存储在%result中
+        $result{$line} = $data1_count;
 
-		$found++;
-		if ($data1_count > 0) { $hit++; }
-	}
+        $found++;
+        if ($data1_count > 0) { $hit++; }
+    }
 
-	# Add lines unique to data2_ref
-	## 添加唯一的行data2_ref 
-	foreach $line (keys(%$data2_ref))
-	{
-		# Skip lines already in data1_ref
-		## 跳过已在中的行 data1_ref
-		if (defined($data1_ref->{$line})) { next; }
+    # Add lines unique to data2_ref
+    ## 添加唯一的行data2_ref
+    foreach $line (keys(%$data2_ref))
+    {
+        # Skip lines already in data1_ref
+        ## 跳过已在中的行 data1_ref
+        if (defined($data1_ref->{$line})) { next; }
 
-		# Copy count from data2_ref
-		## 从 data2_ref 复制计数
-		$result{$line} = $data2_ref->{$line};
+        # Copy count from data2_ref
+        ## 从 data2_ref 复制计数
+        $result{$line} = $data2_ref->{$line};
 
-		$found++;
-		if ($result{$line} > 0) { $hit++; }
-	}
+        $found++;
+        if ($result{$line} > 0) { $hit++; }
+    }
 
-	return (\%result, $found, $hit);
+    return (\%result, $found, $hit);
 }
 
 ##FIX：QGH新添加命令行中关于差异代码的命令
 sub add_diff_counts($$)
 {
-	my $data1_ref = $_[0];	# Hash 1  # Hash 1
-	my $data2_ref = $_[1];	# Hash 2  # Hash 2
-	my %result;		# Resulting hash  # hash 结果
-	my $line;		# Current line iteration scalar  # 当前行迭代标量
-	my $data1_count;	# Count of line in hash1   # hash1中的行计数
-	my $data2_count;	# Count of line in hash2   # hash2中的行计数
-	my $diff_found = 0;		# Total number of lines found  # 找到的行总数
-	my $diff_hit = 0;		# Number of lines with a count > 0  # 计数大于0的行数
+    my $data1_ref = $_[0];    # Hash 1  # Hash 1
+    my $data2_ref = $_[1];    # Hash 2  # Hash 2
+    my %result;        # Resulting hash  # hash 结果
+    my $line;        # Current line iteration scalar  # 当前行迭代标量
+    my $data1_count;    # Count of line in hash1   # hash1中的行计数
+    my $data2_count;    # Count of line in hash2   # hash2中的行计数
+    my $diff_found = 0;        # Total number of lines found  # 找到的行总数
+    my $diff_hit = 0;        # Number of lines with a count > 0  # 计数大于0的行数
 
-	foreach $line (keys(%$data1_ref))
-	{
-		$data1_count = $data1_ref->{$line};
-		$data2_count = $data2_ref->{$line};
+    foreach $line (keys(%$data1_ref))
+    {
+        $data1_count = $data1_ref->{$line};
+        $data2_count = $data2_ref->{$line};
 
-		# Add counts if present in both hashes
-		## 如果两个哈希中都存在，则添加计数
-		if (defined($data2_count)) { $data1_count += $data2_count; }
+        # Add counts if present in both hashes
+        ## 如果两个哈希中都存在，则添加计数
+        if (defined($data2_count)) { $data1_count += $data2_count; }
 
-		# Store sum in %result
-		## 将总和存储在%result中
-		$result{$line} = $data1_count;
+        # Store sum in %result
+        ## 将总和存储在%result中
+        $result{$line} = $data1_count;
 
-		$diff_found++;
-		if ($data1_count > 0) { $diff_hit++; }
-	}
+        $diff_found++;
+        if ($data1_count > 0) { $diff_hit++; }
+    }
 
-	# Add lines unique to data2_ref
-	## 添加唯一的行data2_ref 
-	foreach $line (keys(%$data2_ref))
-	{
-		# Skip lines already in data1_ref
-		## 跳过已在中的行 data1_ref
-		if (defined($data1_ref->{$line})) { next; }
+    # Add lines unique to data2_ref
+    ## 添加唯一的行data2_ref
+    foreach $line (keys(%$data2_ref))
+    {
+        # Skip lines already in data1_ref
+        ## 跳过已在中的行 data1_ref
+        if (defined($data1_ref->{$line})) { next; }
 
-		# Copy count from data2_ref
-		## 从 data2_ref 复制计数
-		$result{$line} = $data2_ref->{$line};
+        # Copy count from data2_ref
+        ## 从 data2_ref 复制计数
+        $result{$line} = $data2_ref->{$line};
 
-		$diff_found++;
-		if ($result{$line} > 0) { $diff_hit++; }
-	}
+        $diff_found++;
+        if ($result{$line} > 0) { $diff_hit++; }
+    }
 
-	return (\%result, $diff_found, $diff_hit);
+    return (\%result, $diff_found, $diff_hit);
 }
 
 #
@@ -2362,53 +2369,53 @@ sub add_diff_counts($$)
 
 sub merge_checksums($$$)
 {
-	my $ref1 = $_[0];
-	my $ref2 = $_[1];
-	my $filename = $_[2];
-	my %result;
-	my $line;
+    my $ref1 = $_[0];
+    my $ref2 = $_[1];
+    my $filename = $_[2];
+    my %result;
+    my $line;
 
-	foreach $line (keys(%{$ref1}))
-	{
-		if (defined($ref2->{$line}) &&
-		    ($ref1->{$line} ne $ref2->{$line}))
-		{
-			die("ERROR: checksum mismatch at $filename:$line\n"); ## 错误： 校验和不匹配
-		}
-		$result{$line} = $ref1->{$line};
-	}
+    foreach $line (keys(%{$ref1}))
+    {
+        if (defined($ref2->{$line}) &&
+            ($ref1->{$line} ne $ref2->{$line}))
+        {
+            die("ERROR: checksum mismatch at $filename:$line\n"); ## 错误： 校验和不匹配
+        }
+        $result{$line} = $ref1->{$line};
+    }
 
-	foreach $line (keys(%{$ref2}))
-	{
-		$result{$line} = $ref2->{$line};
-	}
+    foreach $line (keys(%{$ref2}))
+    {
+        $result{$line} = $ref2->{$line};
+    }
 
-	return \%result;
+    return \%result;
 }
 
 sub merge_diff_data($$$)
 {
-	my ($diffdata1, $diffdata2, $filename) = @_;
-	my %result;
-	my $line;
+    my ($diffdata1, $diffdata2, $filename) = @_;
+    my %result;
+    my $line;
 
-	if (defined($diffdata1)) {
-		%result = %{$diffdata1};
-	}
+    if (defined($diffdata1)) {
+        %result = %{$diffdata1};
+    }
 
-	foreach $line (keys(%{$diffdata2})) {
-		my $line1 = $result{$line};
-		my $line2 = $diffdata2->{$line};
+    foreach $line (keys(%{$diffdata2})) {
+        my $line1 = $result{$line};
+        my $line2 = $diffdata2->{$line};
 
-		if (defined($line1) && ($line1 != $line2)) {
-			warn("WARNING: function data mismatch at ".
-			     "$filename:$line2\n");
-			next;
-		}
-		$result{$line} = $line2;
-	}
+        if (defined($line1) && ($line1 != $line2)) {
+            warn("WARNING: function data mismatch at ".
+                 "$filename:$line2\n");
+            next;
+        }
+        $result{$line} = $line2;
+    }
 
-	return \%result;
+    return \%result;
 }
 
 #
@@ -2417,27 +2424,27 @@ sub merge_diff_data($$$)
 
 sub merge_func_data($$$)
 {
-	my ($funcdata1, $funcdata2, $filename) = @_;
-	my %result;
-	my $func;
+    my ($funcdata1, $funcdata2, $filename) = @_;
+    my %result;
+    my $func;
 
-	if (defined($funcdata1)) {
-		%result = %{$funcdata1};
-	}
+    if (defined($funcdata1)) {
+        %result = %{$funcdata1};
+    }
 
-	foreach $func (keys(%{$funcdata2})) {
-		my $line1 = $result{$func};
-		my $line2 = $funcdata2->{$func};
+    foreach $func (keys(%{$funcdata2})) {
+        my $line1 = $result{$func};
+        my $line2 = $funcdata2->{$func};
 
-		if (defined($line1) && ($line1 != $line2)) {
-			warn("WARNING: function data mismatch at ".
-			     "$filename:$line2\n");
-			next;
-		}
-		$result{$func} = $line2;
-	}
+        if (defined($line1) && ($line1 != $line2)) {
+            warn("WARNING: function data mismatch at ".
+                 "$filename:$line2\n");
+            next;
+        }
+        $result{$func} = $line2;
+    }
 
-	return \%result;
+    return \%result;
 }
 
 
@@ -2445,31 +2452,31 @@ sub merge_func_data($$$)
 # add_fnccount(fnccount1, fnccount2)
 #
 # Add function call count data. Return list (fnccount_added, f_found, f_hit)
-## 添加函数调用计数数据。返回列表(fnccount_added, f_found, f_hit)  
+## 添加函数调用计数数据。返回列表(fnccount_added, f_found, f_hit)
 
 sub add_fnccount($$)
 {
-	my ($fnccount1, $fnccount2) = @_;
-	my %result;
-	my $fn_found;
-	my $fn_hit;
-	my $function;
+    my ($fnccount1, $fnccount2) = @_;
+    my %result;
+    my $fn_found;
+    my $fn_hit;
+    my $function;
 
-	if (defined($fnccount1)) {
-		%result = %{$fnccount1};
-	}
-	foreach $function (keys(%{$fnccount2})) {
-		$result{$function} += $fnccount2->{$function};
-	}
-	$fn_found = scalar(keys(%result));
-	$fn_hit = 0;
-	foreach $function (keys(%result)) {
-		if ($result{$function} > 0) {
-			$fn_hit++;
-		}
-	}
+    if (defined($fnccount1)) {
+        %result = %{$fnccount1};
+    }
+    foreach $function (keys(%{$fnccount2})) {
+        $result{$function} += $fnccount2->{$function};
+    }
+    $fn_found = scalar(keys(%result));
+    $fn_hit = 0;
+    foreach $function (keys(%result)) {
+        if ($result{$function} > 0) {
+            $fn_hit++;
+        }
+    }
 
-	return (\%result, $fn_found, $fn_hit);
+    return (\%result, $fn_found, $fn_hit);
 }
 
 #
@@ -2481,37 +2488,37 @@ sub add_fnccount($$)
 
 sub add_testfncdata($$)
 {
-	my ($testfncdata1, $testfncdata2) = @_;
-	my %result;
-	my $testname;
+    my ($testfncdata1, $testfncdata2) = @_;
+    my %result;
+    my $testname;
 
-	foreach $testname (keys(%{$testfncdata1})) {
-		if (defined($testfncdata2->{$testname})) {
-			my $fnccount;
+    foreach $testname (keys(%{$testfncdata1})) {
+        if (defined($testfncdata2->{$testname})) {
+            my $fnccount;
 
-			# Function call count data for this testname exists
-			# in both data sets: add
-			## 此testname的函数调用计数数据在两个数据集中都存在：add
-			($fnccount) = add_fnccount(
-				$testfncdata1->{$testname},
-				$testfncdata2->{$testname});
-			$result{$testname} = $fnccount;
-			next;
-		}
-		# Function call count data for this testname is unique to
-		# data set 1: copy
-		## 此testname的函数调用计数数据对于数据集1是唯一的：copy
-		$result{$testname} = $testfncdata1->{$testname};
-	}
+            # Function call count data for this testname exists
+            # in both data sets: add
+            ## 此testname的函数调用计数数据在两个数据集中都存在：add
+            ($fnccount) = add_fnccount(
+                $testfncdata1->{$testname},
+                $testfncdata2->{$testname});
+            $result{$testname} = $fnccount;
+            next;
+        }
+        # Function call count data for this testname is unique to
+        # data set 1: copy
+        ## 此testname的函数调用计数数据对于数据集1是唯一的：copy
+        $result{$testname} = $testfncdata1->{$testname};
+    }
 
-	# Add count data for testnames unique to data set 2
-	## 为数据集2唯一的testnames添加count数据
-	foreach $testname (keys(%{$testfncdata2})) {
-		if (!defined($result{$testname})) {
-			$result{$testname} = $testfncdata2->{$testname};
-		}
-	}
-	return \%result;
+    # Add count data for testnames unique to data set 2
+    ## 为数据集2唯一的testnames添加count数据
+    foreach $testname (keys(%{$testfncdata2})) {
+        if (!defined($result{$testname})) {
+            $result{$testname} = $testfncdata2->{$testname};
+        }
+    }
+    return \%result;
 }
 
 
@@ -2527,30 +2534,30 @@ sub add_testfncdata($$)
 
 sub brcount_to_db($)
 {
-	my ($brcount) = @_;
-	my $line;
-	my $db;
+    my ($brcount) = @_;
+    my $line;
+    my $db;
 
-	# Add branches to database
-	# 向数据库添加分支
-	foreach $line (keys(%{$brcount})) {
-		my $brdata = $brcount->{$line};
+    # Add branches to database
+    # 向数据库添加分支
+    foreach $line (keys(%{$brcount})) {
+        my $brdata = $brcount->{$line};
 
-		foreach my $entry (split(/:/, $brdata)) {
-			my ($block, $branch, $taken) = split(/,/, $entry);
-			my $old = $db->{$line}->{$block}->{$branch};
+        foreach my $entry (split(/:/, $brdata)) {
+            my ($block, $branch, $taken) = split(/,/, $entry);
+            my $old = $db->{$line}->{$block}->{$branch};
 
-			if (!defined($old) || $old eq "-") {
-				$old = $taken;
-			} elsif ($taken ne "-") {
-				$old += $taken;
-			}
+            if (!defined($old) || $old eq "-") {
+                $old = $taken;
+            } elsif ($taken ne "-") {
+                $old += $taken;
+            }
 
-			$db->{$line}->{$block}->{$branch} = $old;
-		}
-	}
+            $db->{$line}->{$block}->{$branch} = $old;
+        }
+    }
 
-	return $db;
+    return $db;
 }
 
 
@@ -2563,34 +2570,34 @@ sub brcount_to_db($)
 
 sub db_to_brcount($;$)
 {
-	my ($db, $brcount) = @_;
-	my $line;
-	my $br_found = 0;
-	my $br_hit = 0;
+    my ($db, $brcount) = @_;
+    my $line;
+    my $br_found = 0;
+    my $br_hit = 0;
 
-	# Convert database back to brcount format
-	## 将数据库转换回brcount格式
-	foreach $line (sort({$a <=> $b} keys(%{$db}))) {
-		my $ldata = $db->{$line};
-		my $brdata;
-		my $block;
+    # Convert database back to brcount format
+    ## 将数据库转换回brcount格式
+    foreach $line (sort({$a <=> $b} keys(%{$db}))) {
+        my $ldata = $db->{$line};
+        my $brdata;
+        my $block;
 
-		foreach $block (sort({$a <=> $b} keys(%{$ldata}))) {
-			my $bdata = $ldata->{$block};
-			my $branch;
+        foreach $block (sort({$a <=> $b} keys(%{$ldata}))) {
+            my $bdata = $ldata->{$block};
+            my $branch;
 
-			foreach $branch (sort({$a <=> $b} keys(%{$bdata}))) {
-				my $taken = $bdata->{$branch};
+            foreach $branch (sort({$a <=> $b} keys(%{$bdata}))) {
+                my $taken = $bdata->{$branch};
 
-				$br_found++;
-				$br_hit++ if ($taken ne "-" && $taken > 0);
-				$brdata .= "$block,$branch,$taken:";
-			}
-		}
-		$brcount->{$line} = $brdata;
-	}
+                $br_found++;
+                $br_hit++ if ($taken ne "-" && $taken > 0);
+                $brdata .= "$block,$branch,$taken:";
+            }
+        }
+        $brcount->{$line} = $brdata;
+    }
 
-	return ($brcount, $br_found, $br_hit);
+    return ($brcount, $br_found, $br_hit);
 }
 
 
@@ -2598,38 +2605,38 @@ sub db_to_brcount($;$)
 # brcount_db_combine(db1, db2, op)
 #
 # db1 := db1 op db2, where
-#   db1, db2: brcount data as returned by brcount_to_db  ##brcount返回的数据 brcount_to_db 
+#   db1, db2: brcount data as returned by brcount_to_db  ##brcount返回的数据 brcount_to_db
 #   op:       one of $BR_ADD and BR_SUB
 #
 sub brcount_db_combine($$$)
 {
-	my ($db1, $db2, $op) = @_;
+    my ($db1, $db2, $op) = @_;
 
-	foreach my $line (keys(%{$db2})) {
-		my $ldata = $db2->{$line};
+    foreach my $line (keys(%{$db2})) {
+        my $ldata = $db2->{$line};
 
-		foreach my $block (keys(%{$ldata})) {
-			my $bdata = $ldata->{$block};
+        foreach my $block (keys(%{$ldata})) {
+            my $bdata = $ldata->{$block};
 
-			foreach my $branch (keys(%{$bdata})) {
-				my $taken = $bdata->{$branch};
-				my $new = $db1->{$line}->{$block}->{$branch};
+            foreach my $branch (keys(%{$bdata})) {
+                my $taken = $bdata->{$branch};
+                my $new = $db1->{$line}->{$block}->{$branch};
 
-				if (!defined($new) || $new eq "-") {
-					$new = $taken;
-				} elsif ($taken ne "-") {
-					if ($op == $BR_ADD) {
-						$new += $taken;
-					} elsif ($op == $BR_SUB) {
-						$new -= $taken;
-						$new = 0 if ($new < 0);
-					}
-				}
+                if (!defined($new) || $new eq "-") {
+                    $new = $taken;
+                } elsif ($taken ne "-") {
+                    if ($op == $BR_ADD) {
+                        $new += $taken;
+                    } elsif ($op == $BR_SUB) {
+                        $new -= $taken;
+                        $new = 0 if ($new < 0);
+                    }
+                }
 
-				$db1->{$line}->{$block}->{$branch} = $new;
-			}
-		}
-	}
+                $db1->{$line}->{$block}->{$branch} = $new;
+            }
+        }
+    }
 }
 
 
@@ -2641,25 +2648,25 @@ sub brcount_db_combine($$$)
 
 sub brcount_db_get_found_and_hit($)
 {
-	my ($db) = @_;
-	my ($br_found , $br_hit) = (0, 0);
+    my ($db) = @_;
+    my ($br_found , $br_hit) = (0, 0);
 
-	foreach my $line (keys(%{$db})) {
-		my $ldata = $db->{$line};
+    foreach my $line (keys(%{$db})) {
+        my $ldata = $db->{$line};
 
-		foreach my $block (keys(%{$ldata})) {
-			my $bdata = $ldata->{$block};
+        foreach my $block (keys(%{$ldata})) {
+            my $bdata = $ldata->{$block};
 
-			foreach my $branch (keys(%{$bdata})) {
-				my $taken = $bdata->{$branch};
+            foreach my $branch (keys(%{$bdata})) {
+                my $taken = $bdata->{$branch};
 
-				$br_found++;
-				$br_hit++ if ($taken ne "-" && $taken > 0);
-			}
-		}
-	}
+                $br_found++;
+                $br_hit++ if ($taken ne "-" && $taken > 0);
+            }
+        }
+    }
 
-	return ($br_found, $br_hit);
+    return ($br_found, $br_hit);
 }
 
 
@@ -2675,14 +2682,14 @@ sub brcount_db_get_found_and_hit($)
 
 sub combine_brcount($$$;$)
 {
-	my ($brcount1, $brcount2, $type, $inplace) = @_;
-	my ($db1, $db2);
+    my ($brcount1, $brcount2, $type, $inplace) = @_;
+    my ($db1, $db2);
 
-	$db1 = brcount_to_db($brcount1);
-	$db2 = brcount_to_db($brcount2);
-	brcount_db_combine($db1, $db2, $type);
+    $db1 = brcount_to_db($brcount1);
+    $db2 = brcount_to_db($brcount2);
+    brcount_db_combine($db1, $db2, $type);
 
-	return db_to_brcount($db1, $inplace ? $brcount1 : undef);
+    return db_to_brcount($db1, $inplace ? $brcount1 : undef);
 }
 
 
@@ -2695,36 +2702,36 @@ sub combine_brcount($$$;$)
 
 sub add_testbrdata($$)
 {
-	my ($testbrdata1, $testbrdata2) = @_;
-	my %result;
-	my $testname;
+    my ($testbrdata1, $testbrdata2) = @_;
+    my %result;
+    my $testname;
 
-	foreach $testname (keys(%{$testbrdata1})) {
-		if (defined($testbrdata2->{$testname})) {
-			my $brcount;
+    foreach $testname (keys(%{$testbrdata1})) {
+        if (defined($testbrdata2->{$testname})) {
+            my $brcount;
 
-			# Branch coverage data for this testname exists
-			# in both data sets: add
-			# 此testname的分支覆盖率数据在两个数据集中都存在：add
-			($brcount) = combine_brcount($testbrdata1->{$testname},
-					 $testbrdata2->{$testname}, $BR_ADD);
-			$result{$testname} = $brcount;
-			next;
-		}
-		# Branch coverage data for this testname is unique to
-		# data set 1: copy
-		## 此testname的分支覆盖率数据对于数据集1:copy是唯一的
-		$result{$testname} = $testbrdata1->{$testname};
-	}
+            # Branch coverage data for this testname exists
+            # in both data sets: add
+            # 此testname的分支覆盖率数据在两个数据集中都存在：add
+            ($brcount) = combine_brcount($testbrdata1->{$testname},
+                     $testbrdata2->{$testname}, $BR_ADD);
+            $result{$testname} = $brcount;
+            next;
+        }
+        # Branch coverage data for this testname is unique to
+        # data set 1: copy
+        ## 此testname的分支覆盖率数据对于数据集1:copy是唯一的
+        $result{$testname} = $testbrdata1->{$testname};
+    }
 
-	# Add count data for testnames unique to data set 2
-	## 为数据集2唯一的testnames添加count数据
-	foreach $testname (keys(%{$testbrdata2})) {
-		if (!defined($result{$testname})) {
-			$result{$testname} = $testbrdata2->{$testname};
-		}
-	}
-	return \%result;
+    # Add count data for testnames unique to data set 2
+    ## 为数据集2唯一的testnames添加count数据
+    foreach $testname (keys(%{$testbrdata2})) {
+        if (!defined($result{$testname})) {
+            $result{$testname} = $testbrdata2->{$testname};
+        }
+    }
+    return \%result;
 }
 
 
@@ -2737,193 +2744,193 @@ sub add_testbrdata($$)
 
 sub combine_info_entries($$$)
 {
-	my $entry1 = $_[0];	# Reference to hash containing first entry ## 对包含第一个条目的哈希的引用
-	my $testdata1;
-	my $sumcount1;
-	my $funcdata1;
-	my $checkdata1;
-	my $testfncdata1;
-	my $sumfnccount1;
-	my $testbrdata1;
-	my $sumbrcount1;
-	##FIX：QGH新添加命令行中关于差异代码的命令
-	my $testdiffdata1;
-	my $sumdiffcount1;
+    my $entry1 = $_[0];    # Reference to hash containing first entry ## 对包含第一个条目的哈希的引用
+    my $testdata1;
+    my $sumcount1;
+    my $funcdata1;
+    my $checkdata1;
+    my $testfncdata1;
+    my $sumfnccount1;
+    my $testbrdata1;
+    my $sumbrcount1;
+    ##FIX：QGH新添加命令行中关于差异代码的命令
+    my $testdiffdata1;
+    my $sumdiffcount1;
 
-	my $entry2 = $_[1];	# Reference to hash containing second entry  ## 对包含第二项的哈希的引用
-	my $testdata2;
-	my $sumcount2;
-	my $funcdata2;
-	my $checkdata2;
-	my $testfncdata2;
-	my $sumfnccount2;
-	my $testbrdata2;
-	my $sumbrcount2;
-	##FIX：QGH新添加命令行中关于差异代码的命令
-	my $testdiffdata2;
-	my $sumdiffcount2;
+    my $entry2 = $_[1];    # Reference to hash containing second entry  ## 对包含第二项的哈希的引用
+    my $testdata2;
+    my $sumcount2;
+    my $funcdata2;
+    my $checkdata2;
+    my $testfncdata2;
+    my $sumfnccount2;
+    my $testbrdata2;
+    my $sumbrcount2;
+    ##FIX：QGH新添加命令行中关于差异代码的命令
+    my $testdiffdata2;
+    my $sumdiffcount2;
 
-	my %result;		# Hash containing combined entry  ## 包含组合项的哈希
-	my %result_testdata;
-	my $result_sumcount = {};
-	my $result_funcdata;
-	my $result_testfncdata;
-	my $result_sumfnccount;
-	my $result_testbrdata;
-	my $result_sumbrcount;
+    my %result;        # Hash containing combined entry  ## 包含组合项的哈希
+    my %result_testdata;
+    my $result_sumcount = {};
+    my $result_funcdata;
+    my $result_testfncdata;
+    my $result_sumfnccount;
+    my $result_testbrdata;
+    my $result_sumbrcount;
 
-	##FIX：QGH新添加命令行中关于差异代码的命令
-	my %result_testdiffdata;
-	my $result_sumdiffcount = {};
+    ##FIX：QGH新添加命令行中关于差异代码的命令
+    my %result_testdiffdata;
+    my $result_sumdiffcount = {};
 
-	my $lines_found;
-	my $lines_hit;
-	my $fn_found;
-	my $fn_hit;
-	my $br_found;
-	my $br_hit;
-	##FIX：QGH新添加命令行中关于差异代码的命令
-	my $diff_found;
-	my $diff_hit;
+    my $lines_found;
+    my $lines_hit;
+    my $fn_found;
+    my $fn_hit;
+    my $br_found;
+    my $br_hit;
+    ##FIX：QGH新添加命令行中关于差异代码的命令
+    my $diff_found;
+    my $diff_hit;
 
-	my $testname;
-	my $filename = $_[2];
+    my $testname;
+    my $filename = $_[2];
 
-	# Retrieve data
-	## 包含组合项的哈希
-	($testdata1, $sumcount1, $funcdata1, $checkdata1, $testfncdata1,
-	 $sumfnccount1, $testbrdata1, $sumbrcount1, $testdiffdata1, $sumdiffcount1) = get_info_entry($entry1);
-	($testdata2, $sumcount2, $funcdata2, $checkdata2, $testfncdata2,
-	 $sumfnccount2, $testbrdata2, $sumbrcount2, $testdiffdata2, $sumdiffcount2) = get_info_entry($entry2);
+    # Retrieve data
+    ## 包含组合项的哈希
+    ($testdata1, $sumcount1, $funcdata1, $checkdata1, $testfncdata1,
+     $sumfnccount1, $testbrdata1, $sumbrcount1, $testdiffdata1, $sumdiffcount1) = get_info_entry($entry1);
+    ($testdata2, $sumcount2, $funcdata2, $checkdata2, $testfncdata2,
+     $sumfnccount2, $testbrdata2, $sumbrcount2, $testdiffdata2, $sumdiffcount2) = get_info_entry($entry2);
 
-	# Merge checksums
-	## 合并校验和
-	$checkdata1 = merge_checksums($checkdata1, $checkdata2, $filename);
+    # Merge checksums
+    ## 合并校验和
+    $checkdata1 = merge_checksums($checkdata1, $checkdata2, $filename);
 
-	# Combine funcdata
-	## 合并funcdata
-	$result_funcdata = merge_func_data($funcdata1, $funcdata2, $filename);
+    # Combine funcdata
+    ## 合并funcdata
+    $result_funcdata = merge_func_data($funcdata1, $funcdata2, $filename);
 
-	# Combine function call count data
-	## 组合函数调用计数数据
-	$result_testfncdata = add_testfncdata($testfncdata1, $testfncdata2);
-	($result_sumfnccount, $fn_found, $fn_hit) =
-		add_fnccount($sumfnccount1, $sumfnccount2);
+    # Combine function call count data
+    ## 组合函数调用计数数据
+    $result_testfncdata = add_testfncdata($testfncdata1, $testfncdata2);
+    ($result_sumfnccount, $fn_found, $fn_hit) =
+        add_fnccount($sumfnccount1, $sumfnccount2);
 
-	# Combine branch coverage data
-	## 合并分支覆盖率数据
-	$result_testbrdata = add_testbrdata($testbrdata1, $testbrdata2);
-	($result_sumbrcount, $br_found, $br_hit) =
-		combine_brcount($sumbrcount1, $sumbrcount2, $BR_ADD);
+    # Combine branch coverage data
+    ## 合并分支覆盖率数据
+    $result_testbrdata = add_testbrdata($testbrdata1, $testbrdata2);
+    ($result_sumbrcount, $br_found, $br_hit) =
+        combine_brcount($sumbrcount1, $sumbrcount2, $BR_ADD);
 
-	##FIX:QGH 合并差异覆盖率数据
-	# $result_testdiffdata = add_testbrdata($testbrdata1, $testbrdata2);
-	# ($result_sumdiffcount, $br_found, $br_hit) =
-	# 	combine_brcount($sumbrcount1, $sumbrcount2, $BR_ADD);
+    ##FIX:QGH 合并差异覆盖率数据
+    # $result_testdiffdata = add_testbrdata($testbrdata1, $testbrdata2);
+    # ($result_sumdiffcount, $br_found, $br_hit) =
+    #     combine_brcount($sumbrcount1, $sumbrcount2, $BR_ADD);
 
-	# Combine testdata
-	## 合并测试数据
-	foreach $testname (keys(%{$testdata1}))
-	{
-		if (defined($testdata2->{$testname}))
-		{
-			# testname is present in both entries, requires
-			# combination
-			## 两个条目中都存在testname，需要组合
-			($result_testdata{$testname}) =
-				add_counts($testdata1->{$testname},
-					   $testdata2->{$testname});
-		}
-		else
-		{
-			# testname only present in entry1, add to result
-			## testname只存在于entry1中，添加到result
-			$result_testdata{$testname} = $testdata1->{$testname};
-		}
+    # Combine testdata
+    ## 合并测试数据
+    foreach $testname (keys(%{$testdata1}))
+    {
+        if (defined($testdata2->{$testname}))
+        {
+            # testname is present in both entries, requires
+            # combination
+            ## 两个条目中都存在testname，需要组合
+            ($result_testdata{$testname}) =
+                add_counts($testdata1->{$testname},
+                       $testdata2->{$testname});
+        }
+        else
+        {
+            # testname only present in entry1, add to result
+            ## testname只存在于entry1中，添加到result
+            $result_testdata{$testname} = $testdata1->{$testname};
+        }
 
-		# update sum count hash
-		## 更新和计数哈希
-		($result_sumcount, $lines_found, $lines_hit) =
-			add_counts($result_sumcount,
-				   $result_testdata{$testname});
-	}
+        # update sum count hash
+        ## 更新和计数哈希
+        ($result_sumcount, $lines_found, $lines_hit) =
+            add_counts($result_sumcount,
+                   $result_testdata{$testname});
+    }
 
-	foreach $testname (keys(%{$testdata2}))
-	{
-		# Skip testnames already covered by previous iteration
-		## 跳过上一次迭代中已经覆盖的测试名称
-		if (defined($testdata1->{$testname})) { next; }
+    foreach $testname (keys(%{$testdata2}))
+    {
+        # Skip testnames already covered by previous iteration
+        ## 跳过上一次迭代中已经覆盖的测试名称
+        if (defined($testdata1->{$testname})) { next; }
 
-		# testname only present in entry2, add to result hash
-		## testname只存在于entry2中，添加到结果哈希
-		$result_testdata{$testname} = $testdata2->{$testname};
+        # testname only present in entry2, add to result hash
+        ## testname只存在于entry2中，添加到结果哈希
+        $result_testdata{$testname} = $testdata2->{$testname};
 
-		# update sum count hash
-		## 更新和计数哈希
-		($result_sumcount, $lines_found, $lines_hit) =
-			add_counts($result_sumcount,
-				   $result_testdata{$testname});
-	}
+        # update sum count hash
+        ## 更新和计数哈希
+        ($result_sumcount, $lines_found, $lines_hit) =
+            add_counts($result_sumcount,
+                   $result_testdata{$testname});
+    }
 
-	# ##FIX:QGH 合并差异覆盖率数据
-	foreach $testname (keys(%{$testdiffdata1}))
-	{
-		if (defined($testdiffdata2->{$testname}))
-		{
-			# testname is present in both entries, requires
-			# combination
-			## 两个条目中都存在testname，需要组合
-			($result_testdiffdata{$testname}) =
-				add_diff_counts($testdiffdata1->{$testname},
-					   $testdiffdata2->{$testname});
-		}
-		else
-		{
-			# testname only present in entry1, add to result
-			## testname只存在于entry1中，添加到result
-			$result_testdiffdata{$testname} = $testdiffdata1->{$testname};
-		}
+    # ##FIX:QGH 合并差异覆盖率数据
+    foreach $testname (keys(%{$testdiffdata1}))
+    {
+        if (defined($testdiffdata2->{$testname}))
+        {
+            # testname is present in both entries, requires
+            # combination
+            ## 两个条目中都存在testname，需要组合
+            ($result_testdiffdata{$testname}) =
+                add_diff_counts($testdiffdata1->{$testname},
+                       $testdiffdata2->{$testname});
+        }
+        else
+        {
+            # testname only present in entry1, add to result
+            ## testname只存在于entry1中，添加到result
+            $result_testdiffdata{$testname} = $testdiffdata1->{$testname};
+        }
 
-		# update sum count hash
-		## 更新和计数哈希
-		($result_sumdiffcount, $diff_found, $diff_hit) =
-			add_diff_counts($result_sumdiffcount,
-				   $result_testdiffdata{$testname});
-	}
+        # update sum count hash
+        ## 更新和计数哈希
+        ($result_sumdiffcount, $diff_found, $diff_hit) =
+            add_diff_counts($result_sumdiffcount,
+                   $result_testdiffdata{$testname});
+    }
 
-	foreach $testname (keys(%{$testdiffdata2}))
-	{
-		# Skip testnames already covered by previous iteration
-		## 跳过上一次迭代中已经覆盖的测试名称
-		if (defined($testdiffdata1->{$testname})) { next; }
+    foreach $testname (keys(%{$testdiffdata2}))
+    {
+        # Skip testnames already covered by previous iteration
+        ## 跳过上一次迭代中已经覆盖的测试名称
+        if (defined($testdiffdata1->{$testname})) { next; }
 
-		# testname only present in entry2, add to result hash
-		## testname只存在于entry2中，添加到结果哈希
-		$result_testdiffdata{$testname} = $testdiffdata2->{$testname};
+        # testname only present in entry2, add to result hash
+        ## testname只存在于entry2中，添加到结果哈希
+        $result_testdiffdata{$testname} = $testdiffdata2->{$testname};
 
-		# update sum count hash
-		## 更新和计数哈希
-		($result_sumdiffcount, $diff_found, $diff_hit) =
-			add_diff_counts($result_sumdiffcount,
-				   $result_testdiffdata{$testname});
-	}
+        # update sum count hash
+        ## 更新和计数哈希
+        ($result_sumdiffcount, $diff_found, $diff_hit) =
+            add_diff_counts($result_sumdiffcount,
+                   $result_testdiffdata{$testname});
+    }
 
-	# Calculate resulting sumcount
-	## 计算结果总和
-	
-	# Store result
+    # Calculate resulting sumcount
+    ## 计算结果总和
+    
+    # Store result
     ## 存储结果
-	set_info_entry(\%result, \%result_testdata, $result_sumcount,
-		       $result_funcdata, $checkdata1, 
-		       $result_testfncdata, $result_sumfnccount, 
-		       $result_testbrdata, $result_sumbrcount, 
-		       \%result_testdiffdata, $result_sumdiffcount, 
-		       $lines_found, $lines_hit,
-		       $fn_found, $fn_hit, 
-		       $br_found, $br_hit, 
-		       $diff_found, $diff_hit);
+    set_info_entry(\%result, \%result_testdata, $result_sumcount,
+               $result_funcdata, $checkdata1,
+               $result_testfncdata, $result_sumfnccount,
+               $result_testbrdata, $result_sumbrcount,
+               \%result_testdiffdata, $result_sumdiffcount,
+               $lines_found, $lines_hit,
+               $fn_found, $fn_hit,
+               $br_found, $br_hit,
+               $diff_found, $diff_hit);
 
-	return(\%result);
+    return(\%result);
 
 }
 
@@ -2937,31 +2944,31 @@ sub combine_info_entries($$$)
 
 sub combine_info_files($$)
 {
-	my %hash1 = %{$_[0]};
-	my %hash2 = %{$_[1]};
-	my $filename;
+    my %hash1 = %{$_[0]};
+    my %hash2 = %{$_[1]};
+    my $filename;
 
-	foreach $filename (keys(%hash2))
-	{
-		if ($hash1{$filename})
-		{
-			# Entry already exists in hash1, combine them
-			## hash1中已存在项，请合并它们
-			$hash1{$filename} =
-				combine_info_entries($hash1{$filename},
-						     $hash2{$filename},
-						     $filename);
-		}
-		else
-		{
-			# Entry is unique in both hashes, simply add to
-			# resulting hash
-			## 条目在两个哈希中都是唯一的，只需添加到结果哈希中
-			$hash1{$filename} = $hash2{$filename};
-		}
-	}
+    foreach $filename (keys(%hash2))
+    {
+        if ($hash1{$filename})
+        {
+            # Entry already exists in hash1, combine them
+            ## hash1中已存在项，请合并它们
+            $hash1{$filename} =
+                combine_info_entries($hash1{$filename},
+                             $hash2{$filename},
+                             $filename);
+        }
+        else
+        {
+            # Entry is unique in both hashes, simply add to
+            # resulting hash
+            ## 条目在两个哈希中都是唯一的，只需添加到结果哈希中
+            $hash1{$filename} = $hash2{$filename};
+        }
+    }
 
-	return(\%hash1);
+    return(\%hash1);
 }
 
 
@@ -2977,86 +2984,86 @@ sub combine_info_files($$)
 
 sub get_prefix($@)
 {
-	my ($min_dir, @filename_list) = @_;
-	my %prefix;			# mapping: prefix -> sum of lengths  ## 映射: prefix -> sum of lengths
-	my $current;			# Temporary iteration variable  ## 临时迭代变量
+    my ($min_dir, @filename_list) = @_;
+    my %prefix;            # mapping: prefix -> sum of lengths  ## 映射: prefix -> sum of lengths
+    my $current;            # Temporary iteration variable  ## 临时迭代变量
 
-	# Find list of prefixes
-	## 查找前缀列表
-	foreach (@filename_list)
-	{
-		# Need explicit assignment to get a copy of $_ so that
-		# shortening the contained prefix does not affect the list
-		## 需要显式赋值以获取 $_ 的副本，以便缩短包含的前缀不会影响列表
-		$current = $_;
-		while ($current = shorten_prefix($current))
-		{
-			$current .= "/";
+    # Find list of prefixes
+    ## 查找前缀列表
+    foreach (@filename_list)
+    {
+        # Need explicit assignment to get a copy of $_ so that
+        # shortening the contained prefix does not affect the list
+        ## 需要显式赋值以获取 $_ 的副本，以便缩短包含的前缀不会影响列表
+        $current = $_;
+        while ($current = shorten_prefix($current))
+        {
+            $current .= "/";
 
-			# Skip rest if the remaining prefix has already been
-			# added to hash
-			## 如果剩余前缀已添加到哈希，则跳过rest
-			if (exists($prefix{$current})) { last; }
+            # Skip rest if the remaining prefix has already been
+            # added to hash
+            ## 如果剩余前缀已添加到哈希，则跳过rest
+            if (exists($prefix{$current})) { last; }
 
-			# Initialize with 0
-			## 用0初始化
-			$prefix{$current}="0";
-		}
+            # Initialize with 0
+            ## 用0初始化
+            $prefix{$current}="0";
+        }
 
-	}
+    }
 
-	# Remove all prefixes that would cause filenames to have less than
-	# the minimum number of parent directories
-	## 删除所有会导致文件名的父目录少于最小数量的前缀
-	foreach my $filename (@filename_list) {
-		my $dir = dirname($filename);
+    # Remove all prefixes that would cause filenames to have less than
+    # the minimum number of parent directories
+    ## 删除所有会导致文件名的父目录少于最小数量的前缀
+    foreach my $filename (@filename_list) {
+        my $dir = dirname($filename);
 
-		for (my $i = 0; $i < $min_dir; $i++) {
-			delete($prefix{$dir."/"});
-			$dir = shorten_prefix($dir);
-		}
-	}
+        for (my $i = 0; $i < $min_dir; $i++) {
+            delete($prefix{$dir."/"});
+            $dir = shorten_prefix($dir);
+        }
+    }
 
-	# Check if any prefix remains
-	## 检查是否还有前缀
-	return undef if (!%prefix);
+    # Check if any prefix remains
+    ## 检查是否还有前缀
+    return undef if (!%prefix);
 
-	# Calculate sum of lengths for all prefixes
-	## 计算所有前缀的长度总和
-	foreach $current (keys(%prefix))
-	{
-		foreach (@filename_list)
-		{
-			# Add original length
-			## 添加原始长度
-			$prefix{$current} += length($_);
+    # Calculate sum of lengths for all prefixes
+    ## 计算所有前缀的长度总和
+    foreach $current (keys(%prefix))
+    {
+        foreach (@filename_list)
+        {
+            # Add original length
+            ## 添加原始长度
+            $prefix{$current} += length($_);
 
-			# Check whether prefix matches
-			## 检查前缀是否匹配
-			if (substr($_, 0, length($current)) eq $current)
-			{
-				# Subtract prefix length for this filename
-				## 减去此文件名的前缀长度
-				$prefix{$current} -= length($current);
-			}
-		}
-	}
+            # Check whether prefix matches
+            ## 检查前缀是否匹配
+            if (substr($_, 0, length($current)) eq $current)
+            {
+                # Subtract prefix length for this filename
+                ## 减去此文件名的前缀长度
+                $prefix{$current} -= length($current);
+            }
+        }
+    }
 
-	# Find and return prefix with minimal sum
-	## 查找并返回最小和前缀
-	$current = (keys(%prefix))[0];
+    # Find and return prefix with minimal sum
+    ## 查找并返回最小和前缀
+    $current = (keys(%prefix))[0];
 
-	foreach (keys(%prefix))
-	{
-		if ($prefix{$_} < $prefix{$current})
-		{
-			$current = $_;
-		}
-	}
+    foreach (keys(%prefix))
+    {
+        if ($prefix{$_} < $prefix{$current})
+        {
+            $current = $_;
+        }
+    }
 
-	$current =~ s/\/$//;
+    $current =~ s/\/$//;
 
-	return($current);
+    return($current);
 }
 
 
@@ -3069,10 +3076,10 @@ sub get_prefix($@)
 
 sub shorten_prefix($)
 {
-	my @list = split("/", $_[0]);
+    my @list = split("/", $_[0]);
 
-	pop(@list);
-	return join("/", @list);
+    pop(@list);
+    return join("/", @list);
 }
 
 
@@ -3085,14 +3092,14 @@ sub shorten_prefix($)
 
 sub get_dir_list(@)
 {
-	my %result;
+    my %result;
 
-	foreach (@_)
-	{
-		$result{shorten_prefix($_)} = "";
-	}
+    foreach (@_)
+    {
+        $result{shorten_prefix($_)} = "";
+    }
 
-	return(sort(keys(%result)));
+    return(sort(keys(%result)));
 }
 
 
@@ -3108,25 +3115,25 @@ sub get_dir_list(@)
 
 sub get_relative_base_path($)
 {
-	my $result = "";
-	my $index;
+    my $result = "";
+    my $index;
 
-	# Make an empty directory path a special case
-	## 使空目录路径成为特殊情况
-	if (!$_[0]) { return(""); }
+    # Make an empty directory path a special case
+    ## 使空目录路径成为特殊情况
+    if (!$_[0]) { return(""); }
 
-	# Count number of /s in path
-	## 计数路径中的/s数
-	$index = ($_[0] =~ s/\//\//g);
+    # Count number of /s in path
+    ## 计数路径中的/s数
+    $index = ($_[0] =~ s/\//\//g);
 
-	# Add a ../ to $result for each / in the directory path + 1
-	## 为目录路径+1中的每个 / 添加 ../ 到 $result
-	for (; $index>=0; $index--)
-	{
-		$result .= "../";
-	}
+    # Add a ../ to $result for each / in the directory path + 1
+    ## 为目录路径+1中的每个 / 添加 ../ 到 $result
+    for (; $index>=0; $index--)
+    {
+        $result .= "../";
+    }
 
-	return $result;
+    return $result;
 }
 
 
@@ -3149,65 +3156,65 @@ sub get_relative_base_path($)
 
 sub read_testfile($)
 {
-	my %result;
-	my $test_name;
-	my $changed_testname;
-	local *TEST_HANDLE;
+    my %result;
+    my $test_name;
+    my $changed_testname;
+    local *TEST_HANDLE;
 
-	open(TEST_HANDLE, "<", $_[0])
-		or die("ERROR: cannot open $_[0]!\n");
+    open(TEST_HANDLE, "<", $_[0])
+        or die("ERROR: cannot open $_[0]!\n");
 
-	while (<TEST_HANDLE>)
-	{
-		chomp($_);
+    while (<TEST_HANDLE>)
+    {
+        chomp($_);
 
-		# Match lines beginning with TN:<whitespace(s)>
-		## 以TN开头的匹配行：<whitespace（s）>
-		if (/^TN:\s+(.*?)\s*$/)
-		{
-			# Store name for later use 
-			## 以后使用的存储名称
-			$test_name = $1;
-			if ($test_name =~ s/\W/_/g)
-			{
-				$changed_testname = 1;
-			}
-		}
+        # Match lines beginning with TN:<whitespace(s)>
+        ## 以TN开头的匹配行：<whitespace（s）>
+        if (/^TN:\s+(.*?)\s*$/)
+        {
+            # Store name for later use
+            ## 以后使用的存储名称
+            $test_name = $1;
+            if ($test_name =~ s/\W/_/g)
+            {
+                $changed_testname = 1;
+            }
+        }
 
-		# Match lines beginning with TD:<whitespace(s)>
-		## 以TD开头的匹配行：<whitespace（s）>
-		if (/^TD:\s+(.*?)\s*$/)
-		{
-			if (!defined($test_name)) {
-				die("ERROR: Found test description without prior test name in $_[0]:$.\n");
-			}
-			# Check for empty line
-			## 检查空行
-			if ($1)
-			{
-				# Add description to hash
-				## 向哈希添加说明
-				$result{$test_name} .= " $1";
-			}
-			else
-			{
-				# Add empty line
-				## 添加空行
-				$result{$test_name} .= "\n\n";
-			}
-		}
-	}
+        # Match lines beginning with TD:<whitespace(s)>
+        ## 以TD开头的匹配行：<whitespace（s）>
+        if (/^TD:\s+(.*?)\s*$/)
+        {
+            if (!defined($test_name)) {
+                die("ERROR: Found test description without prior test name in $_[0]:$.\n");
+            }
+            # Check for empty line
+            ## 检查空行
+            if ($1)
+            {
+                # Add description to hash
+                ## 向哈希添加说明
+                $result{$test_name} .= " $1";
+            }
+            else
+            {
+                # Add empty line
+                ## 添加空行
+                $result{$test_name} .= "\n\n";
+            }
+        }
+    }
 
-	close(TEST_HANDLE);
+    close(TEST_HANDLE);
 
-	if ($changed_testname)
-	{
-		## 警告： 从描述文件 $_[0] 中的testname中删除了无效字符
-		warn("WARNING: invalid characters removed from testname in ".
-		     "descriptions file $_[0]\n");
-	}
+    if ($changed_testname)
+    {
+        ## 警告： 从描述文件 $_[0] 中的testname中删除了无效字符
+        warn("WARNING: invalid characters removed from testname in ".
+             "descriptions file $_[0]\n");
+    }
 
-	return \%result;
+    return \%result;
 }
 
 
@@ -3220,24 +3227,24 @@ sub read_testfile($)
 
 sub escape_html($)
 {
-	my $string = $_[0];
+    my $string = $_[0];
 
-	if (!$string) { return ""; }
+    if (!$string) { return ""; }
 
-	$string =~ s/&/&amp;/g;		# & -> &amp;
-	$string =~ s/</&lt;/g;		# < -> &lt;
-	$string =~ s/>/&gt;/g;		# > -> &gt;
-	$string =~ s/\"/&quot;/g;	# " -> &quot;
+    $string =~ s/&/&amp;/g;        # & -> &amp;
+    $string =~ s/</&lt;/g;        # < -> &lt;
+    $string =~ s/>/&gt;/g;        # > -> &gt;
+    $string =~ s/\"/&quot;/g;    # " -> &quot;
 
-	while ($string =~ /^([^\t]*)(\t)/)
-	{
-		my $replacement = " "x($tab_size - (length($1) % $tab_size));
-		$string =~ s/^([^\t]*)(\t)/$1$replacement/;
-	}
+    while ($string =~ /^([^\t]*)(\t)/)
+    {
+        my $replacement = " "x($tab_size - (length($1) % $tab_size));
+        $string =~ s/^([^\t]*)(\t)/$1$replacement/;
+    }
 
-	$string =~ s/\n/<br>/g;		# \n -> <br>
+    $string =~ s/\n/<br>/g;        # \n -> <br>
 
-	return $string;
+    return $string;
 }
 
 
@@ -3249,27 +3256,27 @@ sub escape_html($)
 
 sub get_date_string()
 {
-	my $year;
-	my $month;
-	my $day;
-	my $hour;
-	my $min;
-	my $sec;
-	my @timeresult;
+    my $year;
+    my $month;
+    my $day;
+    my $hour;
+    my $min;
+    my $sec;
+    my @timeresult;
 
-	if (defined $ENV{'SOURCE_DATE_EPOCH'})
-	{
-		@timeresult = gmtime($ENV{'SOURCE_DATE_EPOCH'});
-	}
-	else
-	{
-		@timeresult = localtime();
-	}
-	($year, $month, $day, $hour, $min, $sec) =
-		@timeresult[5, 4, 3, 2, 1, 0];
+    if (defined $ENV{'SOURCE_DATE_EPOCH'})
+    {
+        @timeresult = gmtime($ENV{'SOURCE_DATE_EPOCH'});
+    }
+    else
+    {
+        @timeresult = localtime();
+    }
+    ($year, $month, $day, $hour, $min, $sec) =
+        @timeresult[5, 4, 3, 2, 1, 0];
 
-	return sprintf("%d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1,
-		       $day, $hour, $min, $sec);
+    return sprintf("%d-%02d-%02d %02d:%02d:%02d", $year+1900, $month+1,
+               $day, $hour, $min, $sec);
 }
 
 
@@ -3286,10 +3293,10 @@ sub get_date_string()
 
 sub create_sub_dir($)
 {
-	my ($dir) = @_;
+    my ($dir) = @_;
 
-	system("mkdir", "-p" ,$dir)
-		and die("ERROR: cannot create directory $dir!\n");
+    system("mkdir", "-p" ,$dir)
+        and die("ERROR: cannot create directory $dir!\n");
 }
 
 
@@ -3310,39 +3317,39 @@ sub create_sub_dir($)
 
 sub write_description_file($$$$$$$$$)
 {
-	my %description = %{$_[0]};
-	my $found = $_[1];
-	my $hit = $_[2];
-	my $fn_found = $_[3];
-	my $fn_hit = $_[4];
-	my $br_found = $_[5];
-	my $br_hit = $_[6];
-	##FIX:QGH 新增差异代码覆盖率相关
-	my $diff_found = $_[7];
-	my $diff_hit = $_[8];
-	my $test_name;
-	local *HTML_HANDLE;
+    my %description = %{$_[0]};
+    my $found = $_[1];
+    my $hit = $_[2];
+    my $fn_found = $_[3];
+    my $fn_hit = $_[4];
+    my $br_found = $_[5];
+    my $br_hit = $_[6];
+    ##FIX:QGH 新增差异代码覆盖率相关
+    my $diff_found = $_[7];
+    my $diff_hit = $_[8];
+    my $test_name;
+    local *HTML_HANDLE;
 
-	html_create(*HTML_HANDLE,"descriptions.$html_ext");
-	write_html_prolog(*HTML_HANDLE, "", "LCOV - test case descriptions");
-	write_header(*HTML_HANDLE, 3, "", "", $found, $hit, $fn_found,
-		     $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, 0);
+    html_create(*HTML_HANDLE,"descriptions.$html_ext");
+    write_html_prolog(*HTML_HANDLE, "", "LCOV - test case descriptions");
+    write_header(*HTML_HANDLE, 3, "", "", $found, $hit, $fn_found,
+             $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit, 0);
 
-	write_test_table_prolog(*HTML_HANDLE,
-			 "Test case descriptions - alphabetical list"); ## 测试用例说明 - 按字母顺序排列的清单
+    write_test_table_prolog(*HTML_HANDLE,
+             "Test case descriptions - alphabetical list"); ## 测试用例说明 - 按字母顺序排列的清单
 
-	foreach $test_name (sort(keys(%description)))
-	{
-		my $desc = $description{$test_name};
+    foreach $test_name (sort(keys(%description)))
+    {
+        my $desc = $description{$test_name};
 
-		$desc = escape_html($desc) if (!$rc_desc_html);
-		write_test_table_entry(*HTML_HANDLE, $test_name, $desc);
-	}
+        $desc = escape_html($desc) if (!$rc_desc_html);
+        write_test_table_entry(*HTML_HANDLE, $test_name, $desc);
+    }
 
-	write_test_table_epilog(*HTML_HANDLE);
-	write_html_epilog(*HTML_HANDLE, "");
+    write_test_table_epilog(*HTML_HANDLE);
+    write_html_epilog(*HTML_HANDLE, "");
 
-	close(*HTML_HANDLE);
+    close(*HTML_HANDLE);
 }
 
 
@@ -3360,112 +3367,112 @@ sub write_description_file($$$$$$$$$)
 
 sub write_png_files()
 {
-	my %data;
-	local *PNG_HANDLE;
+    my %data;
+    local *PNG_HANDLE;
 
-	$data{"ruby.png"} =
-		[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 
-		 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 
-		 0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25, 
-		 0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d, 
-		 0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x18, 0x10, 0x5d, 0x57, 
-		 0x34, 0x6e, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73, 
-		 0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2, 
-		 0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d, 
-		 0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00, 
-		 0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0x35, 0x2f, 
-		 0x00, 0x00, 0x00, 0xd0, 0x33, 0x9a, 0x9d, 0x00, 0x00, 0x00, 
-		 0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00, 
-		 0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00, 
-		 0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 
-		 0x82];
-	$data{"amber.png"} =
-		[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 
-		 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 
-		 0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25, 
-		 0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d, 
-		 0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x28, 0x04, 0x98, 0xcb, 
-		 0xd6, 0xe0, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73, 
-		 0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2, 
-		 0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d, 
-		 0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00, 
-		 0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0xe0, 0x50, 
-		 0x00, 0x00, 0x00, 0xa2, 0x7a, 0xda, 0x7e, 0x00, 0x00, 0x00, 
-		 0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00, 
-	  	 0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00, 
-		 0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 
-		 0x82];
-	$data{"emerald.png"} =
-		[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 
-		 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 
-		 0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25, 
-		 0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d, 
-		 0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x22, 0x2b, 0xc9, 0xf5, 
-		 0x03, 0x33, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73, 
-		 0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2, 
-		 0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d, 
-		 0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00, 
-		 0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0x1b, 0xea, 0x59, 
-		 0x0a, 0x0a, 0x0a, 0x0f, 0xba, 0x50, 0x83, 0x00, 0x00, 0x00, 
-		 0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00, 
-		 0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00, 
-		 0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 
-		 0x82];
-	$data{"snow.png"} =
-		[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 
-		 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 
-		 0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25, 
-		 0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d, 
-		 0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x1e, 0x1d, 0x75, 0xbc, 
-		 0xef, 0x55, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73, 
-		 0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2, 
-		 0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d, 
-		 0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00, 
-		 0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0xff, 0xff, 
-		 0x00, 0x00, 0x00, 0x55, 0xc2, 0xd3, 0x7e, 0x00, 0x00, 0x00, 
-		 0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00, 
-		 0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00, 
-		 0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 
-		 0x82];
-	$data{"glass.png"} =
-		[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 
-		 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 
-		 0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25, 
-		 0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d, 
-		 0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00, 
-		 0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0xff, 0xff, 
-		 0x00, 0x00, 0x00, 0x55, 0xc2, 0xd3, 0x7e, 0x00, 0x00, 0x00, 
-		 0x01, 0x74, 0x52, 0x4e, 0x53, 0x00, 0x40, 0xe6, 0xd8, 0x66, 
-		 0x00, 0x00, 0x00, 0x01, 0x62, 0x4b, 0x47, 0x44, 0x00, 0x88, 
-		 0x05, 0x1d, 0x48, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 
-		 0x73, 0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 
-		 0xd2, 0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 
-		 0x4d, 0x45, 0x07, 0xd2, 0x07, 0x13, 0x0f, 0x08, 0x19, 0xc4, 
-		 0x40, 0x56, 0x10, 0x00, 0x00, 0x00, 0x0a, 0x49, 0x44, 0x41, 
-		 0x54, 0x78, 0x9c, 0x63, 0x60, 0x00, 0x00, 0x00, 0x02, 0x00, 
-		 0x01, 0x48, 0xaf, 0xa4, 0x71, 0x00, 0x00, 0x00, 0x00, 0x49, 
-		 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82];
-	$data{"updown.png"} =
-		[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 
-		 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x0a, 
-		 0x00, 0x00, 0x00, 0x0e, 0x08, 0x06, 0x00, 0x00, 0x00, 0x16, 
-		 0xa3, 0x8d, 0xab, 0x00, 0x00, 0x00, 0x3c, 0x49, 0x44, 0x41, 
-		 0x54, 0x28, 0xcf, 0x63, 0x60, 0x40, 0x03, 0xff, 0xa1, 0x00, 
-		 0x5d, 0x9c, 0x11, 0x5d, 0x11, 0x8a, 0x24, 0x23, 0x23, 0x23, 
-		 0x86, 0x42, 0x6c, 0xa6, 0x20, 0x2b, 0x66, 0xc4, 0xa7, 0x08, 
-		 0x59, 0x31, 0x23, 0x21, 0x45, 0x30, 0xc0, 0xc4, 0x30, 0x60, 
-		 0x80, 0xfa, 0x6e, 0x24, 0x3e, 0x78, 0x48, 0x0a, 0x70, 0x62, 
-		 0xa2, 0x90, 0x81, 0xd8, 0x44, 0x01, 0x00, 0xe9, 0x5c, 0x2f, 
-		 0xf5, 0xe2, 0x9d, 0x0f, 0xf9, 0x00, 0x00, 0x00, 0x00, 0x49, 
-		 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82] if ($sort);
-	foreach (keys(%data))
-	{
-		open(PNG_HANDLE, ">", $_)
-			or die("ERROR: cannot create $_!\n");
-		binmode(PNG_HANDLE);
-		print(PNG_HANDLE map(chr,@{$data{$_}}));
-		close(PNG_HANDLE);
-	}
+    $data{"ruby.png"} =
+        [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00,
+         0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01,
+         0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25,
+         0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d,
+         0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x18, 0x10, 0x5d, 0x57,
+         0x34, 0x6e, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73,
+         0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2,
+         0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d,
+         0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00,
+         0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0x35, 0x2f,
+         0x00, 0x00, 0x00, 0xd0, 0x33, 0x9a, 0x9d, 0x00, 0x00, 0x00,
+         0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00,
+         0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00,
+         0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60,
+         0x82];
+    $data{"amber.png"} =
+        [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00,
+         0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01,
+         0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25,
+         0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d,
+         0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x28, 0x04, 0x98, 0xcb,
+         0xd6, 0xe0, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73,
+         0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2,
+         0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d,
+         0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00,
+         0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0xe0, 0x50,
+         0x00, 0x00, 0x00, 0xa2, 0x7a, 0xda, 0x7e, 0x00, 0x00, 0x00,
+         0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00,
+           0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00,
+         0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60,
+         0x82];
+    $data{"emerald.png"} =
+        [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00,
+         0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01,
+         0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25,
+         0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d,
+         0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x22, 0x2b, 0xc9, 0xf5,
+         0x03, 0x33, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73,
+         0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2,
+         0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d,
+         0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00,
+         0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0x1b, 0xea, 0x59,
+         0x0a, 0x0a, 0x0a, 0x0f, 0xba, 0x50, 0x83, 0x00, 0x00, 0x00,
+         0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00,
+         0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00,
+         0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60,
+         0x82];
+    $data{"snow.png"} =
+        [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00,
+         0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01,
+         0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25,
+         0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4d,
+         0x45, 0x07, 0xd2, 0x07, 0x11, 0x0f, 0x1e, 0x1d, 0x75, 0xbc,
+         0xef, 0x55, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73,
+         0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01, 0xd2,
+         0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d,
+         0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00,
+         0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0xff, 0xff,
+         0x00, 0x00, 0x00, 0x55, 0xc2, 0xd3, 0x7e, 0x00, 0x00, 0x00,
+         0x0a, 0x49, 0x44, 0x41, 0x54, 0x78, 0xda, 0x63, 0x60, 0x00,
+         0x00, 0x00, 0x02, 0x00, 0x01, 0xe5, 0x27, 0xde, 0xfc, 0x00,
+         0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60,
+         0x82];
+    $data{"glass.png"} =
+        [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00,
+         0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01,
+         0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x00, 0x00, 0x00, 0x25,
+         0xdb, 0x56, 0xca, 0x00, 0x00, 0x00, 0x04, 0x67, 0x41, 0x4d,
+         0x41, 0x00, 0x00, 0xb1, 0x8f, 0x0b, 0xfc, 0x61, 0x05, 0x00,
+         0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0xff, 0xff, 0xff,
+         0x00, 0x00, 0x00, 0x55, 0xc2, 0xd3, 0x7e, 0x00, 0x00, 0x00,
+         0x01, 0x74, 0x52, 0x4e, 0x53, 0x00, 0x40, 0xe6, 0xd8, 0x66,
+         0x00, 0x00, 0x00, 0x01, 0x62, 0x4b, 0x47, 0x44, 0x00, 0x88,
+         0x05, 0x1d, 0x48, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59,
+         0x73, 0x00, 0x00, 0x0b, 0x12, 0x00, 0x00, 0x0b, 0x12, 0x01,
+         0xd2, 0xdd, 0x7e, 0xfc, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49,
+         0x4d, 0x45, 0x07, 0xd2, 0x07, 0x13, 0x0f, 0x08, 0x19, 0xc4,
+         0x40, 0x56, 0x10, 0x00, 0x00, 0x00, 0x0a, 0x49, 0x44, 0x41,
+         0x54, 0x78, 0x9c, 0x63, 0x60, 0x00, 0x00, 0x00, 0x02, 0x00,
+         0x01, 0x48, 0xaf, 0xa4, 0x71, 0x00, 0x00, 0x00, 0x00, 0x49,
+         0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82];
+    $data{"updown.png"} =
+        [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00,
+         0x00, 0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x0a,
+         0x00, 0x00, 0x00, 0x0e, 0x08, 0x06, 0x00, 0x00, 0x00, 0x16,
+         0xa3, 0x8d, 0xab, 0x00, 0x00, 0x00, 0x3c, 0x49, 0x44, 0x41,
+         0x54, 0x28, 0xcf, 0x63, 0x60, 0x40, 0x03, 0xff, 0xa1, 0x00,
+         0x5d, 0x9c, 0x11, 0x5d, 0x11, 0x8a, 0x24, 0x23, 0x23, 0x23,
+         0x86, 0x42, 0x6c, 0xa6, 0x20, 0x2b, 0x66, 0xc4, 0xa7, 0x08,
+         0x59, 0x31, 0x23, 0x21, 0x45, 0x30, 0xc0, 0xc4, 0x30, 0x60,
+         0x80, 0xfa, 0x6e, 0x24, 0x3e, 0x78, 0x48, 0x0a, 0x70, 0x62,
+         0xa2, 0x90, 0x81, 0xd8, 0x44, 0x01, 0x00, 0xe9, 0x5c, 0x2f,
+         0xf5, 0xe2, 0x9d, 0x0f, 0xf9, 0x00, 0x00, 0x00, 0x00, 0x49,
+         0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82] if ($sort);
+    foreach (keys(%data))
+    {
+        open(PNG_HANDLE, ">", $_)
+            or die("ERROR: cannot create $_!\n");
+        binmode(PNG_HANDLE);
+        print(PNG_HANDLE map(chr,@{$data{$_}}));
+        close(PNG_HANDLE);
+    }
 }
 
 
@@ -3475,19 +3482,19 @@ sub write_png_files()
 
 sub write_htaccess_file()
 {
-	local *HTACCESS_HANDLE;
-	my $htaccess_data;
+    local *HTACCESS_HANDLE;
+    my $htaccess_data;
 
-	open(*HTACCESS_HANDLE, ">", ".htaccess")
-		or die("ERROR: cannot open .htaccess for writing!\n");
+    open(*HTACCESS_HANDLE, ">", ".htaccess")
+        or die("ERROR: cannot open .htaccess for writing!\n");
 
-	$htaccess_data = (<<"END_OF_HTACCESS")
+    $htaccess_data = (<<"END_OF_HTACCESS")
 AddEncoding x-gzip .html
 END_OF_HTACCESS
-	;
+    ;
 
-	print(HTACCESS_HANDLE $htaccess_data);
-	close(*HTACCESS_HANDLE);
+    print(HTACCESS_HANDLE $htaccess_data);
+    close(*HTACCESS_HANDLE);
 }
 
 
@@ -3500,558 +3507,558 @@ END_OF_HTACCESS
 
 sub write_css_file()
 {
-	local *CSS_HANDLE;
+    local *CSS_HANDLE;
 
-	# Check for a specified external style sheet file
-	## 检查指定的外部样式表文件
-	if ($css_filename)
-	{
-		# Simply copy that file
-		## 只需复制该文件
-		system("cp", $css_filename, "gcov.css")
-			and die("ERROR: cannot copy file $css_filename!\n");
-		return;
-	}
+    # Check for a specified external style sheet file
+    ## 检查指定的外部样式表文件
+    if ($css_filename)
+    {
+        # Simply copy that file
+        ## 只需复制该文件
+        system("cp", $css_filename, "gcov.css")
+            and die("ERROR: cannot copy file $css_filename!\n");
+        return;
+    }
 
-	open(CSS_HANDLE, ">", "gcov.css")
-		or die ("ERROR: cannot open gcov.css for writing!\n");
+    open(CSS_HANDLE, ">", "gcov.css")
+        or die ("ERROR: cannot open gcov.css for writing!\n");
 
 
-	# *************************************************************
+    # *************************************************************
 
-	my $css_data = ($_=<<"END_OF_CSS")
-	/* All views: initial background and text color */
-	body
-	{
-	  color: #000000;
-	  background-color: #FFFFFF;
-	}
-	
-	/* All views: standard link format*/
-	a:link
-	{
-	  color: #284FA8;
-	  text-decoration: underline;
-	}
-	
-	/* All views: standard link - visited format */
-	a:visited
-	{
-	  color: #00CB40;
-	  text-decoration: underline;
-	}
-	
-	/* All views: standard link - activated format */
-	a:active
-	{
-	  color: #FF0040;
-	  text-decoration: underline;
-	}
-	
-	/* All views: main title format */
-	td.title
-	{
-	  text-align: center;
-	  padding-bottom: 10px;
-	  font-family: sans-serif;
-	  font-size: 20pt;
-	  font-style: italic;
-	  font-weight: bold;
-	}
-	
-	/* All views: header item format */
-	td.headerItem
-	{
-	  text-align: right;
-	  padding-right: 6px;
-	  font-family: sans-serif;
-	  font-weight: bold;
-	  vertical-align: top;
-	  white-space: nowrap;
-	}
-	
-	/* All views: header item value format */
-	td.headerValue
-	{
-	  text-align: left;
-	  color: #284FA8;
-	  font-family: sans-serif;
-	  font-weight: bold;
-	  white-space: nowrap;
-	}
+    my $css_data = ($_=<<"END_OF_CSS")
+    /* All views: initial background and text color */
+    body
+    {
+      color: #000000;
+      background-color: #FFFFFF;
+    }
+    
+    /* All views: standard link format*/
+    a:link
+    {
+      color: #284FA8;
+      text-decoration: underline;
+    }
+    
+    /* All views: standard link - visited format */
+    a:visited
+    {
+      color: #00CB40;
+      text-decoration: underline;
+    }
+    
+    /* All views: standard link - activated format */
+    a:active
+    {
+      color: #FF0040;
+      text-decoration: underline;
+    }
+    
+    /* All views: main title format */
+    td.title
+    {
+      text-align: center;
+      padding-bottom: 10px;
+      font-family: sans-serif;
+      font-size: 20pt;
+      font-style: italic;
+      font-weight: bold;
+    }
+    
+    /* All views: header item format */
+    td.headerItem
+    {
+      text-align: right;
+      padding-right: 6px;
+      font-family: sans-serif;
+      font-weight: bold;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+    
+    /* All views: header item value format */
+    td.headerValue
+    {
+      text-align: left;
+      color: #284FA8;
+      font-family: sans-serif;
+      font-weight: bold;
+      white-space: nowrap;
+    }
 
-	/* All views: header item coverage table heading */
-	td.headerCovTableHead
-	{
-	  text-align: center;
-	  padding-right: 6px;
-	  padding-left: 6px;
-	  padding-bottom: 0px;
-	  font-family: sans-serif;
-	  font-size: 80%;
-	  white-space: nowrap;
-	}
-	
-	/* All views: header item coverage table entry */
-	td.headerCovTableEntry
-	{
-	  text-align: right;
-	  color: #284FA8;
-	  font-family: sans-serif;
-	  font-weight: bold;
-	  white-space: nowrap;
-	  padding-left: 12px;
-	  padding-right: 4px;
-	  background-color: #DAE7FE;
-	}
-	
-	/* All views: header item coverage table entry for high coverage rate */
-	td.headerCovTableEntryHi
-	{
-	  text-align: right;
-	  color: #000000;
-	  font-family: sans-serif;
-	  font-weight: bold;
-	  white-space: nowrap;
-	  padding-left: 12px;
-	  padding-right: 4px;
-	  background-color: #A7FC9D;
-	}
-	
-	/* All views: header item coverage table entry for medium coverage rate */
-	td.headerCovTableEntryMed
-	{
-	  text-align: right;
-	  color: #000000;
-	  font-family: sans-serif;
-	  font-weight: bold;
-	  white-space: nowrap;
-	  padding-left: 12px;
-	  padding-right: 4px;
-	  background-color: #FFEA20;
-	}
-	
-	/* All views: header item coverage table entry for ow coverage rate */
-	td.headerCovTableEntryLo
-	{
-	  text-align: right;
-	  color: #000000;
-	  font-family: sans-serif;
-	  font-weight: bold;
-	  white-space: nowrap;
-	  padding-left: 12px;
-	  padding-right: 4px;
-	  background-color: #FF0000;
-	}
-	
-	/* All views: header legend value for legend entry */
-	td.headerValueLeg
-	{
-	  text-align: left;
-	  color: #000000;
-	  font-family: sans-serif;
-	  font-size: 80%;
-	  white-space: nowrap;
-	  padding-top: 4px;
-	}
-	
-	/* All views: color of horizontal ruler */
-	td.ruler
-	{
-	  background-color: #6688D4;
-	}
-	
-	/* All views: version string format */
-	td.versionInfo
-	{
-	  text-align: center;
-	  padding-top: 2px;
-	  font-family: sans-serif;
-	  font-style: italic;
-	}
-	
-	/* Directory view/File view (all)/Test case descriptions:
-	   table headline format */
-	td.tableHead
-	{
-	  text-align: center;
-	  color: #FFFFFF;
-	  background-color: #6688D4;
-	  font-family: sans-serif;
-	  font-size: 120%;
-	  font-weight: bold;
-	  white-space: nowrap;
-	  padding-left: 4px;
-	  padding-right: 4px;
-	}
+    /* All views: header item coverage table heading */
+    td.headerCovTableHead
+    {
+      text-align: center;
+      padding-right: 6px;
+      padding-left: 6px;
+      padding-bottom: 0px;
+      font-family: sans-serif;
+      font-size: 80%;
+      white-space: nowrap;
+    }
+    
+    /* All views: header item coverage table entry */
+    td.headerCovTableEntry
+    {
+      text-align: right;
+      color: #284FA8;
+      font-family: sans-serif;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 4px;
+      background-color: #DAE7FE;
+    }
+    
+    /* All views: header item coverage table entry for high coverage rate */
+    td.headerCovTableEntryHi
+    {
+      text-align: right;
+      color: #000000;
+      font-family: sans-serif;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 4px;
+      background-color: #A7FC9D;
+    }
+    
+    /* All views: header item coverage table entry for medium coverage rate */
+    td.headerCovTableEntryMed
+    {
+      text-align: right;
+      color: #000000;
+      font-family: sans-serif;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 4px;
+      background-color: #FFEA20;
+    }
+    
+    /* All views: header item coverage table entry for ow coverage rate */
+    td.headerCovTableEntryLo
+    {
+      text-align: right;
+      color: #000000;
+      font-family: sans-serif;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 4px;
+      background-color: #FF0000;
+    }
+    
+    /* All views: header legend value for legend entry */
+    td.headerValueLeg
+    {
+      text-align: left;
+      color: #000000;
+      font-family: sans-serif;
+      font-size: 80%;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+    
+    /* All views: color of horizontal ruler */
+    td.ruler
+    {
+      background-color: #6688D4;
+    }
+    
+    /* All views: version string format */
+    td.versionInfo
+    {
+      text-align: center;
+      padding-top: 2px;
+      font-family: sans-serif;
+      font-style: italic;
+    }
+    
+    /* Directory view/File view (all)/Test case descriptions:
+       table headline format */
+    td.tableHead
+    {
+      text-align: center;
+      color: #FFFFFF;
+      background-color: #6688D4;
+      font-family: sans-serif;
+      font-size: 120%;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
 
-	span.tableHeadSort
-	{
-	  padding-right: 4px;
-	}
-	
-	/* Directory view/File view (all): filename entry format */
-	td.coverFile
-	{
-	  text-align: left;
-	  padding-left: 10px;
-	  padding-right: 20px; 
-	  color: #284FA8;
-	  background-color: #DAE7FE;
-	  font-family: monospace;
-	}
-	
-	/* Directory view/File view (all): bar-graph entry format*/
-	td.coverBar
-	{
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #DAE7FE;
-	}
-	
-	/* Directory view/File view (all): bar-graph outline color */
-	td.coverBarOutline
-	{
-	  background-color: #000000;
-	}
-	
-	/* Directory view/File view (all): percentage entry for files with
-	   high coverage rate */
-	td.coverPerHi
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #A7FC9D;
-	  font-weight: bold;
-	  font-family: sans-serif;
-	}
-	
-	/* Directory view/File view (all): line count entry for files with
-	   high coverage rate */
-	td.coverNumHi
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #A7FC9D;
-	  white-space: nowrap;
-	  font-family: sans-serif;
-	}
-	
-	/* Directory view/File view (all): percentage entry for files with
-	   medium coverage rate */
-	td.coverPerMed
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #FFEA20;
-	  font-weight: bold;
-	  font-family: sans-serif;
-	}
-	
-	/* Directory view/File view (all): line count entry for files with
-	   medium coverage rate */
-	td.coverNumMed
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #FFEA20;
-	  white-space: nowrap;
-	  font-family: sans-serif;
-	}
-	
-	/* Directory view/File view (all): percentage entry for files with
-	   low coverage rate */
-	td.coverPerLo
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #FF0000;
-	  font-weight: bold;
-	  font-family: sans-serif;
-	}
-	
-	/* Directory view/File view (all): line count entry for files with
-	   low coverage rate */
-	td.coverNumLo
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #FF0000;
-	  white-space: nowrap;
-	  font-family: sans-serif;
-	}
-	
-	/* File view (all): "show/hide details" link format */
-	a.detail:link
-	{
-	  color: #B8D0FF;
-	  font-size:80%;
-	}
-	
-	/* File view (all): "show/hide details" link - visited format */
-	a.detail:visited
-	{
-	  color: #B8D0FF;
-	  font-size:80%;
-	}
-	
-	/* File view (all): "show/hide details" link - activated format */
-	a.detail:active
-	{
-	  color: #FFFFFF;
-	  font-size:80%;
-	}
-	
-	/* File view (detail): test name entry */
-	td.testName
-	{
-	  text-align: right;
-	  padding-right: 10px;
-	  background-color: #DAE7FE;
-	  font-family: sans-serif;
-	}
-	
-	/* File view (detail): test percentage entry */
-	td.testPer
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px; 
-	  background-color: #DAE7FE;
-	  font-family: sans-serif;
-	}
-	
-	/* File view (detail): test lines count entry */
-	td.testNum
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px; 
-	  background-color: #DAE7FE;
-	  font-family: sans-serif;
-	}
-	
-	/* Test case descriptions: test name format*/
-	dt
-	{
-	  font-family: sans-serif;
-	  font-weight: bold;
-	}
-	
-	/* Test case descriptions: description table body */
-	td.testDescription
-	{
-	  padding-top: 10px;
-	  padding-left: 30px;
-	  padding-bottom: 10px;
-	  padding-right: 30px;
-	  background-color: #DAE7FE;
-	}
-	
-	/* Source code view: function entry */
-	td.coverFn
-	{
-	  text-align: left;
-	  padding-left: 10px;
-	  padding-right: 20px; 
-	  color: #284FA8;
-	  background-color: #DAE7FE;
-	  font-family: monospace;
-	}
+    span.tableHeadSort
+    {
+      padding-right: 4px;
+    }
+    
+    /* Directory view/File view (all): filename entry format */
+    td.coverFile
+    {
+      text-align: left;
+      padding-left: 10px;
+      padding-right: 20px;
+      color: #284FA8;
+      background-color: #DAE7FE;
+      font-family: monospace;
+    }
+    
+    /* Directory view/File view (all): bar-graph entry format*/
+    td.coverBar
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #DAE7FE;
+    }
+    
+    /* Directory view/File view (all): bar-graph outline color */
+    td.coverBarOutline
+    {
+      background-color: #000000;
+    }
+    
+    /* Directory view/File view (all): percentage entry for files with
+       high coverage rate */
+    td.coverPerHi
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #A7FC9D;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
+    
+    /* Directory view/File view (all): line count entry for files with
+       high coverage rate */
+    td.coverNumHi
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #A7FC9D;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+    
+    /* Directory view/File view (all): percentage entry for files with
+       medium coverage rate */
+    td.coverPerMed
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #FFEA20;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
+    
+    /* Directory view/File view (all): line count entry for files with
+       medium coverage rate */
+    td.coverNumMed
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #FFEA20;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+    
+    /* Directory view/File view (all): percentage entry for files with
+       low coverage rate */
+    td.coverPerLo
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #FF0000;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
+    
+    /* Directory view/File view (all): line count entry for files with
+       low coverage rate */
+    td.coverNumLo
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #FF0000;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+    
+    /* File view (all): "show/hide details" link format */
+    a.detail:link
+    {
+      color: #B8D0FF;
+      font-size:80%;
+    }
+    
+    /* File view (all): "show/hide details" link - visited format */
+    a.detail:visited
+    {
+      color: #B8D0FF;
+      font-size:80%;
+    }
+    
+    /* File view (all): "show/hide details" link - activated format */
+    a.detail:active
+    {
+      color: #FFFFFF;
+      font-size:80%;
+    }
+    
+    /* File view (detail): test name entry */
+    td.testName
+    {
+      text-align: right;
+      padding-right: 10px;
+      background-color: #DAE7FE;
+      font-family: sans-serif;
+    }
+    
+    /* File view (detail): test percentage entry */
+    td.testPer
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #DAE7FE;
+      font-family: sans-serif;
+    }
+    
+    /* File view (detail): test lines count entry */
+    td.testNum
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #DAE7FE;
+      font-family: sans-serif;
+    }
+    
+    /* Test case descriptions: test name format*/
+    dt
+    {
+      font-family: sans-serif;
+      font-weight: bold;
+    }
+    
+    /* Test case descriptions: description table body */
+    td.testDescription
+    {
+      padding-top: 10px;
+      padding-left: 30px;
+      padding-bottom: 10px;
+      padding-right: 30px;
+      background-color: #DAE7FE;
+    }
+    
+    /* Source code view: function entry */
+    td.coverFn
+    {
+      text-align: left;
+      padding-left: 10px;
+      padding-right: 20px;
+      color: #284FA8;
+      background-color: #DAE7FE;
+      font-family: monospace;
+    }
 
-	/* Source code view: function entry zero count*/
-	td.coverFnLo
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #FF0000;
-	  font-weight: bold;
-	  font-family: sans-serif;
-	}
+    /* Source code view: function entry zero count*/
+    td.coverFnLo
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #FF0000;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
 
-	/* Source code view: function entry nonzero count*/
-	td.coverFnHi
-	{
-	  text-align: right;
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  background-color: #DAE7FE;
-	  font-weight: bold;
-	  font-family: sans-serif;
-	}
+    /* Source code view: function entry nonzero count*/
+    td.coverFnHi
+    {
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #DAE7FE;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
 
-	/* Source code view: source code format */
-	pre.source
-	{
-	  font-family: monospace;
-	  white-space: pre;
-	  margin-top: 2px;
-	}
-	/*竖列，行数*/
-	/* Source code view: line number format */
-	span.lineNum
-	{
-	  background-color: #EFE383;
-	}
-	
-	/* Source code view: format for lines which were executed */
-	td.lineCov,
-	span.lineCov
-	{
-	  background-color: #CAD7FE;
-	}
-	
-	/* Source code view: format for Cov legend */
-	span.coverLegendCov
-	{
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  padding-bottom: 2px;
-	  background-color: #CAD7FE;
-	}
-	
-	/* Source code view: format for lines which were not executed */
-	td.lineNoCov,
-	span.lineNoCov
-	{
-	  background-color: #FF6230;
-	}
-	
-	/* Source code view: format for NoCov legend */
-	span.coverLegendNoCov
-	{
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  padding-bottom: 2px;
-	  background-color: #FF6230;
-	}
-	
-	/* Source code view (function table): standard link - visited format */
-	td.lineNoCov > a:visited,
-	td.lineCov > a:visited
-	{  
-	  color: black;
-	  text-decoration: underline;
-	}  
-	
-	/* Source code view: format for lines which were executed only in a
-	   previous version */
-	span.lineDiffCov
-	{
-	  background-color: #B5F7AF;
-	}
-	
-	/* Source code view: format for branches which were executed
-	 * and taken */
-	span.branchCov
-	{
-	  background-color: #CAD7FE;
-	}
+    /* Source code view: source code format */
+    pre.source
+    {
+      font-family: monospace;
+      white-space: pre;
+      margin-top: 2px;
+    }
+    /*竖列，行数*/
+    /* Source code view: line number format */
+    span.lineNum
+    {
+      background-color: #EFE383;
+    }
+    
+    /* Source code view: format for lines which were executed */
+    td.lineCov,
+    span.lineCov
+    {
+      background-color: #CAD7FE;
+    }
+    
+    /* Source code view: format for Cov legend */
+    span.coverLegendCov
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 2px;
+      background-color: #CAD7FE;
+    }
+    
+    /* Source code view: format for lines which were not executed */
+    td.lineNoCov,
+    span.lineNoCov
+    {
+      background-color: #FF6230;
+    }
+    
+    /* Source code view: format for NoCov legend */
+    span.coverLegendNoCov
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 2px;
+      background-color: #FF6230;
+    }
+    
+    /* Source code view (function table): standard link - visited format */
+    td.lineNoCov > a:visited,
+    td.lineCov > a:visited
+    {
+      color: black;
+      text-decoration: underline;
+    }
+    
+    /* Source code view: format for lines which were executed only in a
+       previous version */
+    span.lineDiffCov
+    {
+      background-color: #B5F7AF;
+    }
+    
+    /* Source code view: format for branches which were executed
+     * and taken */
+    span.branchCov
+    {
+      background-color: #CAD7FE;
+    }
 
-	/* Source code view: format for branches which were executed
-	 * but not taken */
-	span.branchNoCov
-	{
-	  background-color: #FF6230;
-	}
+    /* Source code view: format for branches which were executed
+     * but not taken */
+    span.branchNoCov
+    {
+      background-color: #FF6230;
+    }
 
-	/* Source code view: format for branches which were not executed */
-	span.branchNoExec
-	{
-	  background-color: #FF6230;
-	}
+    /* Source code view: format for branches which were not executed */
+    span.branchNoExec
+    {
+      background-color: #FF6230;
+    }
 
-	/* Source code view: format for the source code heading line */
-	pre.sourceHeading
-	{
-	  white-space: pre;
-	  font-family: monospace;
-	  font-weight: bold;
-	  margin: 0px;
-	}
+    /* Source code view: format for the source code heading line */
+    pre.sourceHeading
+    {
+      white-space: pre;
+      font-family: monospace;
+      font-weight: bold;
+      margin: 0px;
+    }
 
-	/* All views: header legend value for low rate */
-	td.headerValueLegL
-	{
-	  font-family: sans-serif;
-	  text-align: center;
-	  white-space: nowrap;
-	  padding-left: 4px;
-	  padding-right: 2px;
-	  background-color: #FF0000;
-	  font-size: 80%;
-	}
+    /* All views: header legend value for low rate */
+    td.headerValueLegL
+    {
+      font-family: sans-serif;
+      text-align: center;
+      white-space: nowrap;
+      padding-left: 4px;
+      padding-right: 2px;
+      background-color: #FF0000;
+      font-size: 80%;
+    }
 
-	/* All views: header legend value for med rate */
-	td.headerValueLegM
-	{
-	  font-family: sans-serif;
-	  text-align: center;
-	  white-space: nowrap;
-	  padding-left: 2px;
-	  padding-right: 2px;
-	  background-color: #FFEA20;
-	  font-size: 80%;
-	}
+    /* All views: header legend value for med rate */
+    td.headerValueLegM
+    {
+      font-family: sans-serif;
+      text-align: center;
+      white-space: nowrap;
+      padding-left: 2px;
+      padding-right: 2px;
+      background-color: #FFEA20;
+      font-size: 80%;
+    }
 
-	/* All views: header legend value for hi rate */
-	td.headerValueLegH
-	{
-	  font-family: sans-serif;
-	  text-align: center;
-	  white-space: nowrap;
-	  padding-left: 2px;
-	  padding-right: 4px;
-	  background-color: #A7FC9D;
-	  font-size: 80%;
-	}
+    /* All views: header legend value for hi rate */
+    td.headerValueLegH
+    {
+      font-family: sans-serif;
+      text-align: center;
+      white-space: nowrap;
+      padding-left: 2px;
+      padding-right: 4px;
+      background-color: #A7FC9D;
+      font-size: 80%;
+    }
 
-	/* All views except source code view: legend format for low coverage */
-	span.coverLegendCovLo
-	{
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  padding-top: 2px;
-	  background-color: #FF0000;
-	}
+    /* All views except source code view: legend format for low coverage */
+    span.coverLegendCovLo
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 2px;
+      background-color: #FF0000;
+    }
 
-	/* All views except source code view: legend format for med coverage */
-	span.coverLegendCovMed
-	{
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  padding-top: 2px;
-	  background-color: #FFEA20;
-	}
+    /* All views except source code view: legend format for med coverage */
+    span.coverLegendCovMed
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 2px;
+      background-color: #FFEA20;
+    }
 
-	/* All views except source code view: legend format for hi coverage */
-	span.coverLegendCovHi
-	{
-	  padding-left: 10px;
-	  padding-right: 10px;
-	  padding-top: 2px;
-	  background-color: #A7FC9D;
-	}
+    /* All views except source code view: legend format for hi coverage */
+    span.coverLegendCovHi
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 2px;
+      background-color: #A7FC9D;
+    }
 END_OF_CSS
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 
 
-	# Remove leading tab from all lines
-	##删除所有行的前导符
-	$css_data =~ s/^\t//gm;
+    # Remove leading tab from all lines
+    ##删除所有行的前导符
+    $css_data =~ s/^\t//gm;
 
-	print(CSS_HANDLE $css_data);
+    print(CSS_HANDLE $css_data);
 
-	close(CSS_HANDLE);
+    close(CSS_HANDLE);
 }
 
 
@@ -4065,61 +4072,61 @@ END_OF_CSS
 
 sub get_bar_graph_code($$$)
 {
-	my ($base_dir, $found, $hit) = @_;
-	my $rate;
-	my $alt;
-	my $width;
-	my $remainder;
-	my $png_name;
-	my $graph_code;
+    my ($base_dir, $found, $hit) = @_;
+    my $rate;
+    my $alt;
+    my $width;
+    my $remainder;
+    my $png_name;
+    my $graph_code;
 
-	# Check number of instrumented lines
-	## 检查检测线数
-	if ($_[1] == 0) { return ""; }
+    # Check number of instrumented lines
+    ## 检查检测线数
+    if ($_[1] == 0) { return ""; }
 
-	$alt		= rate($hit, $found, "%");
-	$width		= rate($hit, $found, undef, 0);
-	$remainder	= 100 - $width;
+    $alt        = rate($hit, $found, "%");
+    $width        = rate($hit, $found, undef, 0);
+    $remainder    = 100 - $width;
 
-	# Decide which .png file to use
-	## 决定使用哪个.png文件
-	$png_name = $rate_png[classify_rate($found, $hit, $med_limit,
-					    $hi_limit)];
+    # Decide which .png file to use
+    ## 决定使用哪个.png文件
+    $png_name = $rate_png[classify_rate($found, $hit, $med_limit,
+                        $hi_limit)];
 
-	if ($width == 0)
-	{
-		# Zero coverage
-		## 零覆盖
-		$graph_code = (<<END_OF_HTML)
-	        <table border=0 cellspacing=0 cellpadding=1><tr><td class="coverBarOutline"><img src="$_[0]snow.png" width=100 height=10 alt="$alt"></td></tr></table>
+    if ($width == 0)
+    {
+        # Zero coverage
+        ## 零覆盖
+        $graph_code = (<<END_OF_HTML)
+            <table border=0 cellspacing=0 cellpadding=1><tr><td class="coverBarOutline"><img src="$_[0]snow.png" width=100 height=10 alt="$alt"></td></tr></table>
 END_OF_HTML
-		;
-	}
-	elsif ($width == 100)
-	{
-		# Full coverage
-		## 全覆盖
-		$graph_code = (<<END_OF_HTML)
-		<table border=0 cellspacing=0 cellpadding=1><tr><td class="coverBarOutline"><img src="$_[0]$png_name" width=100 height=10 alt="$alt"></td></tr></table>
+        ;
+    }
+    elsif ($width == 100)
+    {
+        # Full coverage
+        ## 全覆盖
+        $graph_code = (<<END_OF_HTML)
+        <table border=0 cellspacing=0 cellpadding=1><tr><td class="coverBarOutline"><img src="$_[0]$png_name" width=100 height=10 alt="$alt"></td></tr></table>
 END_OF_HTML
-		;
-	}
-	else
-	{
-		# Positive coverage
-		## 大于0 小于100 的覆盖
-		$graph_code = (<<END_OF_HTML)
-		<table border=0 cellspacing=0 cellpadding=1><tr><td class="coverBarOutline"><img src="$_[0]$png_name" width=$width height=10 alt="$alt"><img src="$_[0]snow.png" width=$remainder height=10 alt="$alt"></td></tr></table>
+        ;
+    }
+    else
+    {
+        # Positive coverage
+        ## 大于0 小于100 的覆盖
+        $graph_code = (<<END_OF_HTML)
+        <table border=0 cellspacing=0 cellpadding=1><tr><td class="coverBarOutline"><img src="$_[0]$png_name" width=$width height=10 alt="$alt"><img src="$_[0]snow.png" width=$remainder height=10 alt="$alt"></td></tr></table>
 END_OF_HTML
-		;
-	}
+        ;
+    }
 
-	# Remove leading tabs from all lines
-	## 从所有行中删除前导制表符
-	$graph_code =~ s/^\t+//gm;
-	chomp($graph_code);
+    # Remove leading tabs from all lines
+    ## 从所有行中删除前导制表符
+    $graph_code =~ s/^\t+//gm;
+    chomp($graph_code);
 
-	return($graph_code);
+    return($graph_code);
 }
 
 #
@@ -4130,19 +4137,19 @@ END_OF_HTML
 
 sub classify_rate($$$$)
 {
-	my ($found, $hit, $med, $hi) = @_;
-	my $rate;
+    my ($found, $hit, $med, $hi) = @_;
+    my $rate;
 
-	if ($found == 0) {
-		return 2;
-	}
-	$rate = rate($hit, $found);
-	if ($rate < $med) {
-		return 0;
-	} elsif ($rate < $hi) {
-		return 1;
-	}
-	return 2;
+    if ($found == 0) {
+        return 2;
+    }
+    $rate = rate($hit, $found);
+    if ($rate < $med) {
+        return 0;
+    } elsif ($rate < $hi) {
+        return 1;
+    }
+    return 2;
 }
 
 
@@ -4156,15 +4163,15 @@ sub classify_rate($$$$)
 
 sub write_html(*$)
 {
-	local *HTML_HANDLE = $_[0];
-	my $html_code = $_[1];
+    local *HTML_HANDLE = $_[0];
+    my $html_code = $_[1];
 
-	# Remove leading tab from all lines
-	## 从所有行中删除前导制表符
-	$html_code =~ s/^\t//gm;
+    # Remove leading tab from all lines
+    ## 从所有行中删除前导制表符
+    $html_code =~ s/^\t//gm;
 
-	print(HTML_HANDLE $html_code)
-		or die("ERROR: cannot write HTML data ($!)\n");
+    print(HTML_HANDLE $html_code)
+        or die("ERROR: cannot write HTML data ($!)\n");
 }
 
 
@@ -4179,15 +4186,15 @@ sub write_html(*$)
 
 sub write_html_prolog(*$$)
 {
-	my $basedir = $_[1];
-	my $pagetitle = $_[2];
-	my $prolog;
+    my $basedir = $_[1];
+    my $pagetitle = $_[2];
+    my $prolog;
 
-	$prolog = $html_prolog;
-	$prolog =~ s/\@pagetitle\@/$pagetitle/g;
-	$prolog =~ s/\@basedir\@/$basedir/g;
+    $prolog = $html_prolog;
+    $prolog =~ s/\@pagetitle\@/$pagetitle/g;
+    $prolog =~ s/\@basedir\@/$basedir/g;
 
-	write_html($_[0], $prolog);
+    write_html($_[0], $prolog);
 }
 
 
@@ -4199,20 +4206,20 @@ sub write_html_prolog(*$$)
 
 sub write_header_prolog(*$)
 {
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	  <table width="100%" border=0 cellspacing=0 cellpadding=0>
-	    <tr><td class="title">$title</td></tr>
-	    <tr><td class="ruler"><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
+    write_html($_[0], <<END_OF_HTML)
+      <table width="100%" border=0 cellspacing=0 cellpadding=0>
+        <tr><td class="title">$title</td></tr>
+        <tr><td class="ruler"><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
 
-	    <tr>
-	      <td width="100%">
-	        <table cellpadding=1 border=0 width="100%">
+        <tr>
+          <td width="100%">
+            <table cellpadding=1 border=0 width="100%">
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -4224,33 +4231,33 @@ END_OF_HTML
 
 sub write_header_line(*@)
 {
-	my ($handle, @content) = @_;
-	my $entry;
+    my ($handle, @content) = @_;
+    my $entry;
 
-	write_html($handle, "          <tr>\n");
-	foreach $entry (@content) {
-		my ($width, $class, $text, $colspan) = @{$entry};
+    write_html($handle, "          <tr>\n");
+    foreach $entry (@content) {
+        my ($width, $class, $text, $colspan) = @{$entry};
 
-		if (defined($width)) {
-			$width = " width=\"$width\"";
-		} else {
-			$width = "";
-		}
-		if (defined($class)) {
-			$class = " class=\"$class\"";
-		} else {
-			$class = "";
-		}
-		if (defined($colspan)) {
-			$colspan = " colspan=\"$colspan\"";
-		} else {
-			$colspan = "";
-		}
-		$text = "" if (!defined($text));
-		write_html($handle,
-			   "            <td$width$class$colspan>$text</td>\n");
-	}
-	write_html($handle, "          </tr>\n");
+        if (defined($width)) {
+            $width = " width=\"$width\"";
+        } else {
+            $width = "";
+        }
+        if (defined($class)) {
+            $class = " class=\"$class\"";
+        } else {
+            $class = "";
+        }
+        if (defined($colspan)) {
+            $colspan = " colspan=\"$colspan\"";
+        } else {
+            $colspan = "";
+        }
+        $text = "" if (!defined($text));
+        write_html($handle,
+               "            <td$width$class$colspan>$text</td>\n");
+    }
+    write_html($handle, "          </tr>\n");
 }
 
 
@@ -4262,21 +4269,21 @@ sub write_header_line(*@)
 
 sub write_header_epilog(*$)
 {
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	          <tr><td><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
-	        </table>
-	      </td>
-	    </tr>
+    write_html($_[0], <<END_OF_HTML)
+              <tr><td><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
+            </table>
+          </td>
+        </tr>
 
-	    <tr><td class="ruler"><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
-	  </table>
+        <tr><td class="ruler"><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
+      </table>
 
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -4288,134 +4295,134 @@ END_OF_HTML
 
 sub write_file_table_prolog(*$@)
 {
-	my ($handle, $file_heading, @columns) = @_;
-	my $num_columns = 0;
-	my $file_width;
-	my $col;
-	my $width;
+    my ($handle, $file_heading, @columns) = @_;
+    my $num_columns = 0;
+    my $file_width;
+    my $col;
+    my $width;
 
-	$width = 20 if (scalar(@columns) == 1);
-	$width = 10 if (scalar(@columns) == 2);
-	$width = 8 if (scalar(@columns) > 2);
+    $width = 20 if (scalar(@columns) == 1);
+    $width = 10 if (scalar(@columns) == 2);
+    $width = 8 if (scalar(@columns) > 2);
 
-	foreach $col (@columns) {
-		my ($heading, $cols) = @{$col};
+    foreach $col (@columns) {
+        my ($heading, $cols) = @{$col};
 
-		$num_columns += $cols;
-	}
-	$file_width = 100 - $num_columns * $width;
+        $num_columns += $cols;
+    }
+    $file_width = 100 - $num_columns * $width;
 
-	# Table definition ## 表定义
-	write_html($handle, <<END_OF_HTML);
-	  <center>
-	  <table width="80%" cellpadding=1 cellspacing=1 border=0>
+    # Table definition ## 表定义
+    write_html($handle, <<END_OF_HTML);
+      <center>
+      <table width="80%" cellpadding=1 cellspacing=1 border=0>
 
-	    <tr>
-	      <td width="$file_width%"><br></td>
+        <tr>
+          <td width="$file_width%"><br></td>
 END_OF_HTML
-	# Empty first row ## 第一行空
-	foreach $col (@columns) {
-		my ($heading, $cols) = @{$col};
+    # Empty first row ## 第一行空
+    foreach $col (@columns) {
+        my ($heading, $cols) = @{$col};
 
-		while ($cols-- > 0) {
-			write_html($handle, <<END_OF_HTML);
-	      <td width="$width%"></td>
+        while ($cols-- > 0) {
+            write_html($handle, <<END_OF_HTML);
+          <td width="$width%"></td>
 END_OF_HTML
-		}
-	}
-	# Next row ## 下一行
-	write_html($handle, <<END_OF_HTML);
-	    </tr>
+        }
+    }
+    # Next row ## 下一行
+    write_html($handle, <<END_OF_HTML);
+        </tr>
 
-	    <tr>
-	      <td class="tableHead">$file_heading</td>
+        <tr>
+          <td class="tableHead">$file_heading</td>
 END_OF_HTML
-	# Heading row ##首行
-	foreach $col (@columns) {
-		my ($heading, $cols) = @{$col};
-		my $colspan = "";
+    # Heading row ##首行
+    foreach $col (@columns) {
+        my ($heading, $cols) = @{$col};
+        my $colspan = "";
 
-		$colspan = " colspan=$cols" if ($cols > 1);
-		write_html($handle, <<END_OF_HTML);
-	      <td class="tableHead"$colspan>$heading</td>
+        $colspan = " colspan=$cols" if ($cols > 1);
+        write_html($handle, <<END_OF_HTML);
+          <td class="tableHead"$colspan>$heading</td>
 END_OF_HTML
-	}
-	write_html($handle, <<END_OF_HTML);
-	    </tr>
+    }
+    write_html($handle, <<END_OF_HTML);
+        </tr>
 END_OF_HTML
 }
 
 
 # write_file_table_entry(handle, base_dir, filename, page_link,
-#			 ([ found, hit, med_limit, hi_limit, graph ], ..)
+#             ([ found, hit, med_limit, hi_limit, graph ], ..)
 #
 # Write an entry of the file table.
 ## 写入文件表的一个条目。
 
 sub write_file_table_entry(*$$$@)
 {
-	my ($handle, $base_dir, $filename, $page_link, @entries) = @_;
-	my $file_code;
-	my $entry;
-	my $esc_filename = escape_html($filename);
+    my ($handle, $base_dir, $filename, $page_link, @entries) = @_;
+    my $file_code;
+    my $entry;
+    my $esc_filename = escape_html($filename);
 
-	# Add link to source if provided
-	## 添加指向源的链接（如果提供）
-	if (defined($page_link) && $page_link ne "") {
-		$file_code = "<a href=\"$page_link\">$esc_filename</a>";
-	} else {
-		$file_code = $esc_filename;
-	}
+    # Add link to source if provided
+    ## 添加指向源的链接（如果提供）
+    if (defined($page_link) && $page_link ne "") {
+        $file_code = "<a href=\"$page_link\">$esc_filename</a>";
+    } else {
+        $file_code = $esc_filename;
+    }
 
-	# First column: filename
-	## 第一列：文件名
-	write_html($handle, <<END_OF_HTML);
-	    <tr>
-	      <td class="coverFile">$file_code</td>
+    # First column: filename
+    ## 第一列：文件名
+    write_html($handle, <<END_OF_HTML);
+        <tr>
+          <td class="coverFile">$file_code</td>
 END_OF_HTML
-	# Columns as defined
-	## 定义的列
-	foreach $entry (@entries) {
-		my ($found, $hit, $med, $hi, $graph) = @{$entry};
-		my $bar_graph;
-		my $class;
-		my $rate;
+    # Columns as defined
+    ## 定义的列
+    foreach $entry (@entries) {
+        my ($found, $hit, $med, $hi, $graph) = @{$entry};
+        my $bar_graph;
+        my $class;
+        my $rate;
 
-		# Generate bar graph if requested
-		## 如果请求，生成条形图
-		if ($graph) {
-			$bar_graph = get_bar_graph_code($base_dir, $found,
-							$hit);
-			write_html($handle, <<END_OF_HTML);
-	      <td class="coverBar" align="center">
-	        $bar_graph
-	      </td>
+        # Generate bar graph if requested
+        ## 如果请求，生成条形图
+        if ($graph) {
+            $bar_graph = get_bar_graph_code($base_dir, $found,
+                            $hit);
+            write_html($handle, <<END_OF_HTML);
+          <td class="coverBar" align="center">
+            $bar_graph
+          </td>
 END_OF_HTML
-		}
-		# Get rate color and text
-		## 获取速率颜色和文本
-		if ($found == 0) {
-			$rate = "-";
-			$class = "Hi";
-		} else {
-			$rate = rate($hit, $found, "&nbsp;%");
-			$class = $rate_name[classify_rate($found, $hit,
-					    $med, $hi)];
-		}
-		if ($opt_missed) {
-			# Show negative number of items without coverage
-			## 显示没有覆盖范围的负项目数
-			$hit = -($found - $hit);
-		}
-		write_html($handle, <<END_OF_HTML);
-	      <td class="coverPer$class">$rate</td>
-	      <td class="coverNum$class">$hit / $found</td>
-END_OF_HTML
-	}
-	# End of row
-	# 行结束
+        }
+        # Get rate color and text
+        ## 获取速率颜色和文本
+        if ($found == 0) {
+            $rate = "-";
+            $class = "Hi";
+        } else {
+            $rate = rate($hit, $found, "&nbsp;%");
+            $class = $rate_name[classify_rate($found, $hit,
+                        $med, $hi)];
+        }
+        if ($opt_missed) {
+            # Show negative number of items without coverage
+            ## 显示没有覆盖范围的负项目数
+            $hit = -($found - $hit);
+        }
         write_html($handle, <<END_OF_HTML);
-	    </tr>
+          <td class="coverPer$class">$rate</td>
+          <td class="coverNum$class">$hit / $found</td>
+END_OF_HTML
+    }
+    # End of row
+    # 行结束
+        write_html($handle, <<END_OF_HTML);
+        </tr>
 END_OF_HTML
 }
 
@@ -4428,36 +4435,36 @@ END_OF_HTML
 
 sub write_file_table_detail_entry(*$@)
 {
-	my ($handle, $test, @entries) = @_;
-	my $entry;
+    my ($handle, $test, @entries) = @_;
+    my $entry;
 
-	if ($test eq "") {
-		$test = "<span style=\"font-style:italic\">&lt;unnamed&gt;</span>";
-	} elsif ($test =~ /^(.*),diff$/) {
-		$test = $1." (converted)";
-	}
-	# Testname ## 测试名称
-	write_html($handle, <<END_OF_HTML);
-	    <tr>
-	      <td class="testName" colspan=2>$test</td>
+    if ($test eq "") {
+        $test = "<span style=\"font-style:italic\">&lt;unnamed&gt;</span>";
+    } elsif ($test =~ /^(.*),diff$/) {
+        $test = $1." (converted)";
+    }
+    # Testname ## 测试名称
+    write_html($handle, <<END_OF_HTML);
+        <tr>
+          <td class="testName" colspan=2>$test</td>
 END_OF_HTML
-	# Test data ## 测试数据
-	foreach $entry (@entries) {
-		my ($found, $hit) = @{$entry};
-		my $rate = rate($hit, $found, "&nbsp;%");
-
-		write_html($handle, <<END_OF_HTML);
-	      <td class="testPer">$rate</td>
-	      <td class="testNum">$hit&nbsp;/&nbsp;$found</td>
-END_OF_HTML
-	}
+    # Test data ## 测试数据
+    foreach $entry (@entries) {
+        my ($found, $hit) = @{$entry};
+        my $rate = rate($hit, $found, "&nbsp;%");
 
         write_html($handle, <<END_OF_HTML);
-	    </tr>
+          <td class="testPer">$rate</td>
+          <td class="testNum">$hit&nbsp;/&nbsp;$found</td>
+END_OF_HTML
+    }
+
+        write_html($handle, <<END_OF_HTML);
+        </tr>
 
 END_OF_HTML
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -4469,17 +4476,17 @@ END_OF_HTML
 
 sub write_file_table_epilog(*)
 {
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	  </table>
-	  </center>
-	  <br>
+    write_html($_[0], <<END_OF_HTML)
+      </table>
+      </center>
+      <br>
 
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -4491,27 +4498,27 @@ END_OF_HTML
 
 sub write_test_table_prolog(*$)
 {
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	  <center>
-	  <table width="80%" cellpadding=2 cellspacing=1 border=0>
+    write_html($_[0], <<END_OF_HTML)
+      <center>
+      <table width="80%" cellpadding=2 cellspacing=1 border=0>
 
-	    <tr>
-	      <td><br></td>
-	    </tr>
+        <tr>
+          <td><br></td>
+        </tr>
 
-	    <tr>
-	      <td class="tableHead">$_[1]</td>
-	    </tr>
+        <tr>
+          <td class="tableHead">$_[1]</td>
+        </tr>
 
-	    <tr>
-	      <td class="testDescription">
-	        <dl>
+        <tr>
+          <td class="testDescription">
+            <dl>
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -4523,15 +4530,15 @@ END_OF_HTML
 
 sub write_test_table_entry(*$$)
 {
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
+    write_html($_[0], <<END_OF_HTML)
           <dt>$_[1]<a name="$_[1]">&nbsp;</a></dt>
           <dd>$_[2]<br><br></dd>
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -4543,31 +4550,31 @@ END_OF_HTML
 
 sub write_test_table_epilog(*)
 {
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	        </dl>
-	      </td>
-	    </tr>
-	  </table>
-	  </center>
-	  <br>
+    write_html($_[0], <<END_OF_HTML)
+            </dl>
+          </td>
+        </tr>
+      </table>
+      </center>
+      <br>
 
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
 sub fmt_centered($$)
 {
-	my ($width, $text) = @_;
-	my $w0 = length($text);
-	my $w1 = $width > $w0 ? int(($width - $w0) / 2) : 0;
-	my $w2 = $width > $w0 ? $width - $w0 - $w1 : 0;
+    my ($width, $text) = @_;
+    my $w0 = length($text);
+    my $w1 = $width > $w0 ? int(($width - $w0) / 2) : 0;
+    my $w2 = $width > $w0 ? $width - $w0 - $w1 : 0;
 
-	return (" "x$w1).$text.(" "x$w2);
+    return (" "x$w1).$text.(" "x$w2);
 }
 
 
@@ -4579,40 +4586,40 @@ sub fmt_centered($$)
 
 sub write_source_prolog(*)
 {
-	my $lineno_heading = "         ";
-	my $branch_heading = "";
-	my $diffLines_heading = "";
-	my $line_heading = fmt_centered($line_field_width, "Line data");
-	my $source_heading = " Source code";
+    my $lineno_heading = "         ";
+    my $branch_heading = "";
+    my $diffLines_heading = "";
+    my $line_heading = fmt_centered($line_field_width, "Line data");
+    my $source_heading = " Source code";
 
-	if ($br_coverage) {
-		$branch_heading = fmt_centered($br_field_width, "Branch data").
-				  " ";
-	}
-	# *************************************************************
+    if ($br_coverage) {
+        $branch_heading = fmt_centered($br_field_width, "Branch data").
+                  " ";
+    }
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	  <table cellpadding=0 cellspacing=0 border=0>
-	    <tr>
-	      <td><br></td>
-	    </tr>
-	    <tr>
-	      <td>
+    write_html($_[0], <<END_OF_HTML)
+      <table cellpadding=0 cellspacing=0 border=0>
+        <tr>
+          <td><br></td>
+        </tr>
+        <tr>
+          <td>
 <pre class="sourceHeading">${lineno_heading}${diffLines_heading}${branch_heading}${line_heading} ${source_heading}</pre>
 <pre class="source">
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 sub cmp_blocks($$)
 {
-	my ($a, $b) = @_;
-	my ($fa, $fb) = ($a->[0], $b->[0]);
+    my ($a, $b) = @_;
+    my ($fa, $fb) = ($a->[0], $b->[0]);
 
-	return $fa->[0] <=> $fb->[0] if ($fa->[0] != $fb->[0]);
-	return $fa->[1] <=> $fb->[1];
+    return $fa->[0] <=> $fb->[0] if ($fa->[0] != $fb->[0]);
+    return $fa->[1] <=> $fb->[1];
 }
 
 #
@@ -4628,39 +4635,39 @@ sub cmp_blocks($$)
 
 sub get_branch_blocks($)
 {
-	my ($brdata) = @_;
-	my $last_block_num;
-	my $block = [];
-	my @blocks;
+    my ($brdata) = @_;
+    my $last_block_num;
+    my $block = [];
+    my @blocks;
 
-	return () if (!defined($brdata));
+    return () if (!defined($brdata));
 
-	# Group branches
-	# 分支分组
-	foreach my $entry (split(/:/, $brdata)) {
-		my ($block_num, $branch, $taken) = split(/,/, $entry);
-		my $br;
+    # Group branches
+    # 分支分组
+    foreach my $entry (split(/:/, $brdata)) {
+        my ($block_num, $branch, $taken) = split(/,/, $entry);
+        my $br;
 
-		if (defined($last_block_num) && $block_num != $last_block_num) {
-			push(@blocks, $block);
-			$block = [];
-		}
-		$br = [$block_num, $branch, $taken, 3, 0, 0];
-		push(@{$block}, $br);
-		$last_block_num = $block_num;
-	}
-	push(@blocks, $block) if (scalar(@{$block}) > 0);
+        if (defined($last_block_num) && $block_num != $last_block_num) {
+            push(@blocks, $block);
+            $block = [];
+        }
+        $br = [$block_num, $branch, $taken, 3, 0, 0];
+        push(@{$block}, $br);
+        $last_block_num = $block_num;
+    }
+    push(@blocks, $block) if (scalar(@{$block}) > 0);
 
-	# Add braces to first and last branch in group
-	# 将大括号添加到组中的第一个和最后一个分支
-	foreach $block (@blocks) {
-		$block->[0]->[$BR_OPEN] = 1;
-		$block->[0]->[$BR_LEN]++;
-		$block->[scalar(@{$block}) - 1]->[$BR_CLOSE] = 1;
-		$block->[scalar(@{$block}) - 1]->[$BR_LEN]++;
-	}
+    # Add braces to first and last branch in group
+    # 将大括号添加到组中的第一个和最后一个分支
+    foreach $block (@blocks) {
+        $block->[0]->[$BR_OPEN] = 1;
+        $block->[0]->[$BR_LEN]++;
+        $block->[scalar(@{$block}) - 1]->[$BR_CLOSE] = 1;
+        $block->[scalar(@{$block}) - 1]->[$BR_LEN]++;
+    }
 
-	return sort(cmp_blocks @blocks);
+    return sort(cmp_blocks @blocks);
 }
 
 #
@@ -4671,15 +4678,15 @@ sub get_branch_blocks($)
 
 sub get_block_len($)
 {
-	my ($block) = @_;
-	my $len = 0;
-	my $branch;
+    my ($block) = @_;
+    my $len = 0;
+    my $branch;
 
-	foreach $branch (@{$block}) {
-		$len += $branch->[$BR_LEN];
-	}
+    foreach $branch (@{$block}) {
+        $len += $branch->[$BR_LEN];
+    }
 
-	return $len;
+    return $len;
 }
 
 
@@ -4692,113 +4699,113 @@ sub get_block_len($)
 
 sub get_branch_html($)
 {
-	my ($brdata) = @_;
-	my @blocks = get_branch_blocks($brdata);
-	my $block;
-	my $branch;
-	my $line_len = 0;
-	my $line = [];	# [branch2|" ", branch|" ", ...]
-	my @lines;	# [line1, line2, ...]
-	my @result;
+    my ($brdata) = @_;
+    my @blocks = get_branch_blocks($brdata);
+    my $block;
+    my $branch;
+    my $line_len = 0;
+    my $line = [];    # [branch2|" ", branch|" ", ...]
+    my @lines;    # [line1, line2, ...]
+    my @result;
 
-	# Distribute blocks to lines
-	## 将块分配到行
-	foreach $block (@blocks) {
-		my $block_len = get_block_len($block);
+    # Distribute blocks to lines
+    ## 将块分配到行
+    foreach $block (@blocks) {
+        my $block_len = get_block_len($block);
 
-		# Does this block fit into the current line?
-		## 这个区块适合当前线路吗？
-		if ($line_len + $block_len <= $br_field_width) {
-			# Add it
-			$line_len += $block_len;
-			push(@{$line}, @{$block});
-			next;
-		} elsif ($block_len <= $br_field_width) {
-			# It would fit if the line was empty - add it to new
-			# line
-			# 如果行是空的，它将适合-添加到新行
-			push(@lines, $line);
-			$line_len = $block_len;
-			$line = [ @{$block} ];
-			next;
-		}
-		# Split the block into several lines 
-		## 把块分成几行
-		foreach $branch (@{$block}) {
-			if ($line_len + $branch->[$BR_LEN] >= $br_field_width) {
-				# Start a new line
-				## 新行
-				if (($line_len + 1 <= $br_field_width) &&
-				    scalar(@{$line}) > 0 &&
-				    !$line->[scalar(@$line) - 1]->[$BR_CLOSE]) {
-					# Try to align branch symbols to be in
-					# one # row
-					## 尝试将分支符号对齐为一行
-					push(@{$line}, " ");
-				}
-				push(@lines, $line);
-				$line_len = 0;
-				$line = [];
-			}
-			push(@{$line}, $branch);
-			$line_len += $branch->[$BR_LEN];
-		}
-	}
-	push(@lines, $line);
+        # Does this block fit into the current line?
+        ## 这个区块适合当前线路吗？
+        if ($line_len + $block_len <= $br_field_width) {
+            # Add it
+            $line_len += $block_len;
+            push(@{$line}, @{$block});
+            next;
+        } elsif ($block_len <= $br_field_width) {
+            # It would fit if the line was empty - add it to new
+            # line
+            # 如果行是空的，它将适合-添加到新行
+            push(@lines, $line);
+            $line_len = $block_len;
+            $line = [ @{$block} ];
+            next;
+        }
+        # Split the block into several lines
+        ## 把块分成几行
+        foreach $branch (@{$block}) {
+            if ($line_len + $branch->[$BR_LEN] >= $br_field_width) {
+                # Start a new line
+                ## 新行
+                if (($line_len + 1 <= $br_field_width) &&
+                    scalar(@{$line}) > 0 &&
+                    !$line->[scalar(@$line) - 1]->[$BR_CLOSE]) {
+                    # Try to align branch symbols to be in
+                    # one # row
+                    ## 尝试将分支符号对齐为一行
+                    push(@{$line}, " ");
+                }
+                push(@lines, $line);
+                $line_len = 0;
+                $line = [];
+            }
+            push(@{$line}, $branch);
+            $line_len += $branch->[$BR_LEN];
+        }
+    }
+    push(@lines, $line);
 
-	# Convert to HTML
-	## 转换为HTML
-	foreach $line (@lines) {
-		my $current = "";
-		my $current_len = 0;
+    # Convert to HTML
+    ## 转换为HTML
+    foreach $line (@lines) {
+        my $current = "";
+        my $current_len = 0;
 
-		foreach $branch (@$line) {
-			# Skip alignment space
-			## 跳过对齐间距
-			if ($branch eq " ") {
-				$current .= " ";
-				$current_len++;
-				next;
-			}
+        foreach $branch (@$line) {
+            # Skip alignment space
+            ## 跳过对齐间距
+            if ($branch eq " ") {
+                $current .= " ";
+                $current_len++;
+                next;
+            }
 
-			my ($block_num, $br_num, $taken, $len, $open, $close) =
-			   @{$branch};
-			my $class;
-			my $title;
-			my $text;
+            my ($block_num, $br_num, $taken, $len, $open, $close) =
+               @{$branch};
+            my $class;
+            my $title;
+            my $text;
 
-			if ($taken eq '-') {
-				$class	= "branchNoExec";
-				$text	= " # ";
-				$title	= "Branch $br_num was not executed";
-			} elsif ($taken == 0) {
-				$class	= "branchNoCov";
-				$text	= " - ";
-				$title	= "Branch $br_num was not taken";
-			} else {
-				$class	= "branchCov";
-				$text	= " + ";
-				$title	= "Branch $br_num was taken $taken ".
-					  "time";
-				$title .= "s" if ($taken > 1);
-			}
-			$current .= "[" if ($open);
-			$current .= "<span class=\"$class\" title=\"$title\">";
-			$current .= $text."</span>";
-			$current .= "]" if ($close);
-			$current_len += $len;
-		}
+            if ($taken eq '-') {
+                $class    = "branchNoExec";
+                $text    = " # ";
+                $title    = "Branch $br_num was not executed";
+            } elsif ($taken == 0) {
+                $class    = "branchNoCov";
+                $text    = " - ";
+                $title    = "Branch $br_num was not taken";
+            } else {
+                $class    = "branchCov";
+                $text    = " + ";
+                $title    = "Branch $br_num was taken $taken ".
+                      "time";
+                $title .= "s" if ($taken > 1);
+            }
+            $current .= "[" if ($open);
+            $current .= "<span class=\"$class\" title=\"$title\">";
+            $current .= $text."</span>";
+            $current .= "]" if ($close);
+            $current_len += $len;
+        }
 
-		# Right-align result text
-		## 结果文本右对齐
-		if ($current_len < $br_field_width) {
-			$current = (" "x($br_field_width - $current_len)).
-				   $current;
-		}
-		push(@result, $current);
-	}
+        # Right-align result text
+        ## 结果文本右对齐
+        if ($current_len < $br_field_width) {
+            $current = (" "x($br_field_width - $current_len)).
+                   $current;
+        }
+        push(@result, $current);
+    }
 
-	return @result;
+    return @result;
 }
 
 
@@ -4810,18 +4817,18 @@ sub get_branch_html($)
 
 sub format_count($$)
 {
-	my ($count, $width) = @_;
-	my $result;
-	my $exp;
+    my ($count, $width) = @_;
+    my $result;
+    my $exp;
 
-	$result = sprintf("%*.0f", $width, $count);
-	while (length($result) > $width) {
-		last if ($count < 10);
-		$exp++;
-		$count = int($count/10);
-		$result = sprintf("%*s", $width, ">$count*10^$exp");
-	}
-	return $result;
+    $result = sprintf("%*.0f", $width, $count);
+    while (length($result) > $width) {
+        last if ($count < 10);
+        $exp++;
+        $count = int($count/10);
+        $result = sprintf("%*s", $width, ">$count*10^$exp");
+    }
+    return $result;
 }
 
 #
@@ -4834,76 +4841,92 @@ sub format_count($$)
 
 sub write_source_line(*$$$$$$)
 {
-	my ($handle, $line, $source, $count, $converted, $brdata,$diffdata) = @_;
-	my $source_format;
-	my $count_format;
-	my $result;
-	my $anchor_start = "";
-	my $anchor_end = "";
-	my $count_field_width = $line_field_width - 1;
-	my @br_html;
-	my $html;
-	#增量代码的标识
-	my $showDiffFlag = "";
-	my $showLineNumber = "";
-	# Get branch HTML data for this line
-	## 获取此行的分支HTML数据
-	@br_html = get_branch_html($brdata) if ($br_coverage);
+    my ($handle, $line, $source, $count, $converted, $brdata,$diffdata) = @_;
+    my $source_format;
+    my $count_format;
+    my $result;
+    my $anchor_start = "";
+    my $anchor_end = "";
+    my $count_field_width = $line_field_width - 1;
+    my @br_html;
+    my $html;
+    #增量代码的标识
+    my $showDiffFlag = "";
+    my $showLineNumber = "";
+    # Get branch HTML data for this line
+    ## 获取此行的分支HTML数据
+    @br_html = get_branch_html($brdata) if ($br_coverage);
 
-	if (!defined($count)) {
-		$result		= "";
-		$source_format	= "";
-		$count_format	= " "x$count_field_width;
-	}
-	elsif ($count == 0) {
-		$result		= $count;
-		$source_format	= '<span class="lineNoCov">';
-		$count_format	= format_count($count, $count_field_width);
-	}
-	elsif ($converted && defined($highlight)) {
-		$result		= "*".$count;
-		$source_format	= '<span class="lineDiffCov">';
-		$count_format	= format_count($count, $count_field_width);
-	}
-	else {
-		$result		= $count;
-		$source_format	= '<span class="lineCov">';
-		$count_format	= format_count($count, $count_field_width);
-	}
-	$result .= ":".$source;
+    if (!defined($count)) {
+        $result        = "";
+        $source_format    = "";
+        $count_format    = " "x$count_field_width;
+    }
+    elsif ($count == 0) {
+        $result        = $count;
+        $source_format    = '<span class="lineNoCov">';
+        $count_format    = format_count($count, $count_field_width);
+    }
+    elsif ($converted && defined($highlight)) {
+        $result        = "*".$count;
+        $source_format    = '<span class="lineDiffCov">';
+        $count_format    = format_count($count, $count_field_width);
+    }
+    else {
+        $result        = $count;
+        $source_format    = '<span class="lineCov">';
+        $count_format    = format_count($count, $count_field_width);
+    }
+    $result .= ":".$source;
 
-	# Write out a line number navigation anchor every $nav_resolution
-	# lines if necessary
-	## 如有必要，每$nav_resolution行写出一个行号导航锚
-	$anchor_start	= "<a name=\"$_[1]\">";
-	$anchor_end	= "</a>";
+    # Write out a line number navigation anchor every $nav_resolution
+    # lines if necessary
+    ## 如有必要，每$nav_resolution行写出一个行号导航锚
+    $anchor_start    = "<a name=\"$_[1]\">";
+    $anchor_end    = "</a>";
 
-	# *************************************************************
+    # *************************************************************
 
-	$html = $anchor_start;
-	## QGH: 竖列行数，在这里添加增量代码的标识
-	$showDiffFlag = $count > 0 ? "D+":"";
-	$showLineNumber = $count > 0 ? sprintf("%6d", $line) : sprintf("%8d", $line);
-	$html .= "<span class=\"lineNum\">".$showDiffFlag.$showLineNumber." </span>";
-	$html .= shift(@br_html).":" if ($br_coverage);
-	$html .= "$source_format$count_format : ";
-	$html .= escape_html($source);
-	$html .= "</span>" if ($source_format);
-	$html .= $anchor_end."\n";
+    $html = $anchor_start;
+    ## QGH: 竖列行数，在这里添加增量代码的标识
 
-	write_html($handle, $html);
+=pod 这里不应该使用$count 去判断增量代码
+    $showDiffFlag = $count > 0 ? "D+":"";
+    $showLineNumber = $count > 0 ? sprintf("%6d", $line) : sprintf("%8d", $line);
+    $html .= "<span class=\"lineNum\">".$showDiffFlag.$showLineNumber." </span>";
+=cut
+    
+=pod
+    尝试使用 $diffdata 和 $diff_coverage去做判断
+    if ($diff_coverage) {
+        $showDiffFlag = $diffdata > 0 ? "D+":"";
+        $showLineNumber = $diffdata > 0 ? sprintf("%6d", $line) : sprintf("%8d", $line);
+        $html .= "<span class=\"lineNum\">".$showDiffFlag.$showLineNumber." </span>";
+    }else {
+        $html .= "<span class=\"lineNum\">".sprintf("%8d", $line)." </span>";
+    }
+=cut
 
-	if ($br_coverage) {
-		# Add lines for overlong branch information
-		## 为超长分支信息添加行
-		foreach (@br_html) {
-			write_html($handle, "<span class=\"lineNum\">".
-				   "         </span>$_\n");
-		}
-	}
-	# *************************************************************
+    $html .= "<span class=\"lineNum\">".sprintf("%8d", $line)." </span>";
+    $html .= shift(@br_html).":" if ($br_coverage);
+    $html .= "$source_format$count_format : ";
+    $html .= escape_html($source);
+    $html .= "</span>" if ($source_format);
+    $html .= $anchor_end."\n";
 
-	return($result);
+    write_html($handle, $html);
+
+    if ($br_coverage) {
+        # Add lines for overlong branch information
+        ## 为超长分支信息添加行
+        foreach (@br_html) {
+            write_html($handle, "<span class=\"lineNum\">".
+                   "         </span>$_\n");
+        }
+    }
+    # *************************************************************
+
+    return($result);
 }
 
 
@@ -4915,19 +4938,19 @@ sub write_source_line(*$$$$$$)
 
 sub write_source_epilog(*)
 {
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	</pre>
-	      </td>
-	    </tr>
-	  </table>
-	  <br>
+    write_html($_[0], <<END_OF_HTML)
+    </pre>
+          </td>
+        </tr>
+      </table>
+      <br>
 
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -4941,30 +4964,30 @@ END_OF_HTML
 
 sub write_html_epilog(*$;$)
 {
-	my $basedir = $_[1];
-	my $break_code = "";
-	my $epilog;
+    my $basedir = $_[1];
+    my $break_code = "";
+    my $epilog;
 
-	if (defined($_[2]))
-	{
-		$break_code = " target=\"_parent\"";
-	}
+    if (defined($_[2]))
+    {
+        $break_code = " target=\"_parent\"";
+    }
 
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	  <table width="100%" border=0 cellspacing=0 cellpadding=0>
-	    <tr><td class="ruler"><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
-	    <tr><td class="versionInfo">Generated by: <a href="$lcov_url"$break_code>$lcov_version</a></td></tr>
-	  </table>
-	  <br>
+    write_html($_[0], <<END_OF_HTML)
+      <table width="100%" border=0 cellspacing=0 cellpadding=0>
+        <tr><td class="ruler"><img src="$_[1]glass.png" width=3 height=3 alt=""></td></tr>
+        <tr><td class="versionInfo">Generated by: <a href="$lcov_url"$break_code>$lcov_version</a></td></tr>
+      </table>
+      <br>
 END_OF_HTML
-	;
+    ;
 
-	$epilog = $html_epilog;
-	$epilog =~ s/\@basedir\@/$basedir/g;
+    $epilog = $html_epilog;
+    $epilog =~ s/\@basedir\@/$basedir/g;
 
-	write_html($_[0], $epilog);
+    write_html($_[0], $epilog);
 }
 
 
@@ -4975,34 +4998,34 @@ END_OF_HTML
 
 sub write_frameset(*$$$)
 {
-	my $frame_width = $overview_width + 40;
+    my $frame_width = $overview_width + 40;
 
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+    write_html($_[0], <<END_OF_HTML)
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
 
-	<html lang="en">
+    <html lang="en">
 
-	<head>
-	  <meta http-equiv="Content-Type" content="text/html; charset=$charset">
-	  <title>$_[3]</title>
-	  <link rel="stylesheet" type="text/css" href="$_[1]gcov.css">
-	</head>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=$charset">
+      <title>$_[3]</title>
+      <link rel="stylesheet" type="text/css" href="$_[1]gcov.css">
+    </head>
 
-	<frameset cols="$frame_width,*">
-	  <frame src="$_[2].gcov.overview.$html_ext" name="overview">
-	  <frame src="$_[2].gcov.$html_ext" name="source">
-	  <noframes>
-	    <center>Frames not supported by your browser!<br></center>
-	  </noframes>
-	</frameset>
+    <frameset cols="$frame_width,*">
+      <frame src="$_[2].gcov.overview.$html_ext" name="overview">
+      <frame src="$_[2].gcov.$html_ext" name="source">
+      <noframes>
+        <center>Frames not supported by your browser!<br></center>
+      </noframes>
+    </frameset>
 
-	</html>
+    </html>
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -5013,18 +5036,18 @@ END_OF_HTML
 
 sub write_overview_line(*$$$)
 {
-	my $y1 = $_[2] - 1;
-	my $y2 = $y1 + $nav_resolution - 1;
-	my $x2 = $overview_width - 1;
+    my $y1 = $_[2] - 1;
+    my $y2 = $y1 + $nav_resolution - 1;
+    my $x2 = $overview_width - 1;
 
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	    <area shape="rect" coords="0,$y1,$x2,$y2" href="$_[1].gcov.$html_ext#$_[3]" target="source" alt="overview">
+    write_html($_[0], <<END_OF_HTML)
+        <area shape="rect" coords="0,$y1,$x2,$y2" href="$_[1].gcov.$html_ext#$_[3]" target="source" alt="overview">
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
@@ -5035,75 +5058,75 @@ END_OF_HTML
 
 sub write_overview(*$$$$)
 {
-	my $index;
-	my $max_line = $_[4] - 1;
-	my $offset;
+    my $index;
+    my $max_line = $_[4] - 1;
+    my $offset;
 
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    write_html($_[0], <<END_OF_HTML)
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-	<html lang="en">
+    <html lang="en">
 
-	<head>
-	  <title>$_[3]</title>
-	  <meta http-equiv="Content-Type" content="text/html; charset=$charset">
-	  <link rel="stylesheet" type="text/css" href="$_[1]gcov.css">
-	</head>
+    <head>
+      <title>$_[3]</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=$charset">
+      <link rel="stylesheet" type="text/css" href="$_[1]gcov.css">
+    </head>
 
-	<body>
-	  <map name="overview">
+    <body>
+      <map name="overview">
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 
-	# Make $offset the next higher multiple of $nav_resolution
-	## 将$offset的下一个更高的倍数$nav_resolution抵消
-	$offset = ($nav_offset + $nav_resolution - 1) / $nav_resolution;
-	$offset = sprintf("%d", $offset ) * $nav_resolution;
+    # Make $offset the next higher multiple of $nav_resolution
+    ## 将$offset的下一个更高的倍数$nav_resolution抵消
+    $offset = ($nav_offset + $nav_resolution - 1) / $nav_resolution;
+    $offset = sprintf("%d", $offset ) * $nav_resolution;
 
-	# Create image map for overview image
-	## 为概览图像创建图像映射
-	for ($index = 1; $index <= $_[4]; $index += $nav_resolution)
-	{
-		# Enforce nav_offset
-		## 强制执行 nav_offset
-		if ($index < $offset + 1)
-		{
-			write_overview_line($_[0], $_[2], $index, 1);
-		}
-		else
-		{
-			write_overview_line($_[0], $_[2], $index, $index - $offset);
-		}
-	}
+    # Create image map for overview image
+    ## 为概览图像创建图像映射
+    for ($index = 1; $index <= $_[4]; $index += $nav_resolution)
+    {
+        # Enforce nav_offset
+        ## 强制执行 nav_offset
+        if ($index < $offset + 1)
+        {
+            write_overview_line($_[0], $_[2], $index, 1);
+        }
+        else
+        {
+            write_overview_line($_[0], $_[2], $index, $index - $offset);
+        }
+    }
 
-	# *************************************************************
+    # *************************************************************
 
-	write_html($_[0], <<END_OF_HTML)
-	  </map>
+    write_html($_[0], <<END_OF_HTML)
+      </map>
 
-	  <center>
-	  <a href="$_[2].gcov.$html_ext#top" target="source">Top</a><br><br>
-	  <img src="$_[2].gcov.png" width=$overview_width height=$max_line alt="Overview" border=0 usemap="#overview">
-	  </center>
-	</body>
-	</html>
+      <center>
+      <a href="$_[2].gcov.$html_ext#top" target="source">Top</a><br><br>
+      <img src="$_[2].gcov.png" width=$overview_width height=$max_line alt="Overview" border=0 usemap="#overview">
+      </center>
+    </body>
+    </html>
 END_OF_HTML
-	;
+    ;
 
-	# *************************************************************
+    # *************************************************************
 }
 
 
 sub max($$)
 {
-	my ($a, $b) = @_;
+    my ($a, $b) = @_;
 
-	return $a if ($a > $b);
-	return $b;
+    return $a if ($a > $b);
+    return $b;
 }
 
 
@@ -5118,324 +5141,324 @@ sub max($$)
 
 sub write_header(*$$$$$$$$$$$$)
 {
-	local *HTML_HANDLE = $_[0];
-	my $type = $_[1];
-	my $trunc_name = $_[2];
-	my $rel_filename = $_[3];
-	my $lines_found = $_[4];
-	my $lines_hit = $_[5];
-	my $fn_found = $_[6];
-	my $fn_hit = $_[7];
-	my $br_found = $_[8];
-	my $br_hit = $_[9];
-	## FIX:QGH 差异覆盖率相关
-	my $diff_found = $_[10];
-	my $diff_hit = $_[11];
+    local *HTML_HANDLE = $_[0];
+    my $type = $_[1];
+    my $trunc_name = $_[2];
+    my $rel_filename = $_[3];
+    my $lines_found = $_[4];
+    my $lines_hit = $_[5];
+    my $fn_found = $_[6];
+    my $fn_hit = $_[7];
+    my $br_found = $_[8];
+    my $br_hit = $_[9];
+    ## FIX:QGH 差异覆盖率相关
+    my $diff_found = $_[10];
+    my $diff_hit = $_[11];
 
-	my $sort_type = $_[12];
-	my $base_dir;
-	my $view;
-	my $test;
-	my $base_name;
-	my $style;
-	my $rate;
-	my @row_left;
-	my @row_right;
-	my $num_rows;
-	my $i;
-	my $esc_trunc_name = escape_html($trunc_name);
+    my $sort_type = $_[12];
+    my $base_dir;
+    my $view;
+    my $test;
+    my $base_name;
+    my $style;
+    my $rate;
+    my @row_left;
+    my @row_right;
+    my $num_rows;
+    my $i;
+    my $esc_trunc_name = escape_html($trunc_name);
 
-	$base_name = basename($rel_filename);
+    $base_name = basename($rel_filename);
 
-	printf "$_[9]";
-	printf "$_[8]";
-	printf $_[9];
+    printf "$_[9]";
+    printf "$_[8]";
+    printf $_[9];
 
-	# Prepare text for "current view" field
-	## 为“当前视图”字段准备文本
-	if ($type == $HDR_DIR)
-	{
-		# Main overview
-		## 主要概述
-		$base_dir = "";
-		$view = $overview_title;
-	}
-	elsif ($type == $HDR_FILE)
-	{
-		# Directory overview 
-		## 主要概况
-		$base_dir = get_relative_base_path($rel_filename);
-		$view = "<a href=\"$base_dir"."index.$html_ext\">".
-			"$overview_title</a> - $esc_trunc_name";
-	}
-	elsif ($type == $HDR_SOURCE || $type == $HDR_FUNC)
-	{
-		# File view
-		## 文件视图
-		my $dir_name = dirname($rel_filename);
-		my $esc_base_name = escape_html($base_name);
-		my $esc_dir_name = escape_html($dir_name);
+    # Prepare text for "current view" field
+    ## 为“当前视图”字段准备文本
+    if ($type == $HDR_DIR)
+    {
+        # Main overview
+        ## 主要概述
+        $base_dir = "";
+        $view = $overview_title;
+    }
+    elsif ($type == $HDR_FILE)
+    {
+        # Directory overview
+        ## 主要概况
+        $base_dir = get_relative_base_path($rel_filename);
+        $view = "<a href=\"$base_dir"."index.$html_ext\">".
+            "$overview_title</a> - $esc_trunc_name";
+    }
+    elsif ($type == $HDR_SOURCE || $type == $HDR_FUNC)
+    {
+        # File view
+        ## 文件视图
+        my $dir_name = dirname($rel_filename);
+        my $esc_base_name = escape_html($base_name);
+        my $esc_dir_name = escape_html($dir_name);
 
-		$base_dir = get_relative_base_path($dir_name);
-		if ($frames)
-		{
-			# Need to break frameset when clicking any of these
-			# links
-			## 单击这些链接时需要断开框架集
-			$view = "<a href=\"$base_dir"."index.$html_ext\" ".
-				"target=\"_parent\">$overview_title</a> - ".
-				"<a href=\"index.$html_ext\" target=\"_parent\">".
-				"$esc_dir_name</a> - $esc_base_name";
-		}
-		else
-		{
-			$view = "<a href=\"$base_dir"."index.$html_ext\">".
-				"$overview_title</a> - ".
-				"<a href=\"index.$html_ext\">".
-				"$esc_dir_name</a> - $esc_base_name";
-		}
+        $base_dir = get_relative_base_path($dir_name);
+        if ($frames)
+        {
+            # Need to break frameset when clicking any of these
+            # links
+            ## 单击这些链接时需要断开框架集
+            $view = "<a href=\"$base_dir"."index.$html_ext\" ".
+                "target=\"_parent\">$overview_title</a> - ".
+                "<a href=\"index.$html_ext\" target=\"_parent\">".
+                "$esc_dir_name</a> - $esc_base_name";
+        }
+        else
+        {
+            $view = "<a href=\"$base_dir"."index.$html_ext\">".
+                "$overview_title</a> - ".
+                "<a href=\"index.$html_ext\">".
+                "$esc_dir_name</a> - $esc_base_name";
+        }
 
-		# Add function suffix
-		## 添加函数后缀
-		if ($func_coverage) {
-			$view .= "<span style=\"font-size: 80%;\">";
-			if ($type == $HDR_SOURCE) {
-				if ($sort) {
-					$view .= " (source / <a href=\"$base_name.func-sort-c.$html_ext\">functions</a>)";
-				} else {
-					$view .= " (source / <a href=\"$base_name.func.$html_ext\">functions</a>)";
-				}
-			} elsif ($type == $HDR_FUNC) {
-				$view .= " (<a href=\"$base_name.gcov.$html_ext\">source</a> / functions)";
-			}
-			$view .= "</span>";
-		}
-	}
-	elsif ($type == $HDR_TESTDESC)
-	{
-		# Test description header
-		## 测试说明标题
-		$base_dir = "";
-		$view = "<a href=\"$base_dir"."index.$html_ext\">".
-			"$overview_title</a> - test case descriptions";
-	}
+        # Add function suffix
+        ## 添加函数后缀
+        if ($func_coverage) {
+            $view .= "<span style=\"font-size: 80%;\">";
+            if ($type == $HDR_SOURCE) {
+                if ($sort) {
+                    $view .= " (source / <a href=\"$base_name.func-sort-c.$html_ext\">functions</a>)";
+                } else {
+                    $view .= " (source / <a href=\"$base_name.func.$html_ext\">functions</a>)";
+                }
+            } elsif ($type == $HDR_FUNC) {
+                $view .= " (<a href=\"$base_name.gcov.$html_ext\">source</a> / functions)";
+            }
+            $view .= "</span>";
+        }
+    }
+    elsif ($type == $HDR_TESTDESC)
+    {
+        # Test description header
+        ## 测试说明标题
+        $base_dir = "";
+        $view = "<a href=\"$base_dir"."index.$html_ext\">".
+            "$overview_title</a> - test case descriptions";
+    }
 
-	# Prepare text for "test" field
-	## 为“测试”字段准备文本
-	$test = escape_html($test_title);
+    # Prepare text for "test" field
+    ## 为“测试”字段准备文本
+    $test = escape_html($test_title);
 
-	# Append link to test description page if available
-	## 将链接附加到测试描述页（如果可用）
-	if (%test_description && ($type != $HDR_TESTDESC))
-	{
-		if ($frames && ($type == $HDR_SOURCE || $type == $HDR_FUNC))
-		{
-			# Need to break frameset when clicking this link
-			## 单击此链接时需要断开框架集
-			$test .= " ( <span style=\"font-size:80%;\">".
-				 "<a href=\"$base_dir".
-				 "descriptions.$html_ext\" target=\"_parent\">".
-				 "view descriptions</a></span> )";
-		}
-		else
-		{
-			$test .= " ( <span style=\"font-size:80%;\">".
-				 "<a href=\"$base_dir".
-				 "descriptions.$html_ext\">".
-				 "view descriptions</a></span> )";
-		}
-	}
+    # Append link to test description page if available
+    ## 将链接附加到测试描述页（如果可用）
+    if (%test_description && ($type != $HDR_TESTDESC))
+    {
+        if ($frames && ($type == $HDR_SOURCE || $type == $HDR_FUNC))
+        {
+            # Need to break frameset when clicking this link
+            ## 单击此链接时需要断开框架集
+            $test .= " ( <span style=\"font-size:80%;\">".
+                 "<a href=\"$base_dir".
+                 "descriptions.$html_ext\" target=\"_parent\">".
+                 "view descriptions</a></span> )";
+        }
+        else
+        {
+            $test .= " ( <span style=\"font-size:80%;\">".
+                 "<a href=\"$base_dir".
+                 "descriptions.$html_ext\">".
+                 "view descriptions</a></span> )";
+        }
+    }
 
-	# Write header
-	## 写入标头
-	write_header_prolog(*HTML_HANDLE, $base_dir);
+    # Write header
+    ## 写入标头
+    write_header_prolog(*HTML_HANDLE, $base_dir);
 
-	# Left row ## 左行
-	push(@row_left, [[ "10%", "headerItem", "Current view:" ],
-			 [ "35%", "headerValue", $view ]]);
-	push(@row_left, [[undef, "headerItem", "Test:"],
-			 [undef, "headerValue", $test]]);
-	push(@row_left, [[undef, "headerItem", "Date:"],
-			 [undef, "headerValue", $date]]);
+    # Left row ## 左行
+    push(@row_left, [[ "10%", "headerItem", "Current view:" ],
+             [ "35%", "headerValue", $view ]]);
+    push(@row_left, [[undef, "headerItem", "Test:"],
+             [undef, "headerValue", $test]]);
+    push(@row_left, [[undef, "headerItem", "Date:"],
+             [undef, "headerValue", $date]]);
 
-	# Right row  ## 右行
-	if ($legend && ($type == $HDR_SOURCE || $type == $HDR_FUNC)) {
-		my $text = <<END_OF_HTML;
+    # Right row  ## 右行
+    if ($legend && ($type == $HDR_SOURCE || $type == $HDR_FUNC)) {
+        my $text = <<END_OF_HTML;
             Lines:
             <span class="coverLegendCov">hit</span>
             <span class="coverLegendNoCov">not hit</span>
 END_OF_HTML
-		if ($br_coverage) {
-			$text .= <<END_OF_HTML;
+        if ($br_coverage) {
+            $text .= <<END_OF_HTML;
             | Branches:
             <span class="coverLegendCov">+</span> taken
             <span class="coverLegendNoCov">-</span> not taken
             <span class="coverLegendNoCov">#</span> not executed
 END_OF_HTML
-		}
-		##FIX：QGH新添加命令行中关于差异代码的命令
-		if ($diff_coverage) {
-			$text .= <<END_OF_HTML;
+        }
+        ##FIX：QGH新添加命令行中关于差异代码的命令
+        if ($diff_coverage) {
+            $text .= <<END_OF_HTML;
             | DiffLines:
             <span class="coverLegendCov">+</span> taken
             <span class="coverLegendNoCov">-</span> not taken
             <span class="coverLegendNoCov">#</span> not executed
 END_OF_HTML
-		} 
-		push(@row_left, [[undef, "headerItem", "Legend:"],
-				 [undef, "headerValueLeg", $text]]);
-	} elsif ($legend && ($type != $HDR_TESTDESC)) {
-		my $text = <<END_OF_HTML;
-	    Rating:
+        }
+        push(@row_left, [[undef, "headerItem", "Legend:"],
+                 [undef, "headerValueLeg", $text]]);
+    } elsif ($legend && ($type != $HDR_TESTDESC)) {
+        my $text = <<END_OF_HTML;
+        Rating:
             <span class="coverLegendCovLo" title="Coverage rates below $med_limit % are classified as low">low: &lt; $med_limit %</span>
             <span class="coverLegendCovMed" title="Coverage rates between $med_limit % and $hi_limit % are classified as medium">medium: &gt;= $med_limit %</span>
             <span class="coverLegendCovHi" title="Coverage rates of $hi_limit % and more are classified as high">high: &gt;= $hi_limit %</span>
 END_OF_HTML
-		push(@row_left, [[undef, "headerItem", "Legend:"],
-				 [undef, "headerValueLeg", $text]]);
-	}
+        push(@row_left, [[undef, "headerItem", "Legend:"],
+                 [undef, "headerValueLeg", $text]]);
+    }
 
-	if ($type == $HDR_TESTDESC) {
-		push(@row_right, [[ "55%" ]]);
-	} else {
-		push(@row_right, [["15%", undef, undef ],
-				  ["10%", "headerCovTableHead", "Hit" ],
-				  ["10%", "headerCovTableHead", "Total" ],
-				  ["15%", "headerCovTableHead", "Coverage"]]);
-	}
-	# Line coverage
-	## 行覆盖率
-	$style = $rate_name[classify_rate($lines_found, $lines_hit,
-					  $med_limit, $hi_limit)];
-	$rate = rate($lines_hit, $lines_found, " %");
-	push(@row_right, [[undef, "headerItem", "Lines:"],
-			  [undef, "headerCovTableEntry", $lines_hit],
-			  [undef, "headerCovTableEntry", $lines_found],
-			  [undef, "headerCovTableEntry$style", $rate]])
-			if ($type != $HDR_TESTDESC);
+    if ($type == $HDR_TESTDESC) {
+        push(@row_right, [[ "55%" ]]);
+    } else {
+        push(@row_right, [["15%", undef, undef ],
+                  ["10%", "headerCovTableHead", "Hit" ],
+                  ["10%", "headerCovTableHead", "Total" ],
+                  ["15%", "headerCovTableHead", "Coverage"]]);
+    }
+    # Line coverage
+    ## 行覆盖率
+    $style = $rate_name[classify_rate($lines_found, $lines_hit,
+                      $med_limit, $hi_limit)];
+    $rate = rate($lines_hit, $lines_found, " %");
+    push(@row_right, [[undef, "headerItem", "Lines:"],
+              [undef, "headerCovTableEntry", $lines_hit],
+              [undef, "headerCovTableEntry", $lines_found],
+              [undef, "headerCovTableEntry$style", $rate]])
+            if ($type != $HDR_TESTDESC);
 
-	# Function coverage
-	## 方法覆盖率
-	if ($func_coverage) {
-		$style = $rate_name[classify_rate($fn_found, $fn_hit,
-						  $fn_med_limit, $fn_hi_limit)];
-		$rate = rate($fn_hit, $fn_found, " %");
-		push(@row_right, [[undef, "headerItem", "Functions:"],
-				  [undef, "headerCovTableEntry", $fn_hit],
-				  [undef, "headerCovTableEntry", $fn_found],
-				  [undef, "headerCovTableEntry$style", $rate]])
-			if ($type != $HDR_TESTDESC);
-	}
+    # Function coverage
+    ## 方法覆盖率
+    if ($func_coverage) {
+        $style = $rate_name[classify_rate($fn_found, $fn_hit,
+                          $fn_med_limit, $fn_hi_limit)];
+        $rate = rate($fn_hit, $fn_found, " %");
+        push(@row_right, [[undef, "headerItem", "Functions:"],
+                  [undef, "headerCovTableEntry", $fn_hit],
+                  [undef, "headerCovTableEntry", $fn_found],
+                  [undef, "headerCovTableEntry$style", $rate]])
+            if ($type != $HDR_TESTDESC);
+    }
 
-	# Branch coverage
-	## 分支覆盖率 ，header上的展示
-	if ($br_coverage) {
-		$style = $rate_name[classify_rate($br_found, $br_hit,
-						  $br_med_limit, $br_hi_limit)];
-		$rate = rate($br_hit, $br_found, " %");
-		push(@row_right, [[undef, "headerItem", "Branches:"],
-				  [undef, "headerCovTableEntry", $br_hit],
-				  [undef, "headerCovTableEntry", $br_found],
-				  [undef, "headerCovTableEntry$style", $rate]])
-			if ($type != $HDR_TESTDESC);
-	}
+    # Branch coverage
+    ## 分支覆盖率 ，header上的展示
+    if ($br_coverage) {
+        $style = $rate_name[classify_rate($br_found, $br_hit,
+                          $br_med_limit, $br_hi_limit)];
+        $rate = rate($br_hit, $br_found, " %");
+        push(@row_right, [[undef, "headerItem", "Branches:"],
+                  [undef, "headerCovTableEntry", $br_hit],
+                  [undef, "headerCovTableEntry", $br_found],
+                  [undef, "headerCovTableEntry$style", $rate]])
+            if ($type != $HDR_TESTDESC);
+    }
 
-	##FIX:QGH   Diff Lines
-	## 差异代码覆盖率
-	if ($diff_coverage) {
-		$style = $rate_name[classify_rate($diff_found, $diff_hit,
-						  $diff_med_limit, $diff_hi_limit)];
-		$rate = rate($diff_hit, $diff_found, " %");
-		push(@row_right, [[undef, "headerItem", "DiffLines:"],
-				  [undef, "headerCovTableEntry", $diff_hit],
-				  [undef, "headerCovTableEntry", $diff_found],
-				  [undef, "headerCovTableEntry$style", $rate]])
-			if ($type != $HDR_TESTDESC);
-	}
+    ##FIX:QGH   Diff Lines
+    ## 差异代码覆盖率
+    if ($diff_coverage) {
+        $style = $rate_name[classify_rate($diff_found, $diff_hit,
+                          $diff_med_limit, $diff_hi_limit)];
+        $rate = rate($diff_hit, $diff_found, " %");
+        push(@row_right, [[undef, "headerItem", "DiffLines:"],
+                  [undef, "headerCovTableEntry", $diff_hit],
+                  [undef, "headerCovTableEntry", $diff_found],
+                  [undef, "headerCovTableEntry$style", $rate]])
+            if ($type != $HDR_TESTDESC);
+    }
 
-	# Print rows
-	## 打印行
-	$num_rows = max(scalar(@row_left), scalar(@row_right));
-	for ($i = 0; $i < $num_rows; $i++) {
-		my $left = $row_left[$i];
-		my $right = $row_right[$i];
+    # Print rows
+    ## 打印行
+    $num_rows = max(scalar(@row_left), scalar(@row_right));
+    for ($i = 0; $i < $num_rows; $i++) {
+        my $left = $row_left[$i];
+        my $right = $row_right[$i];
 
-		if (!defined($left)) {
-			$left = [[undef, undef, undef], [undef, undef, undef]];
-		}
-		if (!defined($right)) {
-			$right = [];
-		}
-		write_header_line(*HTML_HANDLE, @{$left},
-				  [ $i == 0 ? "5%" : undef, undef, undef],
-				  @{$right});
-	}
+        if (!defined($left)) {
+            $left = [[undef, undef, undef], [undef, undef, undef]];
+        }
+        if (!defined($right)) {
+            $right = [];
+        }
+        write_header_line(*HTML_HANDLE, @{$left},
+                  [ $i == 0 ? "5%" : undef, undef, undef],
+                  @{$right});
+    }
 
-	# Fourth line
-	## 第四行
-	write_header_epilog(*HTML_HANDLE, $base_dir);
+    # Fourth line
+    ## 第四行
+    write_header_epilog(*HTML_HANDLE, $base_dir);
 }
 
 sub get_sorted_by_rate($$)
 {
-	my ($hash, $type) = @_;
+    my ($hash, $type) = @_;
 
-	if ($type == $SORT_LINE) {
-		# Sort by line coverage
-		## 按行覆盖率排序
-		return sort({$hash->{$a}[7] <=> $hash->{$b}[7]} keys(%{$hash}));
-	} elsif ($type == $SORT_FUNC) {
-		# Sort by function coverage;
-		## 按功能覆盖率排序
-		return sort({$hash->{$a}[8] <=> $hash->{$b}[8]}	keys(%{$hash}));
-	} elsif ($type == $SORT_BRANCH) {
-		# Sort by br coverage;
-		## 按分支覆盖率排序
-		return sort({$hash->{$a}[9] <=> $hash->{$b}[9]}	keys(%{$hash}));
-	}elsif ($type == $SORT_DIFFLINE) {
-		# Sort by diff coverage;
-		## 按差异覆盖率排序
-		return sort({$hash->{$a}[10] <=> $hash->{$b}[10]}	keys(%{$hash}));
-	}
+    if ($type == $SORT_LINE) {
+        # Sort by line coverage
+        ## 按行覆盖率排序
+        return sort({$hash->{$a}[7] <=> $hash->{$b}[7]} keys(%{$hash}));
+    } elsif ($type == $SORT_FUNC) {
+        # Sort by function coverage;
+        ## 按功能覆盖率排序
+        return sort({$hash->{$a}[8] <=> $hash->{$b}[8]}    keys(%{$hash}));
+    } elsif ($type == $SORT_BRANCH) {
+        # Sort by br coverage;
+        ## 按分支覆盖率排序
+        return sort({$hash->{$a}[9] <=> $hash->{$b}[9]}    keys(%{$hash}));
+    }elsif ($type == $SORT_DIFFLINE) {
+        # Sort by diff coverage;
+        ## 按差异覆盖率排序
+        return sort({$hash->{$a}[10] <=> $hash->{$b}[10]}    keys(%{$hash}));
+    }
 }
 
 sub get_sorted_by_missed($$)
 {
-	my ($hash, $type) = @_;
+    my ($hash, $type) = @_;
 
-	if ($type == $SORT_LINE) {
-		# Sort by number of instrumented lines without coverage
-		## 按没有覆盖范围的检测行数排序
-		return sort(
-			{
-				($hash->{$b}[0] - $hash->{$b}[1]) <=>
-				($hash->{$a}[0] - $hash->{$a}[1])
-			} keys(%{$hash}));
-	} elsif ($type == $SORT_FUNC) {
-		# Sort by number of instrumented functions without coverage
-		## 按插入指令的函数的数量排序（无覆盖）
-		return sort(
-			{
-				($hash->{$b}[2] - $hash->{$b}[3]) <=>
-				($hash->{$a}[2] - $hash->{$a}[3])
-			} keys(%{$hash}));
-	} elsif ($type == $SORT_BRANCH) {
-		# Sort by number of instrumented branches without coverage
-		## 按无覆盖率的检测分支数排序
-		return sort(
-			{
-				($hash->{$b}[4] - $hash->{$b}[5]) <=>
-				($hash->{$a}[4] - $hash->{$a}[5])
-			} keys(%{$hash}));
-	}elsif ($type == $SORT_DIFFLINE) {
-		# Sort by number of instrumented branches without coverage
-		## 按无覆盖率的检测差异数排序
-		return sort(
-			{
-				($hash->{$b}[6] - $hash->{$b}[7]) <=>
-				($hash->{$a}[6] - $hash->{$a}[7])
-			} keys(%{$hash}));
-	}
+    if ($type == $SORT_LINE) {
+        # Sort by number of instrumented lines without coverage
+        ## 按没有覆盖范围的检测行数排序
+        return sort(
+            {
+                ($hash->{$b}[0] - $hash->{$b}[1]) <=>
+                ($hash->{$a}[0] - $hash->{$a}[1])
+            } keys(%{$hash}));
+    } elsif ($type == $SORT_FUNC) {
+        # Sort by number of instrumented functions without coverage
+        ## 按插入指令的函数的数量排序（无覆盖）
+        return sort(
+            {
+                ($hash->{$b}[2] - $hash->{$b}[3]) <=>
+                ($hash->{$a}[2] - $hash->{$a}[3])
+            } keys(%{$hash}));
+    } elsif ($type == $SORT_BRANCH) {
+        # Sort by number of instrumented branches without coverage
+        ## 按无覆盖率的检测分支数排序
+        return sort(
+            {
+                ($hash->{$b}[4] - $hash->{$b}[5]) <=>
+                ($hash->{$a}[4] - $hash->{$a}[5])
+            } keys(%{$hash}));
+    }elsif ($type == $SORT_DIFFLINE) {
+        # Sort by number of instrumented branches without coverage
+        ## 按无覆盖率的检测差异数排序
+        return sort(
+            {
+                ($hash->{$b}[6] - $hash->{$b}[7]) <=>
+                ($hash->{$a}[6] - $hash->{$a}[7])
+            } keys(%{$hash}));
+    }
 }
 
 #
@@ -5448,148 +5471,148 @@ sub get_sorted_by_missed($$)
 
 sub get_sorted_keys($$)
 {
-	my ($hash, $type) = @_;
+    my ($hash, $type) = @_;
 
-	if ($type == $SORT_FILE) {
-		# Sort by name
-		## 按名称排序
-		return sort(keys(%{$hash}));
-	} elsif ($opt_missed) {
-		return get_sorted_by_missed($hash, $type);
-	} else {
-		return get_sorted_by_rate($hash, $type);
-	}
+    if ($type == $SORT_FILE) {
+        # Sort by name
+        ## 按名称排序
+        return sort(keys(%{$hash}));
+    } elsif ($opt_missed) {
+        return get_sorted_by_missed($hash, $type);
+    } else {
+        return get_sorted_by_rate($hash, $type);
+    }
 }
 
 sub get_sort_code($$$)
 {
-	my ($link, $alt, $base) = @_;
-	my $png;
-	my $link_start;
-	my $link_end;
+    my ($link, $alt, $base) = @_;
+    my $png;
+    my $link_start;
+    my $link_end;
 
-	if (!defined($link)) {
-		$png = "glass.png";
-		$link_start = "";
-		$link_end = "";
-	} else {
-		$png = "updown.png";
-		$link_start = '<a href="'.$link.'">';
-		$link_end = "</a>";
-	}
+    if (!defined($link)) {
+        $png = "glass.png";
+        $link_start = "";
+        $link_end = "";
+    } else {
+        $png = "updown.png";
+        $link_start = '<a href="'.$link.'">';
+        $link_end = "</a>";
+    }
 
-	return ' <span class="tableHeadSort">'.$link_start.
-	       '<img src="'.$base.$png.'" width=10 height=14 '.
-	       'alt="'.$alt.'" title="'.$alt.'" border=0>'.$link_end.'</span>';
+    return ' <span class="tableHeadSort">'.$link_start.
+           '<img src="'.$base.$png.'" width=10 height=14 '.
+           'alt="'.$alt.'" title="'.$alt.'" border=0>'.$link_end.'</span>';
 }
 
 sub get_file_code($$$$)
 {
-	my ($type, $text, $sort_button, $base) = @_;
-	my $result = $text;
-	my $link;
+    my ($type, $text, $sort_button, $base) = @_;
+    my $result = $text;
+    my $link;
 
-	if ($sort_button) {
-		if ($type == $HEAD_NO_DETAIL) {
-			$link = "index.$html_ext";
-		} else {
-			$link = "index-detail.$html_ext";
-		}
-	}
-	$result .= get_sort_code($link, "Sort by name", $base);
+    if ($sort_button) {
+        if ($type == $HEAD_NO_DETAIL) {
+            $link = "index.$html_ext";
+        } else {
+            $link = "index-detail.$html_ext";
+        }
+    }
+    $result .= get_sort_code($link, "Sort by name", $base);
 
-	return $result;
+    return $result;
 }
 
 sub get_line_code($$$$$)
 {
-	my ($type, $sort_type, $text, $sort_button, $base) = @_;
-	my $result = $text;
-	my $sort_link;
+    my ($type, $sort_type, $text, $sort_button, $base) = @_;
+    my $result = $text;
+    my $sort_link;
 
-	if ($type == $HEAD_NO_DETAIL) {
-		# Just text
-		## 仅文本
-		if ($sort_button) {
-			$sort_link = "index-sort-l.$html_ext";
-		}
-	} elsif ($type == $HEAD_DETAIL_HIDDEN) {
-		# Text + link to detail view
-		## 文本 + 链接到详情的视图
-		$result .= ' ( <a class="detail" href="index-detail'.
-			   $fileview_sortname[$sort_type].'.'.$html_ext.
-			   '">show details</a> )';
-		if ($sort_button) {
-			$sort_link = "index-sort-l.$html_ext";
-		}
-	} else {
-		# Text + link to standard view
-		## 文本 + 链接到标准视图
-		$result .= ' ( <a class="detail" href="index'.
-			   $fileview_sortname[$sort_type].'.'.$html_ext.
-			   '">hide details</a> )';
-		if ($sort_button) {
-			$sort_link = "index-detail-sort-l.$html_ext";
-		}
-	}
-	# Add sort button
-	## 添加排序按钮
-	$result .= get_sort_code($sort_link, "Sort by line coverage", $base); ## 按行覆盖率排序
+    if ($type == $HEAD_NO_DETAIL) {
+        # Just text
+        ## 仅文本
+        if ($sort_button) {
+            $sort_link = "index-sort-l.$html_ext";
+        }
+    } elsif ($type == $HEAD_DETAIL_HIDDEN) {
+        # Text + link to detail view
+        ## 文本 + 链接到详情的视图
+        $result .= ' ( <a class="detail" href="index-detail'.
+               $fileview_sortname[$sort_type].'.'.$html_ext.
+               '">show details</a> )';
+        if ($sort_button) {
+            $sort_link = "index-sort-l.$html_ext";
+        }
+    } else {
+        # Text + link to standard view
+        ## 文本 + 链接到标准视图
+        $result .= ' ( <a class="detail" href="index'.
+               $fileview_sortname[$sort_type].'.'.$html_ext.
+               '">hide details</a> )';
+        if ($sort_button) {
+            $sort_link = "index-detail-sort-l.$html_ext";
+        }
+    }
+    # Add sort button
+    ## 添加排序按钮
+    $result .= get_sort_code($sort_link, "Sort by line coverage", $base); ## 按行覆盖率排序
 
-	return $result;
+    return $result;
 }
 
 ## FIX：QGH 差异覆盖率相关 设置差异代码的html链接
 sub get_diff_code($$$$$)
 {
-	my ($type, $sort_type, $text, $sort_button, $base) = @_;
-	my $result = $text;
-	my $link;
+    my ($type, $sort_type, $text, $sort_button, $base) = @_;
+    my $result = $text;
+    my $link;
 
-	if ($sort_button) {
-		if ($type == $HEAD_NO_DETAIL) {
-			$link = "index-sort-d.$html_ext";
-		} else {
-			$link = "index-detail-sort-d.$html_ext";
-		}
-	}
-	$result .= get_sort_code($link, "Sort by diff lines coverage", $base);
+    if ($sort_button) {
+        if ($type == $HEAD_NO_DETAIL) {
+            $link = "index-sort-d.$html_ext";
+        } else {
+            $link = "index-detail-sort-d.$html_ext";
+        }
+    }
+    $result .= get_sort_code($link, "Sort by diff lines coverage", $base);
 
-	return $result;
+    return $result;
 }
 
 sub get_func_code($$$$)
 {
-	my ($type, $text, $sort_button, $base) = @_;
-	my $result = $text;
-	my $link;
+    my ($type, $text, $sort_button, $base) = @_;
+    my $result = $text;
+    my $link;
 
-	if ($sort_button) {
-		if ($type == $HEAD_NO_DETAIL) {
-			$link = "index-sort-f.$html_ext";
-		} else {
-			$link = "index-detail-sort-f.$html_ext";
-		}
-	}
-	$result .= get_sort_code($link, "Sort by function coverage", $base); ## 按功能覆盖率排序
-	return $result;
+    if ($sort_button) {
+        if ($type == $HEAD_NO_DETAIL) {
+            $link = "index-sort-f.$html_ext";
+        } else {
+            $link = "index-detail-sort-f.$html_ext";
+        }
+    }
+    $result .= get_sort_code($link, "Sort by function coverage", $base); ## 按功能覆盖率排序
+    return $result;
 }
 
 sub get_br_code($$$$)
 {
-	my ($type, $text, $sort_button, $base) = @_;
-	my $result = $text;
-	my $link;
+    my ($type, $text, $sort_button, $base) = @_;
+    my $result = $text;
+    my $link;
 
-	if ($sort_button) {
-		if ($type == $HEAD_NO_DETAIL) {
-			$link = "index-sort-b.$html_ext";
-		} else {
-			$link = "index-detail-sort-b.$html_ext";
-		}
-	}
-	$result .= get_sort_code($link, "Sort by branch coverage", $base); ## 按分支覆盖率排序
-	return $result;
+    if ($sort_button) {
+        if ($type == $HEAD_NO_DETAIL) {
+            $link = "index-sort-b.$html_ext";
+        } else {
+            $link = "index-detail-sort-b.$html_ext";
+        }
+    }
+    $result .= get_sort_code($link, "Sort by branch coverage", $base); ## 按分支覆盖率排序
+    return $result;
 }
 
 #
@@ -5601,7 +5624,7 @@ sub get_br_code($$$$)
 ### 写一个完整的文件表。概述是对包含以下映射的哈希的引用：
 #
 #   filename -> "lines_found,lines_hit,funcs_found,funcs_hit,page_link,
-#		 func_link"
+#         func_link"
 #
 # TESTHASH is a reference to the following hash:
 ## TESTHASH是对以下哈希的引用：
@@ -5616,179 +5639,179 @@ sub get_br_code($$$$)
 
 sub write_file_table(*$$$$$$$$)
 {
-	local *HTML_HANDLE = $_[0];
-	my $base_dir = $_[1];
-	my $overview = $_[2];
-	my $testhash = $_[3];
-	my $testfnchash = $_[4];
-	my $testbrhash = $_[5];
-	my $testdiffhash = $_[6];
-	my $fileview = $_[7];
-	my $sort_type = $_[8];
-	my $filename;
-	my $bar_graph;
-	my $hit;
-	my $found;
-	my $fn_found;
-	my $fn_hit;
-	my $br_found;
-	my $br_hit;
-	## FIX:QGH 差异覆盖率相关
-	my $diff_found;
-	my $diff_hit;
+    local *HTML_HANDLE = $_[0];
+    my $base_dir = $_[1];
+    my $overview = $_[2];
+    my $testhash = $_[3];
+    my $testfnchash = $_[4];
+    my $testbrhash = $_[5];
+    my $testdiffhash = $_[6];
+    my $fileview = $_[7];
+    my $sort_type = $_[8];
+    my $filename;
+    my $bar_graph;
+    my $hit;
+    my $found;
+    my $fn_found;
+    my $fn_hit;
+    my $br_found;
+    my $br_hit;
+    ## FIX:QGH 差异覆盖率相关
+    my $diff_found;
+    my $diff_hit;
 
-	my $page_link;
-	my $testname;
-	my $testdata;
-	my $testfncdata;
-	my $testbrdata;
-	## FIX:QGH 差异覆盖率相关
-	my $testdiffdata;
+    my $page_link;
+    my $testname;
+    my $testdata;
+    my $testfncdata;
+    my $testbrdata;
+    ## FIX:QGH 差异覆盖率相关
+    my $testdiffdata;
 
-	my %affecting_tests;
-	my $line_code = "";
-	my $func_code;
-	my $br_code;
-	## FIX:QGH 差异覆盖率相关
-	my $diff_code;
+    my %affecting_tests;
+    my $line_code = "";
+    my $func_code;
+    my $br_code;
+    ## FIX:QGH 差异覆盖率相关
+    my $diff_code;
 
-	my $file_code;
-	my @head_columns;
+    my $file_code;
+    my @head_columns;
 
-	# Determine HTML code for column headings
-	## 确定列标题的HTML代码
-	if (($base_dir ne "") && $show_details)
-	{
-		my $detailed = keys(%{$testhash});
+    # Determine HTML code for column headings
+    ## 确定列标题的HTML代码
+    if (($base_dir ne "") && $show_details)
+    {
+        my $detailed = keys(%{$testhash});
 
-		$file_code = get_file_code($detailed ? $HEAD_DETAIL_HIDDEN :
-					$HEAD_NO_DETAIL,
-					$fileview ? "Filename" : "Directory",
-					$sort && $sort_type != $SORT_FILE,
-					$base_dir);
-		$line_code = get_line_code($detailed ? $HEAD_DETAIL_SHOWN :
-					$HEAD_DETAIL_HIDDEN,
-					$sort_type,
-					"Line Coverage",
-					$sort && $sort_type != $SORT_LINE,
-					$base_dir);
-		$func_code = get_func_code($detailed ? $HEAD_DETAIL_HIDDEN :
-					$HEAD_NO_DETAIL,
-					"Functions",
-					$sort && $sort_type != $SORT_FUNC,
-					$base_dir);
-		$br_code = get_br_code($detailed ? $HEAD_DETAIL_HIDDEN :
-					$HEAD_NO_DETAIL,
-					"Branches",
-					$sort && $sort_type != $SORT_BRANCH,
-					$base_dir);
-		## FIX:QGH 差异覆盖率相关
-		$diff_code = get_diff_code($detailed ? $HEAD_DETAIL_HIDDEN :
-					$HEAD_DETAIL_HIDDEN,
-					$sort_type,
-					"DiffLines",
-					$sort && $sort_type != $SORT_DIFFLINE,
-					$base_dir);
-	} else {
-		$file_code = get_file_code($HEAD_NO_DETAIL,
-					$fileview ? "Filename" : "Directory",
-					$sort && $sort_type != $SORT_FILE,
-					$base_dir);
-		$line_code = get_line_code($HEAD_NO_DETAIL, $sort_type, "Line Coverage",
-					$sort && $sort_type != $SORT_LINE,
-					$base_dir);
-		$func_code = get_func_code($HEAD_NO_DETAIL, "Functions",
-					$sort && $sort_type != $SORT_FUNC,
-					$base_dir);
-		$br_code = get_br_code($HEAD_NO_DETAIL, "Branches",
-					$sort && $sort_type != $SORT_BRANCH,
-					$base_dir);
-		## FIX:QGH 差异覆盖率相关
-		$diff_code = get_diff_code($HEAD_NO_DETAIL, $sort_type, "DiffLines",
-					$sort && $sort_type != $SORT_DIFFLINE,
-					$base_dir);
-	}
-	push(@head_columns, [ $line_code, 3 ]);
-	push(@head_columns, [ $func_code, 2]) if ($func_coverage);
-	push(@head_columns, [ $br_code, 2]) if ($br_coverage);
-	## FIX:QGH 差异覆盖率相关
-	push(@head_columns, [ $diff_code, 2]) if ($diff_coverage);
+        $file_code = get_file_code($detailed ? $HEAD_DETAIL_HIDDEN :
+                    $HEAD_NO_DETAIL,
+                    $fileview ? "Filename" : "Directory",
+                    $sort && $sort_type != $SORT_FILE,
+                    $base_dir);
+        $line_code = get_line_code($detailed ? $HEAD_DETAIL_SHOWN :
+                    $HEAD_DETAIL_HIDDEN,
+                    $sort_type,
+                    "Line Coverage",
+                    $sort && $sort_type != $SORT_LINE,
+                    $base_dir);
+        $func_code = get_func_code($detailed ? $HEAD_DETAIL_HIDDEN :
+                    $HEAD_NO_DETAIL,
+                    "Functions",
+                    $sort && $sort_type != $SORT_FUNC,
+                    $base_dir);
+        $br_code = get_br_code($detailed ? $HEAD_DETAIL_HIDDEN :
+                    $HEAD_NO_DETAIL,
+                    "Branches",
+                    $sort && $sort_type != $SORT_BRANCH,
+                    $base_dir);
+        ## FIX:QGH 差异覆盖率相关
+        $diff_code = get_diff_code($detailed ? $HEAD_DETAIL_HIDDEN :
+                    $HEAD_DETAIL_HIDDEN,
+                    $sort_type,
+                    "DiffLines",
+                    $sort && $sort_type != $SORT_DIFFLINE,
+                    $base_dir);
+    } else {
+        $file_code = get_file_code($HEAD_NO_DETAIL,
+                    $fileview ? "Filename" : "Directory",
+                    $sort && $sort_type != $SORT_FILE,
+                    $base_dir);
+        $line_code = get_line_code($HEAD_NO_DETAIL, $sort_type, "Line Coverage",
+                    $sort && $sort_type != $SORT_LINE,
+                    $base_dir);
+        $func_code = get_func_code($HEAD_NO_DETAIL, "Functions",
+                    $sort && $sort_type != $SORT_FUNC,
+                    $base_dir);
+        $br_code = get_br_code($HEAD_NO_DETAIL, "Branches",
+                    $sort && $sort_type != $SORT_BRANCH,
+                    $base_dir);
+        ## FIX:QGH 差异覆盖率相关
+        $diff_code = get_diff_code($HEAD_NO_DETAIL, $sort_type, "DiffLines",
+                    $sort && $sort_type != $SORT_DIFFLINE,
+                    $base_dir);
+    }
+    push(@head_columns, [ $line_code, 3 ]);
+    push(@head_columns, [ $func_code, 2]) if ($func_coverage);
+    push(@head_columns, [ $br_code, 2]) if ($br_coverage);
+    ## FIX:QGH 差异覆盖率相关
+    push(@head_columns, [ $diff_code, 2]) if ($diff_coverage);
 
-	write_file_table_prolog(*HTML_HANDLE, $file_code, @head_columns);
+    write_file_table_prolog(*HTML_HANDLE, $file_code, @head_columns);
 
-	foreach $filename (get_sorted_keys($overview, $sort_type))
-	{
-		my @columns;
-		($found, $hit, $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit,
-		 $page_link) = @{$overview->{$filename}};
+    foreach $filename (get_sorted_keys($overview, $sort_type))
+    {
+        my @columns;
+        ($found, $hit, $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit,
+         $page_link) = @{$overview->{$filename}};
 
-		# Line coverage 
-		## 行覆盖率
-		push(@columns, [$found, $hit, $med_limit, $hi_limit, 1]);
-		# Function coverage 
-		## 方法覆盖率
-		if ($func_coverage) {
-			push(@columns, [$fn_found, $fn_hit, $fn_med_limit,
-					$fn_hi_limit, 0]);
-		}
-		# Branch coverage 
-		## 分支覆盖率
-		if ($br_coverage) {
-			push(@columns, [$br_found, $br_hit, $br_med_limit,
-					$br_hi_limit, 0]);
-		}
-		## FIX：QGH 新增 Diff coverage 差异覆盖率
-		if ($diff_coverage) {
-			push(@columns, [$diff_found, $diff_hit, $diff_med_limit,
-					$diff_hi_limit, 0]);
-		}
-		write_file_table_entry(*HTML_HANDLE, $base_dir, $filename,
-				       $page_link, @columns);
-		
-		$testdata = $testhash->{$filename};
-		$testfncdata = $testfnchash->{$filename};
-		$testbrdata = $testbrhash->{$filename};
-		# FIX：QGH 新增 差异覆盖率
-		$testdiffdata = $testdiffhash->{$filename};
+        # Line coverage
+        ## 行覆盖率
+        push(@columns, [$found, $hit, $med_limit, $hi_limit, 1]);
+        # Function coverage
+        ## 方法覆盖率
+        if ($func_coverage) {
+            push(@columns, [$fn_found, $fn_hit, $fn_med_limit,
+                    $fn_hi_limit, 0]);
+        }
+        # Branch coverage
+        ## 分支覆盖率
+        if ($br_coverage) {
+            push(@columns, [$br_found, $br_hit, $br_med_limit,
+                    $br_hi_limit, 0]);
+        }
+        ## FIX：QGH 新增 Diff coverage 差异覆盖率
+        if ($diff_coverage) {
+            push(@columns, [$diff_found, $diff_hit, $diff_med_limit,
+                    $diff_hi_limit, 0]);
+        }
+        write_file_table_entry(*HTML_HANDLE, $base_dir, $filename,
+                       $page_link, @columns);
+        
+        $testdata = $testhash->{$filename};
+        $testfncdata = $testfnchash->{$filename};
+        $testbrdata = $testbrhash->{$filename};
+        # FIX：QGH 新增 差异覆盖率
+        $testdiffdata = $testdiffhash->{$filename};
 
-		# Check whether we should write test specific coverage
-		# as well
-		## 检查我们是否也应该写具体的测试覆盖范围
-		if (!($show_details && $testdata)) { next; }
+        # Check whether we should write test specific coverage
+        # as well
+        ## 检查我们是否也应该写具体的测试覆盖范围
+        if (!($show_details && $testdata)) { next; }
 
-		# Filter out those tests that actually affect this file
-		## 过滤掉那些真正影响这个文件的测试
-		%affecting_tests = %{get_affecting_tests($testdata,$testfncdata, $testbrdata,$testdiffdata) };
+        # Filter out those tests that actually affect this file
+        ## 过滤掉那些真正影响这个文件的测试
+        %affecting_tests = %{get_affecting_tests($testdata,$testfncdata, $testbrdata,$testdiffdata) };
 
-		# Does any of the tests affect this file at all?
-		# ## 任何测试都会对这个文件产生影响吗？
-		if (!%affecting_tests) { next; }
+        # Does any of the tests affect this file at all?
+        # ## 任何测试都会对这个文件产生影响吗？
+        if (!%affecting_tests) { next; }
 
-		foreach $testname (keys(%affecting_tests))
-		{
-			my @results;
-			($found, $hit, $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit) =
-				split(",", $affecting_tests{$testname});
+        foreach $testname (keys(%affecting_tests))
+        {
+            my @results;
+            ($found, $hit, $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit) =
+                split(",", $affecting_tests{$testname});
 
-			# Insert link to description of available
-			## 插入对现有产品描述的链接
-			if ($test_description{$testname})
-			{
-				$testname = "<a href=\"$base_dir".
-					    "descriptions.$html_ext#$testname\">".
-					    "$testname</a>";
-			}
+            # Insert link to description of available
+            ## 插入对现有产品描述的链接
+            if ($test_description{$testname})
+            {
+                $testname = "<a href=\"$base_dir".
+                        "descriptions.$html_ext#$testname\">".
+                        "$testname</a>";
+            }
 
-			push(@results, [$found, $hit]);
-			push(@results, [$fn_found, $fn_hit]) if ($func_coverage);
-			push(@results, [$br_found, $br_hit]) if ($br_coverage);
-			push(@results, [$diff_found, $diff_hit]) if ($diff_coverage);
-			write_file_table_detail_entry(*HTML_HANDLE, $testname,
-				@results);
-		}
-	}
+            push(@results, [$found, $hit]);
+            push(@results, [$fn_found, $fn_hit]) if ($func_coverage);
+            push(@results, [$br_found, $br_hit]) if ($br_coverage);
+            push(@results, [$diff_found, $diff_hit]) if ($diff_coverage);
+            write_file_table_detail_entry(*HTML_HANDLE, $testname,
+                @results);
+        }
+    }
 
-	write_file_table_epilog(*HTML_HANDLE);
+    write_file_table_epilog(*HTML_HANDLE);
 }
 
 
@@ -5802,21 +5825,21 @@ sub write_file_table(*$$$$$$$$)
 
 sub get_found_and_hit($)
 {
-	my %hash = %{$_[0]};
-	my $found = 0;
-	my $hit = 0;
+    my %hash = %{$_[0]};
+    my $found = 0;
+    my $hit = 0;
 
-	# Calculate sum
-	$found = 0;
-	$hit = 0;
-			
-	foreach (keys(%hash))
-	{
-		$found++;
-		if ($hash{$_}>0) { $hit++; }
-	}
+    # Calculate sum
+    $found = 0;
+    $hit = 0;
+            
+    foreach (keys(%hash))
+    {
+        $found++;
+        if ($hash{$_}>0) { $hit++; }
+    }
 
-	return ($found, $hit);
+    return ($found, $hit);
 }
 
 #
@@ -5826,21 +5849,21 @@ sub get_found_and_hit($)
 #
 #FIX:QGH 获取差异代码执行行数和总行数
 sub get_diff_found_and_hit($) {
-	my %hash = %{$_[0]};
-	my $diff_found = 0;
-	my $diff_hit = 0;
+    my %hash = %{$_[0]};
+    my $diff_found = 0;
+    my $diff_hit = 0;
 
-	# Calculate sum
-	$diff_found = 0;
-	$diff_hit = 0;
-			
-	foreach (keys(%hash))
-	{
-		$diff_found++;
-		if ($hash{$_}>0) { $diff_hit++; }
-	}
+    # Calculate sum
+    $diff_found = 0;
+    $diff_hit = 0;
+            
+    foreach (keys(%hash))
+    {
+        $diff_found++;
+        if ($hash{$_}>0) { $diff_hit++; }
+    }
 
-	return ($diff_found, $diff_hit);
+    return ($diff_found, $diff_hit);
 }
 
 #
@@ -5851,30 +5874,30 @@ sub get_diff_found_and_hit($) {
 
 sub get_func_found_and_hit($)
 {
-	my ($sumfnccount) = @_;
-	my $function;
-	my $fn_found;
-	my $fn_hit;
+    my ($sumfnccount) = @_;
+    my $function;
+    my $fn_found;
+    my $fn_hit;
 
-	$fn_found = scalar(keys(%{$sumfnccount}));
-	$fn_hit = 0;
-	foreach $function (keys(%{$sumfnccount})) {
-		if ($sumfnccount->{$function} > 0) {
-			$fn_hit++;
-		}
-	}
-	return ($fn_found, $fn_hit);
+    $fn_found = scalar(keys(%{$sumfnccount}));
+    $fn_hit = 0;
+    foreach $function (keys(%{$sumfnccount})) {
+        if ($sumfnccount->{$function} > 0) {
+            $fn_hit++;
+        }
+    }
+    return ($fn_found, $fn_hit);
 }
 
 
 sub get_br_found_and_hit($)
 {
-	my ($brcount) = @_;
-	my $db;
+    my ($brcount) = @_;
+    my $db;
 
-	$db = brcount_to_db($brcount);
+    $db = brcount_to_db($brcount);
 
-	return brcount_db_get_found_and_hit($db);
+    return brcount_db_get_found_and_hit($db);
 }
 
 
@@ -5888,61 +5911,61 @@ sub get_br_found_and_hit($)
 
 sub get_affecting_tests($$$$)
 {
-	my ($testdata, $testfncdata, $testbrdata, $testdiffdata) = @_;
-	my $testname;
-	my $testcount;
-	my $testfnccount;
-	my $testbrcount;
-	my %result;
-	my $found;
-	my $hit;
-	my $fn_found;
-	my $fn_hit;
-	my $br_found;
-	my $br_hit;
-	## FIX:QGH 差异覆盖率相关
-	my $testdiffcount;
-	my $diff_found;
-	my $diff_hit;
+    my ($testdata, $testfncdata, $testbrdata, $testdiffdata) = @_;
+    my $testname;
+    my $testcount;
+    my $testfnccount;
+    my $testbrcount;
+    my %result;
+    my $found;
+    my $hit;
+    my $fn_found;
+    my $fn_hit;
+    my $br_found;
+    my $br_hit;
+    ## FIX:QGH 差异覆盖率相关
+    my $testdiffcount;
+    my $diff_found;
+    my $diff_hit;
 
-	foreach $testname (keys(%{$testdata}))
-	{
-		# Get (line number -> count) hash for this test case
-		## 获取该测试用例的（行号->计数）哈希值。
-		$testcount = $testdata->{$testname};
-		$testfnccount = $testfncdata->{$testname};
-		$testbrcount = $testbrdata->{$testname};
-		## FIX:QGH 差异覆盖率相关
-		$testdiffcount = $testdiffdata->{$testname};
+    foreach $testname (keys(%{$testdata}))
+    {
+        # Get (line number -> count) hash for this test case
+        ## 获取该测试用例的（行号->计数）哈希值。
+        $testcount = $testdata->{$testname};
+        $testfnccount = $testfncdata->{$testname};
+        $testbrcount = $testbrdata->{$testname};
+        ## FIX:QGH 差异覆盖率相关
+        $testdiffcount = $testdiffdata->{$testname};
 
-		# Calculate sum  计算总数
-		($found, $hit) = get_found_and_hit($testcount);
-		($fn_found, $fn_hit) = get_func_found_and_hit($testfnccount);
-		($br_found, $br_hit) = get_br_found_and_hit($testbrcount);
-		## FIX:QGH 差异覆盖率相关
-		($diff_found, $diff_hit) = get_diff_found_and_hit($testdiffcount);
+        # Calculate sum  计算总数
+        ($found, $hit) = get_found_and_hit($testcount);
+        ($fn_found, $fn_hit) = get_func_found_and_hit($testfnccount);
+        ($br_found, $br_hit) = get_br_found_and_hit($testbrcount);
+        ## FIX:QGH 差异覆盖率相关
+        ($diff_found, $diff_hit) = get_diff_found_and_hit($testdiffcount);
 
-		if ($hit>0)
-		{
-			$result{$testname} = "$found,$hit,$fn_found,$fn_hit,".
-					     "$br_found,$br_hit"."$diff_found,$diff_hit";
-		}
-	}
+        if ($hit>0)
+        {
+            $result{$testname} = "$found,$hit,$fn_found,$fn_hit,".
+                         "$br_found,$br_hit"."$diff_found,$diff_hit";
+        }
+    }
 
-	return(\%result);
+    return(\%result);
 }
 
 
 sub get_hash_reverse($)
 {
-	my ($hash) = @_;
-	my %result;
+    my ($hash) = @_;
+    my %result;
 
-	foreach (keys(%{$hash})) {
-		$result{$hash->{$_}} = $_;
-	}
+    foreach (keys(%{$hash})) {
+        $result{$hash->{$_}} = $_;
+    }
 
-	return \%result;
+    return \%result;
 }
 
 #
@@ -5960,114 +5983,114 @@ sub get_hash_reverse($)
 
 sub write_source($$$$$$$$)
 {
-	local *HTML_HANDLE = $_[0];
-	local *SOURCE_HANDLE;
-	my $source_filename = $_[1];
-	my %count_data;
-	my $line_number;
-	my @result;
-	my $checkdata = $_[3];
-	my $converted = $_[4];
-	my $funcdata  = $_[5];
-	my $sumbrcount = $_[6];
-	my $sumdiffcount = $_[7];
-	my $datafunc = get_hash_reverse($funcdata);
-	my @file;
+    local *HTML_HANDLE = $_[0];
+    local *SOURCE_HANDLE;
+    my $source_filename = $_[1];
+    my %count_data;
+    my $line_number;
+    my @result;
+    my $checkdata = $_[3];
+    my $converted = $_[4];
+    my $funcdata  = $_[5];
+    my $sumbrcount = $_[6];
+    my $sumdiffcount = $_[7];
+    my $datafunc = get_hash_reverse($funcdata);
+    my @file;
 
-	if ($_[2])
-	{
-		%count_data = %{$_[2]};
-	}
+    if ($_[2])
+    {
+        %count_data = %{$_[2]};
+    }
 
-	if (!open(SOURCE_HANDLE, "<", $source_filename)) {
-		my @lines;
-		my $last_line = 0;
+    if (!open(SOURCE_HANDLE, "<", $source_filename)) {
+        my @lines;
+        my $last_line = 0;
 
-		if (!$ignore[$ERROR_SOURCE]) {
-			die("ERROR: cannot read $source_filename\n"); ## 错误： 无法读取
-		}
+        if (!$ignore[$ERROR_SOURCE]) {
+            die("ERROR: cannot read $source_filename\n"); ## 错误： 无法读取
+        }
 
-		# Continue without source file
-		warn("WARNING: cannot read $source_filename!\n"); ## 警告： 无法读取
+        # Continue without source file
+        warn("WARNING: cannot read $source_filename!\n"); ## 警告： 无法读取
 
-		@lines = sort( { $a <=> $b }  keys(%count_data));
-		if (@lines) {
-			$last_line = $lines[scalar(@lines) - 1];
-		}
-		return ( ":" ) if ($last_line < 1);
+        @lines = sort( { $a <=> $b }  keys(%count_data));
+        if (@lines) {
+            $last_line = $lines[scalar(@lines) - 1];
+        }
+        return ( ":" ) if ($last_line < 1);
 
-		# Simulate gcov behavior
-		## 模拟gcov行为
-		for ($line_number = 1; $line_number <= $last_line;
-		     $line_number++) {
-			push(@file, "/* EOF */");
-		}
-	} else {
-		@file = <SOURCE_HANDLE>;
-	}
-	
-	write_source_prolog(*HTML_HANDLE);
-	$line_number = 0;
-	foreach (@file) {
-		$line_number++;
-		chomp($_);
+        # Simulate gcov behavior
+        ## 模拟gcov行为
+        for ($line_number = 1; $line_number <= $last_line;
+             $line_number++) {
+            push(@file, "/* EOF */");
+        }
+    } else {
+        @file = <SOURCE_HANDLE>;
+    }
+    
+    write_source_prolog(*HTML_HANDLE);
+    $line_number = 0;
+    foreach (@file) {
+        $line_number++;
+        chomp($_);
 
-		# Also remove CR from line-end
-		## 同时删除行尾的CR
-		s/\015$//;
+        # Also remove CR from line-end
+        ## 同时删除行尾的CR
+        s/\015$//;
 
-		# Source code matches coverage data?
-		## 源代码与覆盖数据匹配？
-		if (defined($checkdata->{$line_number}) &&
-		    ($checkdata->{$line_number} ne md5_base64($_)))
-		{
-			## 错误： 校验和不匹配
-			die("ERROR: checksum mismatch  at $source_filename:".
-			    "$line_number\n");
-		}
+        # Source code matches coverage data?
+        ## 源代码与覆盖数据匹配？
+        if (defined($checkdata->{$line_number}) &&
+            ($checkdata->{$line_number} ne md5_base64($_)))
+        {
+            ## 错误： 校验和不匹配
+            die("ERROR: checksum mismatch  at $source_filename:".
+                "$line_number\n");
+        }
 
-		push (@result,
-		      write_source_line(HTML_HANDLE, $line_number,
-					$_, $count_data{$line_number},
-					$converted->{$line_number},
-					$sumbrcount->{$line_number},
-					$sumdiffcount->{$line_number}));
-	}
+        push (@result,
+              write_source_line(HTML_HANDLE, $line_number,
+                    $_, $count_data{$line_number},
+                    $converted->{$line_number},
+                    $sumbrcount->{$line_number},
+                    $sumdiffcount->{$line_number}));
+    }
 
-	close(SOURCE_HANDLE);
-	write_source_epilog(*HTML_HANDLE);
-	return(@result);
+    close(SOURCE_HANDLE);
+    write_source_epilog(*HTML_HANDLE);
+    return(@result);
 }
 
 
 sub funcview_get_func_code($$$)
 {
-	my ($name, $base, $type) = @_;
-	my $result;
-	my $link;
+    my ($name, $base, $type) = @_;
+    my $result;
+    my $link;
 
-	if ($sort && $type == 1) {
-		$link = "$name.func.$html_ext";
-	}
-	$result = "Function Name";
-	$result .= get_sort_code($link, "Sort by function name", $base);
+    if ($sort && $type == 1) {
+        $link = "$name.func.$html_ext";
+    }
+    $result = "Function Name";
+    $result .= get_sort_code($link, "Sort by function name", $base);
 
-	return $result;
+    return $result;
 }
 
 sub funcview_get_count_code($$$)
 {
-	my ($name, $base, $type) = @_;
-	my $result;
-	my $link;
+    my ($name, $base, $type) = @_;
+    my $result;
+    my $link;
 
-	if ($sort && $type == 0) {
-		$link = "$name.func-sort-c.$html_ext";
-	}
-	$result = "Hit count";
-	$result .= get_sort_code($link, "Sort by hit count", $base);
+    if ($sort && $type == 0) {
+        $link = "$name.func-sort-c.$html_ext";
+    }
+    $result = "Hit count";
+    $result .= get_sort_code($link, "Sort by hit count", $base);
 
-	return $result;
+    return $result;
 }
 
 #
@@ -6079,71 +6102,71 @@ sub funcview_get_count_code($$$)
 
 sub funcview_get_sorted($$$)
 {
-	my ($funcdata, $sumfncdata, $type) = @_;
+    my ($funcdata, $sumfncdata, $type) = @_;
 
-	if ($type == 0) {
-		return sort(keys(%{$funcdata}));
-	}
-	return sort({
-		$sumfncdata->{$b} == $sumfncdata->{$a} ?
-			$a cmp $b : $sumfncdata->{$a} <=> $sumfncdata->{$b}
-		} keys(%{$sumfncdata}));
+    if ($type == 0) {
+        return sort(keys(%{$funcdata}));
+    }
+    return sort({
+        $sumfncdata->{$b} == $sumfncdata->{$a} ?
+            $a cmp $b : $sumfncdata->{$a} <=> $sumfncdata->{$b}
+        } keys(%{$sumfncdata}));
 }
 
 sub demangle_list($)
 {
-	my ($list) = @_;
-	my $tmpfile;
-	my $handle;
-	my %demangle;
-	my $demangle_arg = "";
-	my %versions;
+    my ($list) = @_;
+    my $tmpfile;
+    my $handle;
+    my %demangle;
+    my $demangle_arg = "";
+    my %versions;
 
-	# Write function names to file
-	## 写入函数名
-	($handle, $tmpfile) = tempfile();
-	die("ERROR: could not create temporary file") if (!defined($tmpfile));
-	print($handle join("\n", @$list));
-	close($handle);
+    # Write function names to file
+    ## 写入函数名
+    ($handle, $tmpfile) = tempfile();
+    die("ERROR: could not create temporary file") if (!defined($tmpfile));
+    print($handle join("\n", @$list));
+    close($handle);
 
-	# Extra flag necessary on OS X so that symbols listed by gcov get demangled
-	# properly.
-	## OSX上需要额外的标志，以便gcov列出的符号得到正确的需求。
-	if ($^O eq "darwin") {
-		$demangle_arg = "--no-strip-underscores";
-	}
+    # Extra flag necessary on OS X so that symbols listed by gcov get demangled
+    # properly.
+    ## OSX上需要额外的标志，以便gcov列出的符号得到正确的需求。
+    if ($^O eq "darwin") {
+        $demangle_arg = "--no-strip-underscores";
+    }
 
-	# Build translation hash from c++filt output
-	## 从c++filt输出生成转换哈希
-	open($handle, "-|", "c++filt $demangle_arg < $tmpfile") or
-		die("ERROR: could not run c++filt: $!\n");
-	foreach my $func (@$list) {
-		my $translated = <$handle>;
-		my $version;
+    # Build translation hash from c++filt output
+    ## 从c++filt输出生成转换哈希
+    open($handle, "-|", "c++filt $demangle_arg < $tmpfile") or
+        die("ERROR: could not run c++filt: $!\n");
+    foreach my $func (@$list) {
+        my $translated = <$handle>;
+        my $version;
 
-		last if (!defined($translated));
-		chomp($translated);
+        last if (!defined($translated));
+        chomp($translated);
 
-		$version = ++$versions{$translated};
-		$translated .= ".$version" if ($version > 1);
-		$demangle{$func} = $translated;
-	}
-	close($handle);
+        $version = ++$versions{$translated};
+        $translated .= ".$version" if ($version > 1);
+        $demangle{$func} = $translated;
+    }
+    close($handle);
 
-	if (scalar(keys(%demangle)) != scalar(@$list)) {
-		die("ERROR: c++filt output not as expected (".
-		    scalar(keys(%demangle))." vs ".scalar(@$list).") lines\n");
-	}
+    if (scalar(keys(%demangle)) != scalar(@$list)) {
+        die("ERROR: c++filt output not as expected (".
+            scalar(keys(%demangle))." vs ".scalar(@$list).") lines\n");
+    }
 
-	unlink($tmpfile) or
-		warn("WARNING: could not remove temporary file $tmpfile: $!\n"); ## 警告：无法删除临时文件
-	return \%demangle;
+    unlink($tmpfile) or
+        warn("WARNING: could not remove temporary file $tmpfile: $!\n"); ## 警告：无法删除临时文件
+    return \%demangle;
 }
 
 #
 # write_function_table(filehandle, source_file, sumcount, funcdata,
-#		       sumfnccount, testfncdata, sumbrcount, testbrdata,
-#		       base_name, base_dir, sort_type)
+#               sumfnccount, testfncdata, sumbrcount, testbrdata,
+#               base_name, base_dir, sort_type)
 #
 # Write an HTML table listing all functions in a source file, including
 # also function call counts and line coverages inside of each function.
@@ -6154,88 +6177,88 @@ sub demangle_list($)
 
 sub write_function_table(*$$$$$$$$$$$$)
 {
-	local *HTML_HANDLE = $_[0];
-	my $source = $_[1];
-	my $sumcount = $_[2];
-	my $funcdata = $_[3];
-	my $sumfncdata = $_[4];
-	my $testfncdata = $_[5];
-	my $sumbrcount = $_[6];
-	my $testbrdata = $_[7];
-	my $sumdiffcount = $_[8];
-	my $testdiffdata = $_[9];
-	my $name = $_[10];
-	my $base = $_[11];
-	my $type = $_[12];
-	my $func;
-	my $func_code;
-	my $count_code;
-	my $demangle;
+    local *HTML_HANDLE = $_[0];
+    my $source = $_[1];
+    my $sumcount = $_[2];
+    my $funcdata = $_[3];
+    my $sumfncdata = $_[4];
+    my $testfncdata = $_[5];
+    my $sumbrcount = $_[6];
+    my $testbrdata = $_[7];
+    my $sumdiffcount = $_[8];
+    my $testdiffdata = $_[9];
+    my $name = $_[10];
+    my $base = $_[11];
+    my $type = $_[12];
+    my $func;
+    my $func_code;
+    my $count_code;
+    my $demangle;
 
-	# Get HTML code for headings
-	## 获取标题的HTML代码
-	$func_code = funcview_get_func_code($name, $base, $type);
-	$count_code = funcview_get_count_code($name, $base, $type);
-	write_html(*HTML_HANDLE, <<END_OF_HTML)
-	  <center>
-	  <table width="60%" cellpadding=1 cellspacing=1 border=0>
-	    <tr><td><br></td></tr>
-	    <tr>
-	      <td width="80%" class="tableHead">$func_code</td>
-	      <td width="20%" class="tableHead">$count_code</td>
-	    </tr>
+    # Get HTML code for headings
+    ## 获取标题的HTML代码
+    $func_code = funcview_get_func_code($name, $base, $type);
+    $count_code = funcview_get_count_code($name, $base, $type);
+    write_html(*HTML_HANDLE, <<END_OF_HTML)
+      <center>
+      <table width="60%" cellpadding=1 cellspacing=1 border=0>
+        <tr><td><br></td></tr>
+        <tr>
+          <td width="80%" class="tableHead">$func_code</td>
+          <td width="20%" class="tableHead">$count_code</td>
+        </tr>
 END_OF_HTML
-	;
+    ;
 
-	# Get demangle translation hash
-	## 获取demangle翻译哈希
-	if ($demangle_cpp) {
-		$demangle = demangle_list([ sort(keys(%{$funcdata})) ]);
-	}
+    # Get demangle translation hash
+    ## 获取demangle翻译哈希
+    if ($demangle_cpp) {
+        $demangle = demangle_list([ sort(keys(%{$funcdata})) ]);
+    }
 
-	# Get a sorted table
-	## 获取排序表
-	foreach $func (funcview_get_sorted($funcdata, $sumfncdata, $type)) {
-		if (!defined($funcdata->{$func}))
-		{
-			next;
-		}
+    # Get a sorted table
+    ## 获取排序表
+    foreach $func (funcview_get_sorted($funcdata, $sumfncdata, $type)) {
+        if (!defined($funcdata->{$func}))
+        {
+            next;
+        }
 
-		my $startline = $funcdata->{$func} - $func_offset;
-		my $name = $func;
-		my $count = $sumfncdata->{$name};
-		my $countstyle;
+        my $startline = $funcdata->{$func} - $func_offset;
+        my $name = $func;
+        my $count = $sumfncdata->{$name};
+        my $countstyle;
 
-		# Replace function name with demangled version if available
-		## 将函数名替换为demangled版本（如果可用
-		$name = $demangle->{$name} if (exists($demangle->{$name}));
+        # Replace function name with demangled version if available
+        ## 将函数名替换为demangled版本（如果可用
+        $name = $demangle->{$name} if (exists($demangle->{$name}));
 
-		# Escape special characters
-		## 转义特殊字符
-		$name = escape_html($name);
-		if ($startline < 1) {
-			$startline = 1;
-		}
-		if ($count == 0) {
-			$countstyle = "coverFnLo";
-		} else {
-			$countstyle = "coverFnHi";
-		}
+        # Escape special characters
+        ## 转义特殊字符
+        $name = escape_html($name);
+        if ($startline < 1) {
+            $startline = 1;
+        }
+        if ($count == 0) {
+            $countstyle = "coverFnLo";
+        } else {
+            $countstyle = "coverFnHi";
+        }
 
-		write_html(*HTML_HANDLE, <<END_OF_HTML)
-	    <tr>
+        write_html(*HTML_HANDLE, <<END_OF_HTML)
+        <tr>
               <td class="coverFn"><a href="$source#$startline">$name</a></td>
               <td class="$countstyle">$count</td>
             </tr>
 END_OF_HTML
                 ;
-	}
-	write_html(*HTML_HANDLE, <<END_OF_HTML)
-	  </table>
-	  <br>
-	  </center>
+    }
+    write_html(*HTML_HANDLE, <<END_OF_HTML)
+      </table>
+      <br>
+      </center>
 END_OF_HTML
-	;
+    ;
 }
 
 
@@ -6248,12 +6271,12 @@ END_OF_HTML
 
 sub info(@)
 {
-	if (!$quiet)
-	{
-		# Print info string
-		## 打印信息字符串
-		printf(@_);
-	}
+    if (!$quiet)
+    {
+        # Print info string
+        ## 打印信息字符串
+        printf(@_);
+    }
 }
 
 
@@ -6263,66 +6286,66 @@ sub info(@)
 
 sub subtract_counts($$)
 {
-	my %data = %{$_[0]};
-	my %base = %{$_[1]};
-	my $line;
-	my $data_count;
-	my $base_count;
-	my $hit = 0;
-	my $found = 0;
+    my %data = %{$_[0]};
+    my %base = %{$_[1]};
+    my $line;
+    my $data_count;
+    my $base_count;
+    my $hit = 0;
+    my $found = 0;
 
-	foreach $line (keys(%data))
-	{
-		$found++;
-		$data_count = $data{$line};
-		$base_count = $base{$line};
+    foreach $line (keys(%data))
+    {
+        $found++;
+        $data_count = $data{$line};
+        $base_count = $base{$line};
 
-		if (defined($base_count))
-		{
-			$data_count -= $base_count;
+        if (defined($base_count))
+        {
+            $data_count -= $base_count;
 
-			# Make sure we don't get negative numbers
-			## 确保我们没有得到负数
-			if ($data_count<0) { $data_count = 0; }
-		}
+            # Make sure we don't get negative numbers
+            ## 确保我们没有得到负数
+            if ($data_count<0) { $data_count = 0; }
+        }
 
-		$data{$line} = $data_count;
-		if ($data_count > 0) { $hit++; }
-	}
+        $data{$line} = $data_count;
+        if ($data_count > 0) { $hit++; }
+    }
 
-	return (\%data, $found, $hit);
+    return (\%data, $found, $hit);
 }
 
 sub subtract_diff_counts($$)
 {
-	my %data = %{$_[0]};
-	my %base = %{$_[1]};
-	my $line;
-	my $data_count;
-	my $base_count;
-	my $hit = 0;
-	my $found = 0;
+    my %data = %{$_[0]};
+    my %base = %{$_[1]};
+    my $line;
+    my $data_count;
+    my $base_count;
+    my $hit = 0;
+    my $found = 0;
 
-	foreach $line (keys(%data))
-	{
-		$found++;
-		$data_count = $data{$line};
-		$base_count = $base{$line};
+    foreach $line (keys(%data))
+    {
+        $found++;
+        $data_count = $data{$line};
+        $base_count = $base{$line};
 
-		if (defined($base_count))
-		{
-			$data_count -= $base_count;
+        if (defined($base_count))
+        {
+            $data_count -= $base_count;
 
-			# Make sure we don't get negative numbers
-			## 确保我们没有得到负数
-			if ($data_count<0) { $data_count = 0; }
-		}
+            # Make sure we don't get negative numbers
+            ## 确保我们没有得到负数
+            if ($data_count<0) { $data_count = 0; }
+        }
 
-		$data{$line} = $data_count;
-		if ($data_count > 0) { $hit++; }
-	}
+        $data{$line} = $data_count;
+        if ($data_count > 0) { $hit++; }
+    }
 
-	return (\%data, $found, $hit);
+    return (\%data, $found, $hit);
 }
 
 #
@@ -6336,38 +6359,38 @@ sub subtract_diff_counts($$)
 
 sub subtract_fnccounts($$)
 {
-	my %data;
-	my %base;
-	my $func;
-	my $data_count;
-	my $base_count;
-	my $fn_hit = 0;
-	my $fn_found = 0;
+    my %data;
+    my %base;
+    my $func;
+    my $data_count;
+    my $base_count;
+    my $fn_hit = 0;
+    my $fn_found = 0;
 
-	%data = %{$_[0]} if (defined($_[0]));
-	%base = %{$_[1]} if (defined($_[1]));
-	foreach $func (keys(%data)) {
-		$fn_found++;
-		$data_count = $data{$func};
-		$base_count = $base{$func};
+    %data = %{$_[0]} if (defined($_[0]));
+    %base = %{$_[1]} if (defined($_[1]));
+    foreach $func (keys(%data)) {
+        $fn_found++;
+        $data_count = $data{$func};
+        $base_count = $base{$func};
 
-		if (defined($base_count)) {
-			$data_count -= $base_count;
+        if (defined($base_count)) {
+            $data_count -= $base_count;
 
-			# Make sure we don't get negative numbers
-			## 确保我们没有得到负数
-			if ($data_count < 0) {
-				$data_count = 0;
-			}
-		}
+            # Make sure we don't get negative numbers
+            ## 确保我们没有得到负数
+            if ($data_count < 0) {
+                $data_count = 0;
+            }
+        }
 
-		$data{$func} = $data_count;
-		if ($data_count > 0) {
-			$fn_hit++;
-		}
-	}
+        $data{$func} = $data_count;
+        if ($data_count > 0) {
+            $fn_hit++;
+        }
+    }
 
-	return (\%data, $fn_found, $fn_hit);
+    return (\%data, $fn_found, $fn_hit);
 }
 
 
@@ -6380,153 +6403,153 @@ sub subtract_fnccounts($$)
 
 sub apply_baseline($$)
 {
-	my %data_hash = %{$_[0]};
-	my %base_hash = %{$_[1]};
-	my $filename;
-	my $testname;
-	my $data;
-	my $data_testdata;
-	my $data_funcdata;
-	my $data_checkdata;
-	my $data_testfncdata;
-	my $data_testbrdata;
-	my $data_count;
-	my $data_testfnccount;
-	my $data_testbrcount;
-	my $base;
-	my $base_checkdata;
-	my $base_sumfnccount;
-	my $base_sumbrcount;
-	my $base_count;
-	my $sumcount;
-	my $sumfnccount;
-	my $sumbrcount;
-	my $found;
-	my $hit;
-	my $fn_found;
-	my $fn_hit;
-	my $br_found;
-	my $br_hit;
-	##FIX：QGH新添加命令行中关于差异代码的命令
-	my $data_testdiffdata;
-	my $data_testdiffcount;
-	my $base_sumdiffcount;
-	my $sumdiffcount;
-	my $diff_found;
-	my $diff_hit;
+    my %data_hash = %{$_[0]};
+    my %base_hash = %{$_[1]};
+    my $filename;
+    my $testname;
+    my $data;
+    my $data_testdata;
+    my $data_funcdata;
+    my $data_checkdata;
+    my $data_testfncdata;
+    my $data_testbrdata;
+    my $data_count;
+    my $data_testfnccount;
+    my $data_testbrcount;
+    my $base;
+    my $base_checkdata;
+    my $base_sumfnccount;
+    my $base_sumbrcount;
+    my $base_count;
+    my $sumcount;
+    my $sumfnccount;
+    my $sumbrcount;
+    my $found;
+    my $hit;
+    my $fn_found;
+    my $fn_hit;
+    my $br_found;
+    my $br_hit;
+    ##FIX：QGH新添加命令行中关于差异代码的命令
+    my $data_testdiffdata;
+    my $data_testdiffcount;
+    my $base_sumdiffcount;
+    my $sumdiffcount;
+    my $diff_found;
+    my $diff_hit;
 
 
-	foreach $filename (keys(%data_hash))
-	{
-		# Get data set for data and baseline
-		## 获取数据和基线的数据集
-		$data = $data_hash{$filename};
-		$base = $base_hash{$filename};
+    foreach $filename (keys(%data_hash))
+    {
+        # Get data set for data and baseline
+        ## 获取数据和基线的数据集
+        $data = $data_hash{$filename};
+        $base = $base_hash{$filename};
 
-		# Skip data entries for which no base entry exists
-		## 跳过不存在基项的数据项
-		if (!defined($base))
-		{
-			next;
-		}
+        # Skip data entries for which no base entry exists
+        ## 跳过不存在基项的数据项
+        if (!defined($base))
+        {
+            next;
+        }
 
-		# Get set entries for data and baseline
-		## 获取数据和基线的集合项  ##FIX：QGH新添加命令行中关于差异代码的命令
-		($data_testdata, undef, $data_funcdata, $data_checkdata,
-		 $data_testfncdata, undef, $data_testbrdata, undef, $data_testdiffdata) =
-			get_info_entry($data);
-		(undef, $base_count, undef, $base_checkdata, undef,
-		 $base_sumfnccount, undef, $base_sumbrcount, undef, $base_sumdiffcount) =
-			get_info_entry($base);
+        # Get set entries for data and baseline
+        ## 获取数据和基线的集合项  ##FIX：QGH新添加命令行中关于差异代码的命令
+        ($data_testdata, undef, $data_funcdata, $data_checkdata,
+         $data_testfncdata, undef, $data_testbrdata, undef, $data_testdiffdata) =
+            get_info_entry($data);
+        (undef, $base_count, undef, $base_checkdata, undef,
+         $base_sumfnccount, undef, $base_sumbrcount, undef, $base_sumdiffcount) =
+            get_info_entry($base);
 
-		# Check for compatible checksums
-		## 检查兼容的校验和
-		merge_checksums($data_checkdata, $base_checkdata, $filename);
+        # Check for compatible checksums
+        ## 检查兼容的校验和
+        merge_checksums($data_checkdata, $base_checkdata, $filename);
 
-		# sumcount has to be calculated anew
-		## 总数必须重新计算
-		$sumcount = {};
-		$sumfnccount = {};
-		$sumbrcount = {};
+        # sumcount has to be calculated anew
+        ## 总数必须重新计算
+        $sumcount = {};
+        $sumfnccount = {};
+        $sumbrcount = {};
 
-		# For each test case, subtract test specific counts
-		## 对于每个测试用例，减去特定于测试的计数
-		foreach $testname (keys(%{$data_testdata}))
-		{
-			# Get counts of both data and baseline
-			## 获取数据和基线的计数
-			$data_count = $data_testdata->{$testname};
-			$data_testfnccount = $data_testfncdata->{$testname};
-			$data_testbrcount = $data_testbrdata->{$testname};
-			##FIX：QGH新添加命令行中关于差异代码的命令
-			$data_testdiffcount = $data_testdiffdata->{$testname};
+        # For each test case, subtract test specific counts
+        ## 对于每个测试用例，减去特定于测试的计数
+        foreach $testname (keys(%{$data_testdata}))
+        {
+            # Get counts of both data and baseline
+            ## 获取数据和基线的计数
+            $data_count = $data_testdata->{$testname};
+            $data_testfnccount = $data_testfncdata->{$testname};
+            $data_testbrcount = $data_testbrdata->{$testname};
+            ##FIX：QGH新添加命令行中关于差异代码的命令
+            $data_testdiffcount = $data_testdiffdata->{$testname};
 
-			($data_count, undef, $hit) =
-				subtract_counts($data_count, $base_count);
-			($data_testfnccount) =
-				subtract_fnccounts($data_testfnccount,
-						   $base_sumfnccount);
-			($data_testbrcount) =
-				combine_brcount($data_testbrcount,
-						 $base_sumbrcount, $BR_SUB);
+            ($data_count, undef, $hit) =
+                subtract_counts($data_count, $base_count);
+            ($data_testfnccount) =
+                subtract_fnccounts($data_testfnccount,
+                           $base_sumfnccount);
+            ($data_testbrcount) =
+                combine_brcount($data_testbrcount,
+                         $base_sumbrcount, $BR_SUB);
 
-			##FIX：QGH新添加命令行中关于差异代码的命令
-			($data_testdiffcount, undef, $diff_hit) =
-				subtract_diff_counts($data_testdiffcount,
-						 $base_sumdiffcount);
+            ##FIX：QGH新添加命令行中关于差异代码的命令
+            ($data_testdiffcount, undef, $diff_hit) =
+                subtract_diff_counts($data_testdiffcount,
+                         $base_sumdiffcount);
 
-			# Check whether this test case did hit any line at all
-			## 检查这个测试用例是否碰到了任何行
-			if ($hit > 0)
-			{
-				# Write back resulting hash
-				## 回写结果哈希
-				$data_testdata->{$testname} = $data_count;
-				$data_testfncdata->{$testname} =
-					$data_testfnccount;
-				$data_testbrdata->{$testname} =
-					$data_testbrcount;
-				##FIX：QGH新添加命令行中关于差异代码的命令
-				$data_testdiffdata->{$testname} =
-					$data_testdiffcount;
-			}
-			else
-			{
-				# Delete test case which did not impact this
-				# file
-				## 删除不影响此文件的测试用例
-				delete($data_testdata->{$testname});
-				delete($data_testfncdata->{$testname});
-				delete($data_testbrdata->{$testname});
-				##FIX：QGH新添加命令行中关于差异代码的命令
-				delete($data_testdiffdata->{$testname});
-			}
+            # Check whether this test case did hit any line at all
+            ## 检查这个测试用例是否碰到了任何行
+            if ($hit > 0)
+            {
+                # Write back resulting hash
+                ## 回写结果哈希
+                $data_testdata->{$testname} = $data_count;
+                $data_testfncdata->{$testname} =
+                    $data_testfnccount;
+                $data_testbrdata->{$testname} =
+                    $data_testbrcount;
+                ##FIX：QGH新添加命令行中关于差异代码的命令
+                $data_testdiffdata->{$testname} =
+                    $data_testdiffcount;
+            }
+            else
+            {
+                # Delete test case which did not impact this
+                # file
+                ## 删除不影响此文件的测试用例
+                delete($data_testdata->{$testname});
+                delete($data_testfncdata->{$testname});
+                delete($data_testbrdata->{$testname});
+                ##FIX：QGH新添加命令行中关于差异代码的命令
+                delete($data_testdiffdata->{$testname});
+            }
 
-			# Add counts to sum of counts
-			## 将计数加到计数之和
-			($sumcount, $found, $hit) =
-				add_counts($sumcount, $data_count);
-			($sumfnccount, $fn_found, $fn_hit) =
-				add_fnccount($sumfnccount, $data_testfnccount);
-			($sumbrcount, $br_found, $br_hit) =
-				combine_brcount($sumbrcount, $data_testbrcount,
-						$BR_ADD);
-			##FIX：QGH新添加命令行中关于差异代码的命令
-			($sumdiffcount, $diff_found, $diff_hit) =
-				add_diff_counts($sumdiffcount, $data_testdiffcount);
-		}
+            # Add counts to sum of counts
+            ## 将计数加到计数之和
+            ($sumcount, $found, $hit) =
+                add_counts($sumcount, $data_count);
+            ($sumfnccount, $fn_found, $fn_hit) =
+                add_fnccount($sumfnccount, $data_testfnccount);
+            ($sumbrcount, $br_found, $br_hit) =
+                combine_brcount($sumbrcount, $data_testbrcount,
+                        $BR_ADD);
+            ##FIX：QGH新添加命令行中关于差异代码的命令
+            ($sumdiffcount, $diff_found, $diff_hit) =
+                add_diff_counts($sumdiffcount, $data_testdiffcount);
+        }
 
-		# Write back resulting entry
-		## 回写结果项
-		set_info_entry($data, $data_testdata, $sumcount, $data_funcdata,
-			       $data_checkdata, $data_testfncdata, $sumfnccount,
-			       $data_testbrdata, $sumbrcount, $data_testdiffdata, $sumdiffcount, $found, $hit,
-			       $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit);
+        # Write back resulting entry
+        ## 回写结果项
+        set_info_entry($data, $data_testdata, $sumcount, $data_funcdata,
+                   $data_checkdata, $data_testfncdata, $sumfnccount,
+                   $data_testbrdata, $sumbrcount, $data_testdiffdata, $sumdiffcount, $found, $hit,
+                   $fn_found, $fn_hit, $br_found, $br_hit, $diff_found, $diff_hit);
 
-		$data_hash{$filename} = $data;
-	}
+        $data_hash{$filename} = $data;
+    }
 
-	return (\%data_hash);
+    return (\%data_hash);
 }
 
 
@@ -6539,39 +6562,39 @@ sub apply_baseline($$)
 
 sub remove_unused_descriptions()
 {
-	my $filename;		# The current filename  # 当前文件名
-	my %test_list;		# Hash containing found test names   # 包含找到的测试名称的哈希
-	my $test_data;		# Reference to hash test_name -> count_data # 对哈希test_name->count_data的引用
-	my $before;		# Initial number of descriptions # 初始描述数
-	my $after;		# Remaining number of descriptions # 剩余描述数
-	
-	$before = scalar(keys(%test_description));
+    my $filename;        # The current filename  # 当前文件名
+    my %test_list;        # Hash containing found test names   # 包含找到的测试名称的哈希
+    my $test_data;        # Reference to hash test_name -> count_data # 对哈希test_name->count_data的引用
+    my $before;        # Initial number of descriptions # 初始描述数
+    my $after;        # Remaining number of descriptions # 剩余描述数
+    
+    $before = scalar(keys(%test_description));
 
-	foreach $filename (keys(%info_data))
-	{
-		($test_data) = get_info_entry($info_data{$filename});
-		foreach (keys(%{$test_data}))
-		{
-			$test_list{$_} = "";
-		}
-	}
+    foreach $filename (keys(%info_data))
+    {
+        ($test_data) = get_info_entry($info_data{$filename});
+        foreach (keys(%{$test_data}))
+        {
+            $test_list{$_} = "";
+        }
+    }
 
-	# Remove descriptions for tests which are not in our list
-	## 删除不在我们列表中的测试说明
-	foreach (keys(%test_description))
-	{
-		if (!defined($test_list{$_}))
-		{
-			delete($test_description{$_});
-		}
-	}
+    # Remove descriptions for tests which are not in our list
+    ## 删除不在我们列表中的测试说明
+    foreach (keys(%test_description))
+    {
+        if (!defined($test_list{$_}))
+        {
+            delete($test_description{$_});
+        }
+    }
 
-	$after = scalar(keys(%test_description));
-	if ($after < $before)
-	{
-		info("Removed ".($before - $after).
-		     " unused descriptions, $after remaining.\n");
-	}
+    $after = scalar(keys(%test_description));
+    if ($after < $before)
+    {
+        info("Removed ".($before - $after).
+             " unused descriptions, $after remaining.\n");
+    }
 }
 
 
@@ -6584,21 +6607,21 @@ sub remove_unused_descriptions()
 
 sub apply_prefix($@)
 {
-	my $filename = shift;
-	my @dir_prefix = @_;
+    my $filename = shift;
+    my @dir_prefix = @_;
 
-	if (@dir_prefix)
-	{
-		foreach my $prefix (@dir_prefix)
-		{
-			if ($prefix ne "" && $filename =~ /^\Q$prefix\E\/(.*)$/)
-			{
-				return substr($filename, length($prefix) + 1);
-			}
-		}
-	}
+    if (@dir_prefix)
+    {
+        foreach my $prefix (@dir_prefix)
+        {
+            if ($prefix ne "" && $filename =~ /^\Q$prefix\E\/(.*)$/)
+            {
+                return substr($filename, length($prefix) + 1);
+            }
+        }
+    }
 
-	return $filename;
+    return $filename;
 }
 
 
@@ -6616,35 +6639,35 @@ sub apply_prefix($@)
 
 sub system_no_output($@)
 {
-	my $mode = shift;
-	my $result;
-	local *OLD_STDERR;
-	local *OLD_STDOUT;
+    my $mode = shift;
+    my $result;
+    local *OLD_STDERR;
+    local *OLD_STDOUT;
 
-	# Save old stdout and stderr handles
-	## 保存旧的stdout和stderr句柄
-	($mode & 1) && open(OLD_STDOUT, ">>&", "STDOUT");
-	($mode & 2) && open(OLD_STDERR, ">>&", "STDERR");
+    # Save old stdout and stderr handles
+    ## 保存旧的stdout和stderr句柄
+    ($mode & 1) && open(OLD_STDOUT, ">>&", "STDOUT");
+    ($mode & 2) && open(OLD_STDERR, ">>&", "STDERR");
 
-	# Redirect to /dev/null
-	## 重定向到 /dev/null
-	($mode & 1) && open(STDOUT, ">", "/dev/null");
-	($mode & 2) && open(STDERR, ">", "/dev/null");
+    # Redirect to /dev/null
+    ## 重定向到 /dev/null
+    ($mode & 1) && open(STDOUT, ">", "/dev/null");
+    ($mode & 2) && open(STDERR, ">", "/dev/null");
 
-	system(@_);
-	$result = $?;
+    system(@_);
+    $result = $?;
 
-	# Close redirected handles
-	## 关闭重定向句柄
-	($mode & 1) && close(STDOUT);
-	($mode & 2) && close(STDERR);
+    # Close redirected handles
+    ## 关闭重定向句柄
+    ($mode & 1) && close(STDOUT);
+    ($mode & 2) && close(STDERR);
 
-	# Restore old handles
-	## 恢复旧句柄
-	($mode & 1) && open(STDOUT, ">>&", "OLD_STDOUT");
-	($mode & 2) && open(STDERR, ">>&", "OLD_STDERR");
+    # Restore old handles
+    ## 恢复旧句柄
+    ($mode & 1) && open(STDOUT, ">>&", "OLD_STDOUT");
+    ($mode & 2) && open(STDERR, ">>&", "OLD_STDERR");
 
-	return $result;
+    return $result;
 }
 
 
@@ -6657,43 +6680,43 @@ sub system_no_output($@)
 
 sub read_config($)
 {
-	my $filename = $_[0];
-	my %result;
-	my $key;
-	my $value;
-	local *HANDLE;
+    my $filename = $_[0];
+    my %result;
+    my $key;
+    my $value;
+    local *HANDLE;
 
-	if (!open(HANDLE, "<", $filename))
-	{
-		warn("WARNING: cannot read configuration file $filename\n");
-		return undef;
-	}
-	while (<HANDLE>)
-	{
-		chomp;
-		# Skip comments
-		## 跳过评论
-		s/#.*//;
-		# Remove leading blanks
-		## 删除前导空格
-		s/^\s+//;
-		# Remove trailing blanks
-		## 删除尾随空格
-		s/\s+$//;
-		next unless length;
-		($key, $value) = split(/\s*=\s*/, $_, 2);
-		if (defined($key) && defined($value))
-		{
-			$result{$key} = $value;
-		}
-		else
-		{
-			warn("WARNING: malformed statement in line $. ".
-			     "of configuration file $filename\n");
-		}
-	}
-	close(HANDLE);
-	return \%result;
+    if (!open(HANDLE, "<", $filename))
+    {
+        warn("WARNING: cannot read configuration file $filename\n");
+        return undef;
+    }
+    while (<HANDLE>)
+    {
+        chomp;
+        # Skip comments
+        ## 跳过评论
+        s/#.*//;
+        # Remove leading blanks
+        ## 删除前导空格
+        s/^\s+//;
+        # Remove trailing blanks
+        ## 删除尾随空格
+        s/\s+$//;
+        next unless length;
+        ($key, $value) = split(/\s*=\s*/, $_, 2);
+        if (defined($key) && defined($value))
+        {
+            $result{$key} = $value;
+        }
+        else
+        {
+            warn("WARNING: malformed statement in line $. ".
+                 "of configuration file $filename\n");
+        }
+    }
+    close(HANDLE);
+    return \%result;
 }
 
 
@@ -6706,23 +6729,23 @@ sub read_config($)
 #
 # where KEY_STRING is a keyword and VAR_REF is a reference to an associated
 # variable. If the global configuration hashes CONFIG or OPT_RC contain a value
-# for keyword KEY_STRING, VAR_REF will be assigned the value for that keyword. 
+# for keyword KEY_STRING, VAR_REF will be assigned the value for that keyword.
 #
 ## 其中KEY_STRING是关键字，VAR_REF是对关联变量的引用。
 ## 如果全局配置散列CONFIG或OPT_RC包含关键字KEY_STRING的值，则将为VAR_REF指定该关键字的值。
 
 sub apply_config($)
 {
-	my $ref = $_[0];
+    my $ref = $_[0];
 
-	foreach (keys(%{$ref}))
-	{
-		if (defined($opt_rc{$_})) {
-			${$ref->{$_}} = $opt_rc{$_};
-		} elsif (defined($config->{$_})) {
-			${$ref->{$_}} = $config->{$_};
-		}
-	}
+    foreach (keys(%{$ref}))
+    {
+        if (defined($opt_rc{$_})) {
+            ${$ref->{$_}} = $opt_rc{$_};
+        } elsif (defined($config->{$_})) {
+            ${$ref->{$_}} = $config->{$_};
+        }
+    }
 }
 
 
@@ -6735,24 +6758,24 @@ sub apply_config($)
 
 sub get_html_prolog($)
 {
-	my $filename = $_[0];
-	my $result = "";
+    my $filename = $_[0];
+    my $result = "";
 
-	if (defined($filename))
-	{
-		local *HANDLE;
+    if (defined($filename))
+    {
+        local *HANDLE;
 
-		open(HANDLE, "<", $filename)
-			or die("ERROR: cannot open html prolog $filename!\n"); ## 错误： 无法打开html序言 
-		while (<HANDLE>)
-		{
-			$result .= $_;
-		}
-		close(HANDLE);
-	}
-	else
-	{
-		$result = <<END_OF_HTML
+        open(HANDLE, "<", $filename)
+            or die("ERROR: cannot open html prolog $filename!\n"); ## 错误： 无法打开html序言
+        while (<HANDLE>)
+        {
+            $result .= $_;
+        }
+        close(HANDLE);
+    }
+    else
+    {
+        $result = <<END_OF_HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html lang="en">
@@ -6766,10 +6789,10 @@ sub get_html_prolog($)
 <body>
 
 END_OF_HTML
-		;
-	}
+        ;
+    }
 
-	return $result;
+    return $result;
 }
 
 
@@ -6782,47 +6805,47 @@ END_OF_HTML
 
 sub get_html_epilog($)
 {
-	my $filename = $_[0];
-	my $result = "";
+    my $filename = $_[0];
+    my $result = "";
 
-	if (defined($filename))
-	{
-		local *HANDLE;
+    if (defined($filename))
+    {
+        local *HANDLE;
 
-		open(HANDLE, "<", $filename)
-			or die("ERROR: cannot open html epilog $filename!\n");## 错误： 无法打开html序言 
-		while (<HANDLE>)
-		{
-			$result .= $_;
-		}
-		close(HANDLE);
-	}
-	else
-	{
-		$result = <<END_OF_HTML
+        open(HANDLE, "<", $filename)
+            or die("ERROR: cannot open html epilog $filename!\n");## 错误： 无法打开html序言
+        while (<HANDLE>)
+        {
+            $result .= $_;
+        }
+        close(HANDLE);
+    }
+    else
+    {
+        $result = <<END_OF_HTML
 
 </body>
 </html>
 END_OF_HTML
-		;
-	}
+        ;
+    }
 
-	return $result;
+    return $result;
 
 }
 
 sub warn_handler($)
 {
-	my ($msg) = @_;
+    my ($msg) = @_;
 
-	warn("$tool_name: $msg");
+    warn("$tool_name: $msg");
 }
 
 sub die_handler($)
 {
-	my ($msg) = @_;
+    my ($msg) = @_;
 
-	die("$tool_name: $msg");
+    die("$tool_name: $msg");
 }
 
 #
@@ -6833,33 +6856,33 @@ sub die_handler($)
 
 sub parse_ignore_errors(@)
 {
-	my (@ignore_errors) = @_;
-	my @items;
-	my $item;
+    my (@ignore_errors) = @_;
+    my @items;
+    my $item;
 
-	return if (!@ignore_errors);
+    return if (!@ignore_errors);
 
-	foreach $item (@ignore_errors) {
-		$item =~ s/\s//g;
-		if ($item =~ /,/) {
-			# Split and add comma-separated parameters
-			## 拆分并添加逗号分隔的参数
-			push(@items, split(/,/, $item));
-		} else {
-			# Add single parameter
-			## 添加单个参数
-			push(@items, $item);
-		}
-	}
-	foreach $item (@items) {
-		my $item_id = $ERROR_ID{lc($item)};
+    foreach $item (@ignore_errors) {
+        $item =~ s/\s//g;
+        if ($item =~ /,/) {
+            # Split and add comma-separated parameters
+            ## 拆分并添加逗号分隔的参数
+            push(@items, split(/,/, $item));
+        } else {
+            # Add single parameter
+            ## 添加单个参数
+            push(@items, $item);
+        }
+    }
+    foreach $item (@items) {
+        my $item_id = $ERROR_ID{lc($item)};
 
-		if (!defined($item_id)) {
-			die("ERROR: unknown argument for --ignore-errors: ".
-			    "$item\n");
-		}
-		$ignore[$item_id] = 1;
-	}
+        if (!defined($item_id)) {
+            die("ERROR: unknown argument for --ignore-errors: ".
+                "$item\n");
+        }
+        $ignore[$item_id] = 1;
+    }
 }
 
 #
@@ -6870,22 +6893,22 @@ sub parse_ignore_errors(@)
 
 sub parse_dir_prefix(@)
 {
-	my (@opt_dir_prefix) = @_;
-	my $item;
+    my (@opt_dir_prefix) = @_;
+    my $item;
 
-	return if (!@opt_dir_prefix);
+    return if (!@opt_dir_prefix);
 
-	foreach $item (@opt_dir_prefix) {
-		if ($item =~ /,/) {
-			# Split and add comma-separated parameters
-			## 拆分并添加逗号分隔的参数
-			push(@dir_prefix, split(/,/, $item));
-		} else {
-			# Add single parameter
-			## 添加单个参数
-			push(@dir_prefix, $item);
-		}
-	}
+    foreach $item (@opt_dir_prefix) {
+        if ($item =~ /,/) {
+            # Split and add comma-separated parameters
+            ## 拆分并添加逗号分隔的参数
+            push(@dir_prefix, split(/,/, $item));
+        } else {
+            # Add single parameter
+            ## 添加单个参数
+            push(@dir_prefix, $item);
+        }
+    }
 }
 
 #
@@ -6906,24 +6929,24 @@ sub parse_dir_prefix(@)
 sub rate($$;$$$)
 {
         my ($hit, $found, $suffix, $precision, $width) = @_;
-        my $rate; 
+        my $rate;
 
-	# Assign defaults if necessary
-	## 必要时指定默认值
-	$precision	= $default_precision if (!defined($precision));
-	$suffix		= ""	if (!defined($suffix));
-	$width		= 0	if (!defined($width));
+    # Assign defaults if necessary
+    ## 必要时指定默认值
+    $precision    = $default_precision if (!defined($precision));
+    $suffix        = ""    if (!defined($suffix));
+    $width        = 0    if (!defined($width));
         
         return sprintf("%*s", $width, "-") if (!defined($found) || $found == 0);
         $rate = sprintf("%.*f", $precision, $hit * 100 / $found);
 
-	# Adjust rates if necessary
-	## 必要时调整费率
+    # Adjust rates if necessary
+    ## 必要时调整费率
     if ($rate == 0 && $hit > 0) {
-		$rate = sprintf("%.*f", $precision, 1 / 10 ** $precision);
+        $rate = sprintf("%.*f", $precision, 1 / 10 ** $precision);
     } elsif ($rate == 100 && $hit != $found) {
-		$rate = sprintf("%.*f", $precision, 100 - 1 / 10 ** $precision);
-	}
+        $rate = sprintf("%.*f", $precision, 100 - 1 / 10 ** $precision);
+    }
 
-	return sprintf("%*s", $width, $rate.$suffix);
+    return sprintf("%*s", $width, $rate.$suffix);
 }
